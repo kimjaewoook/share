@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>런드리고 SCM팀 OJT 커리큘럼</title>
+    <!-- Modern Korean Typography -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --surface-dark: #1e293b;
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.4);
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #10b981;
+            --danger: #ef4444;
+            --card-border: rgba(255,255,255,0.08);
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Pretendard', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--card-border);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            box-sizing: border-box;
+        }
+        .navbar h1 { margin: 0; font-size: 1.2rem; font-weight: 700; letter-spacing: -0.5px; color: #fff;}
+        .navbar .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 2rem; font-weight: 600; font-size: 0.95rem; transition: color 0.3s; }
+        .navbar .nav-links a:hover { color: var(--text-light); }
+
+        /* Container */
+        .container { max-width: 1000px; margin: 120px auto 50px; padding: 0 2rem; }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.4) 100%);
+            border-radius: 32px;
+            border: 1px solid var(--card-border);
+            margin-bottom: 4rem;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .hero h2 { font-size: 2.8rem; margin: 0 0 1rem; font-weight: 800; letter-spacing: -1.5px; line-height: 1.2; }
+        .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 650px; margin: 0 auto; }
+        .hero .highlight { color: var(--primary); }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 1.75rem; font-weight: 700; border-bottom: 2px solid var(--card-border);
+            padding-bottom: 0.75rem; margin-top: 4rem; margin-bottom: 2rem; display: block;
+        }
+
+        /* Grid Layout */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+
+        /* Cards */
+        .card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 1.75rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        .card:hover { 
+            transform: translateY(-6px); 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 0 20px var(--primary-glow); 
+            border-color: rgba(59,130,246,0.4); 
+            background: rgba(30, 41, 59, 0.8);
+        }
+        .card h3 { margin-top: 0; color: #fff; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;}
+        .card p { color: var(--text-muted); margin: 0; font-size: 0.95rem; }
+        .card ul { padding-left: 1.2rem; margin-bottom: 0; color: var(--text-muted); font-size: 0.95rem;}
+        .card li { margin-bottom: 0.5rem; }
+
+        /* Badges */
+        .badge {
+            display: inline-block; padding: 0.25rem 0.75rem; border-radius: 9999px;
+            font-size: 0.75rem; font-weight: 700; letter-spacing: 0.5px;
+            background: rgba(59,130,246,0.15); color: var(--primary); margin-bottom: 1rem;
+        }
+        .badge.accent { background: rgba(16,185,129,0.15); color: var(--accent); }
+        .badge.danger { background: rgba(239,68,68,0.15); color: var(--danger); }
+
+        /* Timeline / Curriculum */
+        .timeline { position: relative; padding-left: 2rem; margin-top: 2rem; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 2px; background: var(--card-border); }
+        
+        .timeline-item { position: relative; margin-bottom: 2rem; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -2.4rem; top: 0.4rem; width: 14px; height: 14px;
+            background: var(--primary); border-radius: 50%; border: 4px solid var(--bg-dark);
+            box-shadow: 0 0 10px var(--primary-glow); transition: all 0.3s;
+        }
+        .timeline-item:hover::before { transform: scale(1.3); background: var(--accent); box-shadow: 0 0 15px rgba(16,185,129,0.5); }
+        
+        .timeline-content {
+            background: rgba(30, 41, 59, 0.4); border-radius: 20px; padding: 1.5rem; 
+            border: 1px solid var(--card-border); transition: all 0.3s;
+        }
+        .timeline-content:hover { border-color: rgba(255,255,255,0.2); background: rgba(30, 41, 59, 0.8); }
+        
+        .timeline-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.75rem;}
+        .timeline-content h4 { margin: 0; font-size: 1.15rem; color: #fff; font-weight: 600;}
+        .timeline-content .day { color: var(--primary); font-weight: 800; margin-right: 0.75rem; font-size: 1.3rem;}
+        .timeline-content .owner { font-size: 0.8rem; font-weight: 700; color: var(--bg-dark); background: var(--accent); padding: 0.2rem 0.6rem; border-radius: 8px; }
+        .timeline-content p { margin: 0; color: var(--text-muted); font-size: 0.95rem; }
+
+        /* Alert / Caution */
+        .alert { 
+            background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.2);
+            border-left: 4px solid var(--danger); padding: 1.25rem; border-radius: 12px; margin: 2rem 0; 
+            color: var(--text-muted); font-size: 0.95rem;
+        }
+        .alert strong { color: var(--danger); display: block; margin-bottom: 0.5rem; font-size: 1.05rem;}
+
+        footer { text-align: center; padding: 3rem 2rem; color: var(--text-muted); border-top: 1px solid var(--card-border); margin-top: 5rem; font-size: 0.9rem;}
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <h1>Laundrygo SCM</h1>
+        <div class="nav-links">
+            <a href="#m1-common">공통 사항</a>
+            
+            <a href="#m1-tasks">업무 분류</a>
+            <a href="#m2-curriculum">일일 커리큘럼</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <!-- Hero Section -->
+        <div class="hero">
+            <h2>SCM본부 <span class="highlight">OJT 매뉴얼</span></h2>
+            <p>신입 조달 실무자가 런드리고의 속도에 완벽히 적응할 수 있도록 설계된<br>9일 초압축 실전 가이드 및 업무 동기화(M1/M2) 통합 문서입니다.</p>
+        </div>
+
+        <!-- M1: 직장인 공통 사항 -->
+        <h2 class="section-title" id="m1-common">M1: 직장인 공통 사항</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>부가세(VAT) 별도/포함</h3>
+                <p>B2B 구매 실무에서는 모든 단가를 <strong>'부가세 별도'</strong> 기준으로 소통합니다. 매입세액은 공제/환급받으므로 회사의 실제 원가는 공급가액입니다. 이를 착각할 경우 원가 계산 시 10%의 치명적 오차가 발생합니다.</p>
+            </div>
+            <div class="card">
+                <h3>수량 단위 교차 검증</h3>
+                <p>자재별 포장 단위(BOX)와 발주 단위(EA)를 혼동하면 엄청난 오발주가 터집니다. 발주서 상의 단위와 실제 �� 수치에 도달하면 무조건 PO를 날려야 하는 발주점 재고(ROP).</p>
+            </div>
+            <div class="card">
+                <span class="badge accent">물류 공간</span>
+                <h3>가용 / 불용재고</h3>
+                <p>당장 현장에 투입할 수 있는 실제 가용재고와, 단종되어 공간만 차지해 폐기를 고려해야 할 불용재고.</p>
+            </div>
+            <div class="card">
+                <span class="badge danger">운송 배차</span>
+                <h3>윙바디 / 간선차량</h3>
+                <p>거점 간 대량 화물을 옮기는 11톤 이상 간선차량. 양 측면이 열려 지게차 하차에 특화된 윙바디.</p>
+            </div>
+            <div class="card">
+                <span class="badge danger">생산 지원</span>
+                <h3>임가공 / 직납</h3>
+                <p>원자재를 우리가 주고 가공비만 내는 임가공. 물류센터를 거치지 않고 현장으로 바로 쏘는 직납 화물.</p>
+            </div>
+        </div>
+        
+        <div class="alert">
+            <strong>⚠️ [실무 커뮤니케이션 주의] 납품(Delivery) vs 입고(Receipt)</strong>
+            공급업체는 공장에서 '용차 출발'을 납품 완료라고 부릅니다. 하지만 런드리고 전산에 '입고' 자산으로 잡히기까지는 검수 등 물리적 시차가 발생합니다. 이 시차를 인지하지 못하고 현장에 소통하면 생산 라인 일정에 큰 차질이 생깁니다.
+        </div>
+
+        <!-- M1: 업무 분류 -->
+        <h2 class="section-title" id="m1-tasks">M1: SCM 본부 업무 분류</h2>
+        <div class="grid">
+            <div class="card">
+                <span class="badge accent">일반 업무</span>
+                <h3>현장 수요 대응 및 부자재 조달</h3>
+                <ul>
+                    <li>슬랙/구글 시트 불출 요청 상시 확인 및 검증</li>
+                    <li>더존ERP 단가 관리 및 PO 시스템 발행</li>
+                    <li>팩토리별 오청구 필터링 및 권한 통제</li>
+                    <li>협력사별 월간 매입 정산 마감</li>
+                </ul>
+            </div>
+            <div class="card">
+                <span class="badge accent">일반 업무</span>
+                <h3>입출고 및 배차 운영</h3>
+                <ul>
+                    <li>팩토리 공간 제약을 고려한 입출고 스케줄 조율</li>
+                    <li>직납 화물과 간선 화물의 물리적 동선 분리</li>
+                    <li>5톤/퀵 등 용차 배차 및 슬랙 정보 수배 공유</li>
+                    <li>일일 배차 실적 관리 및 물류비 검증</li>
+                </ul>
+            </div>
+            <div class="card" style="border-color: rgba(239,68,68,0.4); background: linear-gradient(180deg, rgba(30,41,59,0.8) 0%, rgba(239,68,68,0.05) 100%);">
+                <span class="badge danger">핵심 전략 업무</span>
+                <h3>원부자재 스펙 개선 및 생산성 향상</h3>
+                <p style="margin-top:0.5rem; color:#fff; font-weight:600;">SCM팀은 단순 발주 부서가 아닙니다.</p>
+                <p>현장 작업자들이 매일 사용하는 원부자재 스펙을 개선하여 공정의 비효율을 걷어내는 기획을 수행합니다. (사례: 기존 직물 태그를 불소실리콘 RFID 태그로 전면 전환하여, 연간 1.25억 원의 로스 방어 및 노무비 절감 성공)</p>
+            </div>
+        </div>
+
+        <!-- M2: 9-Day Curriculum -->
+        <h2 class="section-title" id="m2-curriculum">M2: 9일 초압축 일일 커리큘럼</h2>
+        <p style="color:var(--text-muted); margin-bottom: 2rem;">가장 효율적인 인지 순서<strong>(프로세스 ➔ 구매 ➔ 물류)</strong>에 맞춰 뼈대부터 세우고 살을 붙여나가는 커리큘럼입니다.</p>
+        
+        <div class="timeline">
+            <!-- Phase 1 -->
+            <div style="margin: 3rem 0 1.5rem -1rem;"><span class="badge">PHASE 1. 도입부</span></div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h4><span class="day">Day 1</span> 회사 소개 & 팩토리 투어</h4>
+                        <span class="owner">김재욱 님</span>
+                    </div>
+                    <p>우리 회사의 비즈니스 구조와 수익 모델 등 큰 그림부터 조망합니다. P&C실 산하 SCM 본부의 중추적 역할을 인지하고, 성수/군포 현장에 데려가 창고 공간이 얼마나 좁고 복잡한지 물리적 현실을 눈으로 확인시킵니다.</p>
+                </div>
+            </div>
+
+            <!-- Phase 2 -->
+            <div style="margin: 3rem 0 1.5rem -1rem;"><span class="badge accent">PHASE 2. 뼈대 세우기 (우리 팀은 하루를 어떻게 보내는가?)</span></div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h4><span class="day">Day 2</span> 실제 업무 프로세스 (1) - 발주와 전산 흐름</h4>
+                        <span class="owner">김재욱 님</span>
+                    </div>
+                    <p>구글 시트 요청서에서 현장의 엉뚱한 오청구를 먼저 검증하여 걸러냅니다. 이후 정상 건을 더존ERP에 단가 등록, 정식 발주(PO), 입고 및 마감 처리로 이어가는 일련의 실제 데이터 A to Z 흐름을 파악합니다.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h4><span class="day">Day 3</span> 실제 업무 프로세스 (2) - 퇴사자 데이터 분석 및 리스크 조율</h4>
+                        <span class="owner">김재욱 님</span>
+                    </div>
+                    <p>과거 퇴사자(이미혜 님)가 남긴 25개 공급업체 거래 이력과 데이터를 바탕으로, 신입 스스로 컨택 포인트와 결제 조건을 파악하고 장악합니다. 발주 전후로 터지는 대금 지연이나 현장 납기 시차 발생 시 중간에서 조율/방어하는 위기관리 프로세스를 익힙니다.</p>
+                </div>
+            </div>
+
+            <!-- Phase 3 -->
+            <div style="margin: 3rem 0 1.5rem -1rem;"><span class="badge danger">PHASE 3. 살 붙이기 (구매: 발주 넣을 때 알아야 할 개념들)</span></div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h4><span class="day">Day 4</span> 구매 기본 (1) - 물건 사오는 순서</h4>
+                        <span class="owner">김재욱 님</span>
+                    </div>
+                    <p>현장에서 필요한 것을 사달라고 요청(PR)하면, 업체에 가격을 묻고(RFQ), 최종 주문(PO)을 던지는 공식적인 조달 흐름의 개념을 숙지합니다.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h4><span class="day">Day 5</span> 구매 기본 (2) - 우리가 주로 사는 물건들</h4>
+                        <span class="owner">김재욱 님</span>
+                    </div>
+                    <p>국내(내자) 조달과 해외 수입(외자) 조달의 차이점을 익힙니다. 매일 쏟아부어 쓰는 '일반 소모품'과 장비류인 'OEM 사출물'의 조달 특성 및 호흡을 비교합니다.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h4><span class="day">Day 6</span> 구매 기본 (3) - 진짜 돈(원가) 계산하는 법</h4>
+                        <span class="owner">김재욱 님</span>
+                    </div>
+                    <p>단가표의 숫자만 보지 않고, 배송비나 외자 환율(매매기준율)까지 모두 합쳐 진짜 '총조달원가'가 얼마인지 계산해 내는 안목을 기릅니다.</p>
+                </div>
+            </div>
+
+            <!-- Phase 4 -->
+            <div style="margin: 3rem 0 1.5rem -1rem;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#f59e0b;">PHASE 4. 살 붙이기 (물류: 트럭이 올 때 알아야 할 개념들)</span></div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h4><span class="day">Day 7</span> 물류 기본 (1) - 파레트와 로케이션의 기본 원리</h4>
+                        <span class="owner">장현석 님</span>
+                    </div>
+                    <p>지게차 상하차를 위해 파레트가 왜 필수적인지, 그리고 좁은 현장에서 정해진 로케이션(지정 위치)에 물건을 두지 않으면 동선이 어떻게 마비되는지 물리적 원리를 교육합니다.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h4><span class="day">Day 8</span> 물류 기본 (2) - 납품 형태 및 차량 사전 조율</h4>
+                        <span class="owner">장현석 님</span>
+                    </div>
+                    <p>공급업체가 무작정 물건을 던지게 놔두지 않고, 팩토리 내부 랙(Rack) 높이에 맞춰 적재 높이를 사전에 조율하는 법. 윙바디/탑차 등 하차 방식에 따른 차량 통제 개념을 숙지합니다.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h4><span class="day">Day 9</span> 물류 기본 (3) - 입고 스케줄 사전 통제</h4>
+                        <span class="owner">장현석 님</span>
+                    </div>
+                    <p>팩토리 앞마당 마비를 막기 위해 트럭 입고 시간을 사전에 쪼개고 조율하는 것. 즉, 끌려다니지 않고 공급망과 물류를 사전에 통제하는 것이 SCM의 핵심 역량임을 깨닫습니다.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Laundrygo P&C Division SCM Team • Confidential Internal Document</p>
+    </footer>
+
+</body>
+</html>
