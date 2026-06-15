@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>런드리고 SCM팀 핵심 용어 사전</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <style>
+        :root {
+            --bg-color: #f4f7fb;
+            --surface: #ffffff;
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --accent: #10b981;
+            --danger: #ef4444;
+        }
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        header p {
+            margin: 1rem auto 0;
+            max-width: 600px;
+            color: #bfdbfe;
+            font-size: 1.1rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: -2rem auto 3rem;
+            padding: 0 2rem;
+            position: relative;
+        }
+        .search-box {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+        }
+        .search-box input {
+            width: 100%;
+            border: none;
+            font-size: 1.2rem;
+            padding: 0.5rem 1rem;
+            outline: none;
+            font-family: 'Pretendard', sans-serif;
+            color: var(--text-main);
+        }
+        .search-box input::placeholder {
+            color: #cbd5e1;
+        }
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin: 2rem 0 1rem;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 0.5rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        .card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+            border-color: #bfdbfe;
+        }
+        .card h3 {
+            margin: 0 0 0.75rem 0;
+            color: var(--primary);
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card h3 .eng {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            background: var(--primary-light);
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            font-weight: 600;
+        }
+        .card p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        .alert-box {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: #fef2f2;
+            border-left: 4px solid var(--danger);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.85rem;
+            color: #991b1b;
+        }
+        .alert-box strong {
+            color: var(--danger);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            display: none;
+            width: 100%;
+            grid-column: 1 / -1;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>SCM 핵심 용어 사전</h1>
+    <p>런드리고 SCM팀 신규 입사자를 위한 실무 용어 가이드. 궁금한 단어를 검색해 보세요.</p>
+</header>
+
+<div class="container">
+    <div class="search-box">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="searchInput" placeholder="용어 검색 (예: PR, 발주점, 윙바디)...">
+    </div>
+
+    <!-- Category 1 -->
+    <h2 class="category-title">🛒 조달 및 구매 실무</h2>
+    <div class="grid" id="grid1">
+        <div class="card term-item">
+            <h3>구매요청<span class="eng">PR</span></h3>
+            <p>현장이나 타 부서에서 필요한 자재를 파악하여 구매 담당자에게 공식적으로 조달을 요청하는 내부 프로세스.</p>
+        </div>
+        <div class="card term-item">
+            <h3>발주<span class="eng">PO</span></h3>
+            <p>구매 담당자가 공급업체에게 수량, 단가, 납기, 결제 조건 등을 명시하여 자재를 공식적으로 주문하는 외부 계약 행위.</p>
+        </div>
+        <div class="card term-item">
+            <h3>조회/문의<span class="eng">Inquiry</span></h3>
+            <p>본격적인 소싱 전이나 중간에 공급업체에게 조건, 단가, 납기 등을 사전에 가볍게 물어보고 조율하는 실무적 커뮤니케이션.</p>
+        </div>
+        <div class="card term-item">
+            <h3>사전 질의서<span class="eng">RFI</span></h3>
+            <p>신규 소싱 시 잠재적 공급업체들의 기본 역량(생산 능력, 재무 상태 등)을 파악하기 위해 요청하는 사전 질의서.</p>
+        </div>
+        <div class="card term-item">
+            <h3>견적 요청<span class="eng">RFQ</span></h3>
+            <p>구체적인 구매 조건이 확정된 후, 복수의 공급업체에게 단가와 납기를 포함한 정식 견적을 요청하는 문서.</p>
+        </div>
+        <div class="card term-item">
+            <h3>소싱<span class="eng">Sourcing</span></h3>
+            <p>회사가 요구하는 품질, 가격, 납기를 만족시킬 수 있는 최적의 공급업체를 발굴하고 선정하는 일련의 과정.</p>
+        </div>
+        <div class="card term-item">
+            <h3>개발구매<span class="eng">Development</span></h3>
+            <p>신제품(예: 신형 런드렛) 기획 초기부터 참여해 원가를 분석하고, 초도 양산을 위한 최적의 공급망과 금형을 세팅하는 선행 구매.</p>
+        </div>
+        <div class="card term-item">
+            <h3>조달구매<span class="eng">Procurement</span></h3>
+            <p>이미 세팅된 양산 인프라 안에서, 실시간 생산 계획과 재고 현황에 맞춰 적시에 자재를 발주하고 납기를 관리하는 실행 구매.</p>
+        </div>
+        <div class="card term-item">
+            <h3>일원화 소싱<span class="eng">Single Sourcing</span></h3>
+            <p>단일 업체에 발주 물량을 몰아주어 매입 단가를 낮추고 파트너십을 집중하는 전략. (단가 절감에 유리하나 위기 시 리스크 존재)</p>
+        </div>
+        <div class="card term-item">
+            <h3>이원화 소싱<span class="eng">Multi Sourcing</span></h3>
+            <p>단일 공급처의 납품 지연 리스크에 대비하여, 동일 자재를 복수의 공급망에서 나누어 확보하는 발주 전략.</p>
+        </div>
+        <div class="card term-item">
+            <h3>내자 / 외자<span class="eng">Local/Import</span></h3>
+            <p>국내 협력사를 통해 원화로 조달하는 자재를 '내자', 해외 업체로부터 외화 결제 및 수입 통관을 거쳐 들여오는 자재를 '외자'로 구분.</p>
+        </div>
+        <div class="card term-item">
+            <h3>임가공<span class="eng">Toll Mfg</span></h3>
+            <p>원자재나 반제품을 당사가 직접 제공하고, 협력사는 가공(제조)만 수행한 뒤 가공비(임가공비)만 청구하는 생산 위탁 방식.</p>
+        </div>
+        <div class="card term-item">
+            <h3>최소 발주 수량<span class="eng">MOQ</span></h3>
+            <p>협력사가 생산 또는 납품을 진행하기 위해 요구하는 최소 발주 수량.</p>
+        </div>
+        <div class="card term-item">
+            <h3>리드타임<span class="eng">Lead Time</span></h3>
+            <p>자재를 발주(PO)한 시점부터 실제로 팩토리에 납품 및 입고되어 사용 가능할 때까지 소요되는 총 대기 시간.</p>
+        </div>
+        <div class="card term-item">
+            <h3>매매기준율<span class="eng">Exchange Rate</span></h3>
+            <p>수입 자재(외자) 대금을 외화로 결제할 때 기준이 되는 환율. 수입 단가 계산 시 필수 지표.</p>
+        </div>
+        <div class="card term-item">
+            <h3>OEM / ODM<span class="eng">Mfg Type</span></h3>
+            <p>OEM은 당사가 설계하고 생산만 위탁, ODM은 협력사가 설계/생산하고 당사 상표를 부착하는 방식.</p>
+        </div>
+    </div>
+
+    <!-- Category 2 -->
+    <h2 class="category-title">📊 재고 및 데이터 관리</h2>
+    <div class="grid" id="grid2">
+        <div class="card term-item">
+            <h3>안전재고<span class="eng">Safety Stock</span></h3>
+            <p>수요 급증이나 리드타임 지연 등 불확실한 상황에서도 결품이 발생하지 않도록 최소한으로 유지해야 하는 완충 재고.</p>
+        </div>
+        <div class="card term-item">
+            <h3>발주점 재고<span class="eng">Reorder Point</span></h3>
+            <p>현재 재고가 이 수준에 도달했을 때 즉각 새로운 발주(PO)를 진행해야 결품 없이 자재가 공급되는 기준 재고량.</p>
+        </div>
+        <div class="card term-item">
+            <h3>가용재고<span class="eng">Available Stock</span></h3>
+            <p>현재 창고에 보유 중인 물리적 재고 중, 타 공정에 할당/예약된 수량을 제외하고 즉시 사용할 수 있는 실제 재고량.</p>
+        </div>
+        <div class="card term-item">
+            <h3>불용재고<span class="eng">Dead Stock</span></h3>
+            <p>장기간 사용되지 않거나 단종 등의 사유로 소진될 가능성이 없어 폐기/매각을 고려해야 하는 잉여 재고.</p>
+        </div>
+        <div class="card term-item">
+            <h3>로스<span class="eng">Loss</span></h3>
+            <p>생산 또는 운영 과정에서 정상적으로 사용되지 못하고 분실되거나 파손되어 버려지는 자재의 수량이나 비율.</p>
+        </div>
+    </div>
+
+    <!-- Category 3 -->
+    <h2 class="category-title">🚛 현장 물류 및 배차</h2>
+    <div class="grid" id="grid3">
+        <div class="card term-item">
+            <h3>직납<span class="eng">Direct Delivery</span></h3>
+            <p>물류센터나 중간 거점을 거치지 않고, 공급업체가 최종 사용처(예: 부산팩토리 현장)로 직접 화물을 납품하는 방식.</p>
+        </div>
+        <div class="card term-item">
+            <h3>납품<span class="eng">Delivery</span></h3>
+            <p>공급업체 입장에서 약속된 물건을 당사로 발송하거나 물리적으로 하차하는 행위.</p>
+            <div class="alert-box">
+                <strong>⚠️ 실무 주의</strong> 공급업체는 '용차 출발'을 납품 완료로 부르기도 하므로 전산상 '입고'와 혼동하지 말 것.
+            </div>
+        </div>
+        <div class="card term-item">
+            <h3>입고<span class="eng">Goods Receipt</span></h3>
+            <p>당사 담당자가 물품을 수령 및 검수하고 더존ERP에 등록하여 공식적인 '당사 자산'으로 확정하는 행위.</p>
+            <div class="alert-box">
+                <strong>⚠️ 실무 주의</strong> 납품일과 전산 입고일에는 검수 시차가 존재함. 이를 현장에 소통할 때 주의 요망.
+            </div>
+        </div>
+        <div class="card term-item">
+            <h3>출고<span class="eng">Goods Issue</span></h3>
+            <p>창고에 보관된 가용재고를 생산 현장이나 타 거점으로 불출하기 위해 전산에서 차감하고 물리적으로 내보내는 행위.</p>
+        </div>
+        <div class="card term-item">
+            <h3>간선차량<span class="eng">Trunk Line</span></h3>
+            <p>성수, 군포, 부산 등 물류 허브 및 거점 간에 대량의 화물을 운송하는 대형 화물 차량 (주로 11톤 이상).</p>
+        </div>
+        <div class="card term-item">
+            <h3>윙바디<span class="eng">Wingbody</span></h3>
+            <p>적재함의 양 측면 덮개가 위로 열려, 지게차를 이용한 파레트 상하차 작업에 특화된 화물 차량.</p>
+        </div>
+        <div class="card term-item">
+            <h3>배차<span class="eng">Dispatch</span></h3>
+            <p>화물이나 부자재를 운송하기 위해 간선차량, 용차, 퀵서비스 등 차량과 기사를 수배하고 일정을 배정하는 작업.</p>
+        </div>
+        <div class="card term-item">
+            <h3>회수 물류<span class="eng">Reverse Logis</span></h3>
+            <p>배송을 완료한 후 현장에서 발생한 물류 도구(빈 수거 용기, 런드렛 등)를 다시 거점으로 역송하여 재사용하도록 하는 흐름.</p>
+        </div>
+    </div>
+
+    <!-- Category 4 -->
+    <h2 class="category-title">⚙️ 시스템 및 핵심 자재</h2>
+    <div class="grid" id="grid4">
+        <div class="card term-item">
+            <h3>더존ERP<span class="eng">ERP</span></h3>
+            <p>런드리고의 전사적 자원 관리 및 회계/정산 시스템. 부자재 매입, 발주 관리, 협력사 대금 정산에 사용.</p>
+        </div>
+        <div class="card term-item">
+            <h3>RFID 태그<span class="eng">RFID</span></h3>
+            <p>사물 식별 및 추적을 위해 사용하는 무선 주파수 인식 기술. 세탁물과 런드렛에 부착하여 물류 및 공정을 추적.</p>
+        </div>
+        <div class="card term-item">
+            <h3>런드렛<span class="eng">Laundrette</span></h3>
+            <p>고객 세탁물을 안전하게 수거하고 배송하기 위해 사용하는 런드리고 전용 이동식 수거함.</p>
+        </div>
+        <div class="card term-item">
+            <h3>롤테이너<span class="eng">Rolltainer</span></h3>
+            <p>하단에 바퀴가 부착되어 대량의 세탁물이나 부자재를 적재하고 보관하며, 화물 차량 적재 시 사용하는 철제 수송 보관함.</p>
+        </div>
+    </div>
+
+    <div id="noResults" class="no-results">
+        검색 결과가 없습니다. 다른 검색어를 입력해 보세요.
+    </div>
+
+</div>
+
+<script>
+    // Live Search Functionality
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        const items = document.querySelectorAll('.term-item');
+        const categories = document.querySelectorAll('.category-title');
+        const grids = document.querySelectorAll('.grid');
+        let hasResults = false;
+
+        items.forEach(item => {
+            const text = item.innerText.toLowerCase();
+            if (text.includes(searchTerm)) {
+                item.style.display = 'block';
+                hasResults = true;
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        // Hide empty categories
+        grids.forEach((grid, index) => {
+            const anyVisible = Array.from(grid.querySelectorAll('.term-item')).some(i => i.style.display !== 'none');
+            
+            if (anyVisible) {
+                grid.style.display = 'grid';
+                categories[index].style.display = 'block';
+            } else {
+                grid.style.display = 'none';
+                categories[index].style.display = 'none';
+            }
+        });
+
+        document.getElementById('noResults').style.display = hasResults ? 'none' : 'block';
+    });
+</script>
+
+</body>
+</html>
