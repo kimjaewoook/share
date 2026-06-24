@@ -5,10 +5,14 @@ __pycache__/
 venv/
 
 # 각 단위 앱 하위의 데이터 로테이션(아카이브) 및 산출물 폴더 원천 차단
-archive/
-output/
-input/
-logs/
+**/archive/*
+!**/archive/.gitkeep
+**/output/*
+!**/output/.gitkeep
+**/input/*
+!**/input/.gitkeep
+**/logs/*
+!**/logs/.gitkeep
 
 # 인증키 및 로컬 세팅 파일
 *.json
