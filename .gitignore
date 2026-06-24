@@ -1,0 +1,31 @@
+__pycache__/
+*.pyc
+*.py[cod]
+.venv/
+venv/
+
+# 각 단위 앱 하위의 데이터 로테이션(아카이브) 및 산출물 폴더 원천 차단
+archive/
+output/
+input/
+logs/
+
+# 인증키 및 로컬 세팅 파일
+*.json
+.env
+
+# 비코드 자산 전역 차단 (유출 방지)
+*.csv
+*.xlsx
+*.m4a
+*.pdf
+*.log
+*.doc
+
+# macOS 잔재
+.DS_Store
+
+# 최근 생성된 임시 폴더 및 압축/문서 파일
+scratch/
+*.zip
+*.docx
