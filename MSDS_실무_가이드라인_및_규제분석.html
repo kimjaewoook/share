@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSDS 제도 및 실무 가이드라인 리포트</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Color Palette based on Information Design Principles */
+            --bg-color: #f4f4f5; /* Zinc 100 - Reduces eye strain compared to pure white */
+            --surface-color: #ffffff;
+            --text-primary: #18181b; /* Zinc 900 - High contrast for optimal readability */
+            --text-secondary: #3f3f46; /* Zinc 700 - Clear hierarchy for body text */
+            --text-muted: #71717a; /* Zinc 500 - For meta info */
+            --border-color: #e4e4e7; /* Zinc 200 */
+            
+            /* User Preference: Dark Gray & White */
+            --header-bg: #27272a; /* Zinc 800 - True dark gray */
+            --header-text: #ffffff;
+
+            /* Accent Colors - Muted and Professional */
+            --primary-color: #2563eb;
+            --primary-light: #eff6ff;
+            
+            /* Tag Colors - Semantic mapping for rapid visual parsing */
+            --tag-labor-bg: #eff6ff;
+            --tag-labor-text: #1e40af;
+            --tag-labor-border: #bfdbfe;
+
+            --tag-env-chem-bg: #ecfdf5;
+            --tag-env-chem-text: #065f46;
+            --tag-env-chem-border: #a7f3d0;
+
+            --tag-env-prod-bg: #fdf4ff;
+            --tag-env-prod-text: #86198f;
+            --tag-env-prod-border: #f5d0fe;
+
+            /* Shadows for depth & layering (Material Design principles) */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+            
+            --border-radius-sm: 6px;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.65; /* Optimal line-height for Korean (1.6~1.7) */
+            letter-spacing: -0.015em; /* Tighter letter spacing for professional typography */
+            word-break: keep-all; /* CRITICAL: Prevents Korean words from splitting across lines */
+            overflow-wrap: break-word;
+            margin: 0;
+            display: flex;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background-color: var(--surface-color);
+            height: 100vh;
+            position: fixed;
+            border-right: 1px solid var(--border-color);
+            padding: 2rem 1.5rem;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-sm);
+            z-index: 10;
+        }
+
+        .sidebar-brand {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--header-bg);
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: -0.03em;
+        }
+
+        .sidebar-brand::before {
+            content: '📑';
+            font-size: 1.4rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.75rem 1rem;
+            border-radius: var(--border-radius-sm);
+            margin-bottom: 0.4rem;
+            transition: all 0.2s ease;
+            display: block;
+        }
+
+        .nav-link:hover {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 3.5rem 4rem;
+            width: calc(100% - 280px);
+            box-sizing: border-box;
+            max-width: 1300px;
+        }
+
+        .hero {
+            margin-bottom: 3.5rem;
+            max-width: 900px; /* Restrict line length for readability (Gestalt principle) */
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.2rem;
+            color: var(--header-bg);
+            line-height: 1.3;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+        }
+
+        /* Sections & Cards */
+        section {
+            margin-bottom: 4.5rem;
+            max-width: 100%;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--header-bg);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .card {
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+        }
+
+        /* Info Blocks */
+        .info-block {
+            margin-bottom: 2rem;
+        }
+        .info-block:last-child {
+            margin-bottom: 0;
+        }
+        .info-block h4 {
+            margin-bottom: 0.75rem;
+            color: var(--header-bg);
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .info-block p {
+            margin: 0 0 1rem 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .info-block ul {
+            margin: 0;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .info-block li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* Table Styling */
+        .table-wrapper {
+            background-color: var(--surface-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            min-width: 800px;
+            table-layout: auto;
+        }
+
+        th {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 1.2rem 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+            letter-spacing: -0.01em;
+            word-break: keep-all;
+            vertical-align: middle;
+        }
+
+        td {
+            padding: 1.2rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            vertical-align: top;
+            line-height: 1.6;
+        }
+
+        tbody tr:nth-child(even) { background-color: #fafafa; }
+        tbody tr:hover { background-color: #f1f5f9; }
+        tbody tr:last-child td { border-bottom: none; }
+
+        /* Custom Tags */
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            border: 1px solid;
+            letter-spacing: -0.01em;
+            white-space: nowrap;
+        }
+
+        .tag-labor { background-color: var(--tag-labor-bg); color: var(--tag-labor-text); border-color: var(--tag-labor-border); }
+        .tag-env-chem { background-color: var(--tag-env-chem-bg); color: var(--tag-env-chem-text); border-color: var(--tag-env-chem-border); }
+        .tag-env-prod { background-color: var(--tag-env-prod-bg); color: var(--tag-env-prod-text); border-color: var(--tag-env-prod-border); }
+
+        .strong-labor { color: #1e3a8a; font-weight: 700; }
+        .strong-env-chem { color: #064e3b; font-weight: 700; }
+        .strong-env-prod { color: #4a044e; font-weight: 700; }
+
+        /* FAQ Elements */
+        .case-card {
+            background: var(--surface-color);
+            border-left: 6px solid #94a3b8;
+            padding: 1.8rem;
+            margin-bottom: 2rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .case-header { display: flex; flex-direction: column; gap: 0.4rem; }
+        .case-title { font-size: 1.15rem; font-weight: 800; color: var(--text-primary); margin: 0; letter-spacing: -0.02em; }
+        .case-meta {
+            font-size: 0.85rem; font-weight: 600; color: var(--text-muted); background: var(--bg-color);
+            padding: 0.3rem 0.6rem; border-radius: 4px; display: inline-block; width: fit-content;
+        }
+        .case-body { font-size: 0.95rem; color: var(--text-secondary); background: #ffffff; }
+        .case-comparison { display: grid; grid-template-columns: 1fr 1.2fr; gap: 1rem; }
+        .case-misconception { background: #f8fafc; border: 1px solid #e2e8f0; padding: 1.2rem; border-radius: 8px; }
+        .case-fact { background: #f0fdfa; border: 1px solid #ccfbf1; padding: 1.2rem; border-radius: 8px; }
+        .case-box-title { margin: 0 0 0.8rem 0; font-size: 0.95rem; font-weight: 700; display: flex; align-items: center; gap: 0.4rem; }
+        .title-gray { color: #475569; }
+        .title-teal { color: #0f766e; }
+        .case-misconception p { margin: 0; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+        .case-fact ul { margin: 0; padding-left: 1.2rem; color: var(--text-secondary); font-size: 0.9rem; }
+        .case-fact li { margin-bottom: 0.5rem; }
+        .case-correction {
+            padding: 1.2rem; background: var(--bg-color); border-radius: var(--border-radius-sm); font-weight: 600;
+            font-size: 0.95rem; color: var(--text-primary); border: 1px solid var(--border-color); display: flex; gap: 0.5rem;
+        }
+        .summary-box { margin-top: 2rem; padding: 1.8rem; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: var(--border-radius); box-shadow: var(--shadow-sm); }
+        .summary-box h4 { margin: 0 0 1rem 0; color: #1e40af; font-size: 1.1rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem; }
+        .summary-box ul { margin: 0; padding-left: 1.5rem; color: #1e3a8a; font-size: 0.95rem; }
+
+        /* =========================================
+           Law Link & Modal Popup Styles
+           ========================================= */
+        .law-link {
+            color: #2563eb;
+            font-weight: 700;
+            text-decoration: underline;
+            text-decoration-style: dashed;
+            text-underline-offset: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .law-link:hover {
+            background-color: #dbeafe;
+            text-decoration-style: solid;
+        }
+        
+        .law-link::after {
+            content: ' 🔍';
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease-out;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.2s ease-out;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-header {
+            padding: 1.2rem 1.5rem;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .modal-title {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1.4;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #94a3b8;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            margin-left: 1rem;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: #0f172a;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            font-size: 0.95rem;
+            color: #334155;
+            line-height: 1.7;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .modal-body strong {
+            color: #1e40af;
+            background: #eff6ff;
+            padding: 0 4px;
+            border-radius: 3px;
+        }
+
+        @media (max-width: 1100px) {
+            .case-comparison { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-brand">MSDS 실무 가이드</div>
+        <a href="#section-0" class="nav-link">📌 부처별 법률 대비표</a>
+        <a href="#section-1" class="nav-link">1. 제도의 정의와 의무</a>
+        <a href="#section-2" class="nav-link">2. B2B vs B2C 법적 해석</a>
+        <a href="#section-3" class="nav-link">3. 취급 사업장 법적 리스크</a>
+        <a href="#section-4" class="nav-link">4. 실무 유의사항 및 자주 묻는 질문</a>
+        <a href="#section-5" class="nav-link">5. 단가테이블 의무 점검</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="hero">
+            <h1>물질안전보건자료 제도 및<br>실무 가이드라인 리포트</h1>
+            <p>공식 정부 부처(고용노동부, 환경부) 및 안전보건공단(KOSHA)의 원문 데이터를 기반으로 규제와 법령을 1:1 매핑한 실무 가이드라인 대시보드입니다. 파란색 밑줄이 쳐진 <strong>관련 법조항을 클릭하면 실제 법률 문구를 팝업으로 확인</strong>할 수 있습니다.</p>
+            
+            <div class="source-links" style="margin-top: 1.5rem; padding: 1rem 1.2rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
+                <h4 style="margin: 0 0 0.5rem 0; font-size: 0.95rem; color: #475569; display: flex; align-items: center; gap: 0.4rem;">🔗 법령 검증 출처 (국가법령정보센터 원문)</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; font-size: 0.85rem;">
+                    <a href="https://www.law.go.kr/법령/산업안전보건법" target="_blank" style="color: #2563eb; text-decoration: none; padding: 0.2rem 0.5rem; background: #eff6ff; border-radius: 4px; border: 1px solid #bfdbfe;">산업안전보건법</a>
+                    <a href="https://www.law.go.kr/법령/산업안전보건법시행령" target="_blank" style="color: #2563eb; text-decoration: none; padding: 0.2rem 0.5rem; background: #eff6ff; border-radius: 4px; border: 1px solid #bfdbfe;">산업안전보건법 시행령</a>
+                    <a href="https://www.law.go.kr/법령/화학물질관리법" target="_blank" style="color: #059669; text-decoration: none; padding: 0.2rem 0.5rem; background: #ecfdf5; border-radius: 4px; border: 1px solid #a7f3d0;">화학물질관리법</a>
+                    <a href="https://www.law.go.kr/법령/화학물질관리법시행령" target="_blank" style="color: #059669; text-decoration: none; padding: 0.2rem 0.5rem; background: #ecfdf5; border-radius: 4px; border: 1px solid #a7f3d0;">화학물질관리법 시행령</a>
+                    <a href="https://www.law.go.kr/법령/화학제품안전법" target="_blank" style="color: #9333ea; text-decoration: none; padding: 0.2rem 0.5rem; background: #faf5ff; border-radius: 4px; border: 1px solid #e9d5ff;">화학제품안전법</a>
+                    <a href="https://www.law.go.kr/법령/생활화학제품및살생물제의안전관리에관한법률시행령" target="_blank" style="color: #9333ea; text-decoration: none; padding: 0.2rem 0.5rem; background: #faf5ff; border-radius: 4px; border: 1px solid #e9d5ff;">화학제품안전법 시행령</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Section 0: Comparative Table -->
+        <section id="section-0">
+            <h2 class="section-title">정부 부처별 관리 법률 및 대비표</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;">소관 부처</th>
+                            <th style="width: 12%;">관련 법률</th>
+                            <th style="width: 18%;">제도의 근본적인 목적</th>
+                            <th style="width: 20%;">규제 대상</th>
+                            <th style="width: 20%;">공급 주체별 의무 <br><span style="font-size:0.8rem; font-weight:400; opacity:0.8;">(제조/수입 vs 단순 판매)</span></th>
+                            <th style="width: 20%;">취급 사업장 의무 <br><span style="font-size:0.8rem; font-weight:400; opacity:0.8;">(의식주컴퍼니)</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="strong-labor">고용노동부</td>
+                            <td style="font-weight: 700;">산업안전보건법<br><span style="font-weight:400; font-size:0.85rem; color:var(--text-muted);">(산안법)</span></td>
+                            <td>산업재해 예방 및 쾌적한 작업환경 조성을 통해 <strong>근로자의 안전과 보건</strong>을 유지 및 증진</td>
+                            <td>화학물질 및 혼합물 중 <strong>유해성·위험성 분류기준에 해당하는 물질</strong></td>
+                            <td>
+                                <strong>[제조·수입자]</strong><br>
+                                1. MSDS 작성 및 제출 <span class="law-link" data-law="law-110">(제110조제1항)</span><br>
+                                2. 제출번호 반영 의무 <span class="law-link" data-law="law-110">(제110조제4항)</span><br><br>
+                                <strong>[단순 판매·유통업자]</strong><br>
+                                1. <strong>작성 및 제출 의무 없음</strong><br>
+                                2. 제출번호 반영 MSDS 제공 의무 <span class="law-link" data-law="law-111">(제111조제1항)</span>
+                            </td>
+                            <td>
+                                1. MSDS 팩토리 내 게시/비치 <span class="law-link" data-law="law-114">(제114조제1항)</span><br>
+                                2. 취급 근로자 안전보건 교육 <span class="law-link" data-law="law-114">(제114조제2항)</span><br>
+                                3. 용기 및 포장 경고표시 부착 <span class="law-link" data-law="law-115">(제115조)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="strong-env-chem">환경부</td>
+                            <td style="font-weight: 700;">화학물질관리법<br><span style="font-weight:400; font-size:0.85rem; color:var(--text-muted);">(화관법)</span></td>
+                            <td>화학물질 위해 예방 및 적절한 관리를 통해 <strong>국민건강 및 환경</strong>을 보호</td>
+                            <td><strong>유해화학물질</strong><br>(유독, 제한, 금지, 사고대비물질 등)</td>
+                            <td>
+                                1. 수입 승인/신고 및 확인서 제출<br>
+                                2. 용기/차량에 유해화학물질 표시 부착
+                            </td>
+                            <td>
+                                1. 영업허가 취득 또는 신고<br>
+                                2. 취급시설 설치 및 정기 검사 이행<br>
+                                3. 화학사고예방관리계획서 제출
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="strong-env-prod">환경부</td>
+                            <td style="font-weight: 700;">화학제품안전법<br><span style="font-weight:400; font-size:0.85rem; color:var(--text-muted);">(생활화학제품법)</span></td>
+                            <td>생활화학제품 및 살생물제의 안전관리로 <strong>국민 건강 및 환경</strong>을 보호</td>
+                            <td>안전확인대상생활화학제품<br><strong>(소비자 생활용 제품)</strong></td>
+                            <td>
+                                1. 출시 전 안전기준 적합 확인 및 신고/승인 획득<br>
+                                2. 포장에 신고번호 표시 준수
+                            </td>
+                            <td>
+                                1. 적법하게 승인된 제품만 사용<br>
+                                <strong style="color:#b91c1c;">2. 제품 용량과 무관하게, 사업장 B2B 산업용 취급 시에는 화학제품안전법 확인 여부와 상관없이 산안법상 MSDS 의무가 전적으로 적용됨 (면제 불가)</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 1 -->
+        <section id="section-1">
+            <h2 class="section-title">1. 물질안전보건자료 및 제출번호 제도의 정의와 의무</h2>
+            <div class="card">
+                <div class="info-block">
+                    <h4>물질안전보건자료(MSDS)의 정의 <span class="tag tag-labor">고용노동부-산업안전보건법</span></h4>
+                    <p>화학물질의 안전한 취급을 위해 명칭, 물리화학적 성질, 유해위험성, 응급조치요령, 취급시 주의사항 등을 기록한 문서입니다. <span class="law-link" data-law="law-110">산업안전보건법 제110조</span>에 따라 작성 및 제출 의무가 부여됩니다.</p>
+                </div>
+                <div class="info-block">
+                    <h4>공식 제출번호 제도의 정의 <span class="tag tag-labor">고용노동부-산업안전보건법</span></h4>
+                    <p>화학물질 제조사 또는 수입사가 작성한 MSDS를 안전보건공단에 제출하고, 발급받은 <strong>고유 제출번호를 MSDS 상단에 기재하여 제공하도록 의무화</strong>한 제도입니다. 2026년 1월 16일부로 최종 유예기간이 전면 종료되어, <strong>현재 유통되는 모든 MSDS에는 공식 제출번호 기재가 필수</strong>입니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2 -->
+        <section id="section-2">
+            <h2 class="section-title">2. B2B 산업용 대용량 납품과 B2C 소비자용 규제 충돌 시의 법적 해석</h2>
+            <div class="card">
+                <div class="info-block">
+                    <h4>시행령 근거 및 법적 해석 <span class="tag tag-labor">고용노동부-산업안전보건법</span><span class="tag tag-env-prod">환경부-화학제품안전법</span></h4>
+                    <ul>
+                        <li><span class="law-link" data-law="law-86">산업안전보건법 시행령 제86조</span>에 따른 예외는 <strong>일반 소비자가 시장에서 구입하여 가정 내에서 사용하는 포장 및 유통 제품(생활용 제제)</strong>에만 국한됩니다.</li>
+                        <li>사업장 내에서 근로자가 취급하는 <strong>산업용 대용량(벌크) 납품은 생활용 범위를 초과하는 B2B 거래이므로 면제 기준이 적용되지 않습니다.</strong></li>
+                        <li>환경부의 '안전기준적합확인신고증명서'는 소비자 대상 안전성을 보증할 뿐, <strong>근로자 보호를 위한 산업안전보건법상 MSDS 제출 의무를 절대 면제하거나 대체할 수 없습니다.</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3 -->
+        <section id="section-3">
+            <h2 class="section-title">3. 관련 법령 미준수 시 발생할 수 있는 사업장 리스크</h2>
+            <div class="card">
+                <div class="info-block">
+                    <h4>사업장 관련 리스크 기준 <span class="law-link" data-law="law-175">(산안법 제175조)</span> <span class="tag tag-labor">고용노동부-산업안전보건법</span></h4>
+                    <ul>
+                        <li><strong>MSDS 게시/비치 의무 위반 <span class="law-link" data-law="law-114">(제114조 제1항)</span>:</strong> 화학물질 1종당 과태료 최대 500만 원 <span class="law-link" data-law="law-175">(제175조 제3항 제3호)</span></li>
+                        <li><strong>근로자 교육 의무 위반 <span class="law-link" data-law="law-114">(제114조 제2항)</span>:</strong> 교육 대상 근로자 1인당 과태료 최대 30만 원, 법정 최고 300만 원 <span class="law-link" data-law="law-175">(제175조 제4항 제2호)</span></li>
+                        <li><strong>경고표시 부착 의무 위반 <span class="law-link" data-law="law-115">(제115조)</span>:</strong> 화학물질 1종당 과태료 최대 50만 원, 법정 최고 300만 원 <span class="law-link" data-law="law-175">(제175조 제4항 제3호)</span></li>
+                    </ul>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: #fef2f2; border-left: 4px solid #dc2626; border-radius: 4px;">
+                        <strong style="color: #b91c1c;">현업 안내:</strong>
+                        <p style="margin: 0.3rem 0 0 0; color: #991b1b; font-size: 0.95rem;">공급사가 적법한 번호가 기재된 MSDS를 적시에 제공하지 않아 당 사업장에 서류가 누락되면, 현장 감독 시 취급 사업장인 당사에 <strong>직접적인 제재 및 과태료가 발생</strong>할 수 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4 -->
+        <section id="section-4">
+            <h2 class="section-title">4. 실무 진행 시 유의사항 및 자주 묻는 질문</h2>
+
+            <!-- Case 1 -->
+            <div class="case-card">
+                <div class="case-header">
+                    <h3 class="case-title">쟁점 1: 환경부 증명서로 고용노동부 MSDS를 대체할 수 있는지 여부</h3>
+                    <div class="case-meta">유의 사항: 공급업체에서 환경부 서류만으로 갈음하려 할 때의 대응 방안</div>
+                </div>
+                <div class="case-comparison">
+                    <div class="case-misconception">
+                        <h5 class="case-box-title title-gray">🤔 실무적 혼선 요인</h5>
+                        <p>환경부 <span class="tag tag-env-prod">화학제품안전법</span>에 따른 증명서 취득 사실이 고용노동부 <span class="tag tag-labor">산업안전보건법</span>상 MSDS 의무 면제 조건에 해당한다고 넓게 해석하는 데서 오는 혼선입니다.</p>
+                    </div>
+                    <div class="case-fact">
+                        <h5 class="case-box-title title-teal">✅ 법적 기준 (팩트체크)</h5>
+                        <ul>
+                            <li><strong>Fact 1:</strong> MSDS 예외 대상인 '생활용 제제'는 일반 소비자의 생활용으로 제공되는 제품에 한하며 <span class="law-link" data-law="law-86">(시행령 제86조 제1항 제6호)</span>, 제품의 용량(5L 이하 등)이 아닌 B2C 유통 여부 및 용도를 기준으로 판단합니다.</li>
+                            <li><strong>Fact 2:</strong> 사업장(세탁 팩토리 등) 내에서 근로자가 작업 공정상 사용하는 화학제품은 포장 용량에 관계없이 <strong>B2B 산업용 취급</strong>에 해당하므로 면제 대상에서 제외되며 산안법상 MSDS 의무가 전적으로 적용됩니다.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="case-correction">
+                    <span>👉</span>
+                    <span><strong>실무 가이드:</strong> 당사 팩토리(팩토리)에서 근로자가 취급하는 모든 자재는 용량(5L 이하 소용량 포함)과 관계없이 B2B 산업용 취급으로 분류되므로, 환경부 생활화학제품 신고 여부와 무관하게 <strong>산안법에 따른 공식 제출번호가 기재된 국문 MSDS를 공급사(제조·수입사)에 반드시 요구하여 비치 및 교육을 실시</strong>해야 합니다.</span>
+                </div>
+            </div>
+
+            <!-- Case 2 -->
+            <div class="case-card">
+                <div class="case-header">
+                    <h3 class="case-title">쟁점 2: 서류상 성분 함량 표기 조율의 법적 한계</h3>
+                    <div class="case-meta">유의 사항: 작업환경측정 대상 여부 판정 시 서류와 실제 성분의 일치성</div>
+                </div>
+                <div class="case-comparison">
+                    <div class="case-misconception">
+                        <h5 class="case-box-title title-gray">🤔 실무적 혼선 요인</h5>
+                        <p>화학물질의 실질적인 물리화학적 배합비 변경 없이, <strong>서류상 기재 범위만 기준치 미만으로 조정</strong>함으로써 합법적으로 관리 대상(작업환경측정 등)에서 제외될 수 있다고 오해할 소지가 있습니다.</p>
+                    </div>
+                    <div class="case-fact">
+                        <h5 class="case-box-title title-teal">✅ 법적 기준 (팩트체크)</h5>
+                        <ul>
+                            <li><strong>Fact 1:</strong> MSDS상 유해·위험성 성분 및 함량을 실제와 다르게 허위 기재하여 제출·제공하는 행위는 엄격한 법적 제재의 대상임. <span class="law-link" data-law="law-175">(제175조)</span></li>
+                            <li><strong>Fact 2:</strong> 취급 화학물질이 법적 노출기준 이상을 함유하는 경우 측정을 적법하게 진행해야 하며, 불일치 적발 시 행정 처분이 따름.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="case-correction">
+                    <span>👉</span>
+                    <span><strong>실무 가이드:</strong> 실제 성분의 변경 없이 문서상으로만 수치를 조율하는 행위는 리스크가 매우 큽니다. 반드시 실제 함량이 정확히 기재된 최신 MSDS를 수령하고, 그에 따른 <strong>적법한 안전보건 조치를 이행</strong>해야 합니다.</span>
+                </div>
+            </div>
+
+            <!-- Case 3 -->
+            <div class="case-card">
+                <div class="case-header">
+                    <h3 class="case-title">쟁점 3: 수입 화학물질의 MSDS 제출번호 주체 파악</h3>
+                    <div class="case-meta">유의 사항: 국외 제조 화학물질 수입 시 적법한 제출번호 확인</div>
+                </div>
+                <div class="case-comparison">
+                    <div class="case-misconception">
+                        <h5 class="case-box-title title-gray">🤔 실무적 혼선 요인</h5>
+                        <p>동일한 브랜드/제품명이라면, 국내 다수 수입업체 중 아무 업체의 MSDS 제출번호가 기재되어 있어도 법적 요건을 충족한다고 오해할 수 있습니다.</p>
+                    </div>
+                    <div class="case-fact">
+                        <h5 class="case-box-title title-teal">✅ 법적 기준 (팩트체크)</h5>
+                        <ul>
+                            <li><strong>Fact 1:</strong> 수입품의 경우, 국내 <strong>직접 수입자 본인</strong>이 발급받았거나 국외제조사가 <strong>공식 선임한 대리인</strong>이 발급받은 제출번호여야 유효함. <span class="law-link" data-law="law-110">(제110조 제1항)</span></li>
+                            <li><strong>Fact 2:</strong> 당사에 직접 유통하는 과정과 무관한 타 수입업자의 번호를 무단 인용 및 기재하는 것은 인정되지 않음.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="case-correction">
+                    <span>👉</span>
+                    <span><strong>실무 가이드:</strong> 당사에 물품을 공급하는 정식 수입 주체, 혹은 해당 물품의 공식 선임대리인이 부여받은 적법한 번호가 기재된 MSDS를 정상 경로로 확보해야 합니다.</span>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Section 5 -->
+        <section id="section-5">
+            <h2 class="section-title">5. 단가테이블 기반 공급업체별 자재 용량 및 의무 점검 현황</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">공급업체명</th>
+                            <th style="width: 15%;">자재코드</th>
+                            <th style="width: 35%;">자재명</th>
+                            <th style="width: 15%;">용량구분</th>
+                            <th style="width: 20%;">MSDS 의무 판단 가이드</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: 700;">두손화학</td>
+                            <td><span style="font-family: monospace; background: #e4e4e7; padding: 3px 6px; border-radius: 4px; font-size: 0.85rem;">2FIN0002-01</span></td>
+                            <td>후처리제 두손화학 구연산-세탁풀 20L</td>
+                            <td>대용량 (20L)</td>
+                            <td><span class="tag tag-labor">의무 대상 (B2B 납품)</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 700;">두손화학</td>
+                            <td><span style="font-family: monospace; background: #e4e4e7; padding: 3px 6px; border-radius: 4px; font-size: 0.85rem;">2FIN0004-01</span></td>
+                            <td>냄새제거제 20L</td>
+                            <td>대용량 (20L)</td>
+                            <td><span class="tag tag-labor">의무 대상 (B2B 납품)</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 700;">두손화학</td>
+                            <td><span style="font-family: monospace; background: #e4e4e7; padding: 3px 6px; border-radius: 4px; font-size: 0.85rem;">2PRE0002-01</span></td>
+                            <td>셔츠부스터 20L</td>
+                            <td>대용량 (20L)</td>
+                            <td><span class="tag tag-labor">의무 대상 (B2B 납품)</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 700;">애경산업</td>
+                            <td><span style="font-family: monospace; background: #e4e4e7; padding: 3px 6px; border-radius: 4px; font-size: 0.85rem;">2SOP0002-01</span></td>
+                            <td>WET세제 애경 런드리고 프로페셔널 13L</td>
+                            <td>대용량 (13L)</td>
+                            <td><span class="tag tag-labor">의무 대상 (B2B 납품)</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 700;">피앤지</td>
+                            <td><span style="font-family: monospace; background: #e4e4e7; padding: 3px 6px; border-radius: 4px; font-size: 0.85rem;">2FIN0005-01</span></td>
+                            <td>후처리제 피앤지 다우니 화이트 티 4.1L</td>
+                            <td>소용량 (4.1L)</td>
+                            <td><span class="tag tag-env-prod">면제 가능성 검토 (B2C 일반소비자용)</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 700;">에이치에스씨</td>
+                            <td><span style="font-family: monospace; background: #e4e4e7; padding: 3px 6px; border-radius: 4px; font-size: 0.85rem;">2PRE0001-01</span></td>
+                            <td>런드리고 전처리제 4L</td>
+                            <td>소용량 (4L)</td>
+                            <td><span class="tag tag-labor">의무 대상 (B2B 전용)</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 700;">에이치에스씨</td>
+                            <td><span style="font-family: monospace; background: #e4e4e7; padding: 3px 6px; border-radius: 4px; font-size: 0.85rem;">2PRE0004-01</span></td>
+                            <td>L1 4L</td>
+                            <td>소용량 (4L)</td>
+                            <td><span class="tag tag-labor">의무 대상 (B2B 전용)</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 700;">진주크린텍</td>
+                            <td><span style="font-family: monospace; background: #e4e4e7; padding: 3px 6px; border-radius: 4px; font-size: 0.85rem;">2PRE0005-01</span></td>
+                            <td>바르는비트 220mL</td>
+                            <td>소용량 (220mL)</td>
+                            <td><span class="tag tag-env-prod">면제 가능성 검토 (B2C 일반소비자용)</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="summary-box">
+                <h4>💡 종합 실무 가이드 요약</h4>
+                <ul>
+                    <li style="margin-bottom: 0.6rem;">
+                        <strong>포장 용량은 법적 면제 기준이 아님:</strong> 산안법상 소용량(5L 이하, 220mL 등)이라 하더라도 용량 자체는 면제 판단의 기준이 아닙니다. 오로지 <strong>"일반 소비자의 생활용으로 제공되는 것(B2C)"</strong>인지 아니면 <strong>"사업장 작업용으로 취급하는 것(B2B)"</strong>인지에 따라 면제 여부가 결정됩니다.
+                    </li>
+                    <li style="margin-bottom: 0.6rem;">
+                        <strong>B2B 전용/주문형 제품 (예: HSC 런드리고 전처리제 4L, L1 4L 등):</strong> 시중에 일반 소비자용으로 판매되지 않고 사업장(팩토리) 전용으로 납품되는 제품은 용량이 소량이더라도 <strong>산안법상 MSDS 의무 대상에 전적으로 해당</strong>합니다. 반드시 안전보건공단 공식 제출번호가 반영된 MSDS를 확보해야 합니다.
+                    </li>
+                    <li>
+                        <strong>B2C 범용 소비자용 제품 (예: 다우니 4.1L, 바르는비트 220mL 등):</strong> 일반 마트나 유통 채널에서 소비자가 구매하여 사용하는 제품을 원형 그대로 사용하는 경우, 산안법 시행령 제86조 제1항 제6호 및 제16호에 따라 <strong>MSDS 의무 면제 대상에 해당할 가능성</strong>이 있습니다. 이 경우 환경부 화학제품안전법 신고번호(신고증명서)로 갈음할 수 있습니다.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Law Modal Overlay -->
+    <div id="lawModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle" class="modal-title">법령 제목</h3>
+                <button id="modalClose" class="modal-close">&times;</button>
+            </div>
+            <div id="modalBody" class="modal-body">
+                법령 내용이 여기에 표시됩니다.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for sidebar navigation
+        document.querySelectorAll('.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 40,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Legal Data Object (Official texts from KOSHA/MOL)
+        const lawData = {
+            'law-110': {
+                title: '산업안전보건법 제110조 <br><span style="font-size:0.9rem; color:#64748b; font-weight:600;">(물질안전보건자료의 작성 및 제출)</span>',
+                content: '① 물질안전보건자료대상물질을 <strong>제조하거나 수입하려는 자</strong>는 고용노동부령으로 정하는 바에 따라 물질안전보건자료대상물질의 명칭, 구성성분의 명칭 및 함량 등 고용노동부령으로 정하는 사항을 적은 자료(물질안전보건자료)를 <strong>작성하여 고용노동부장관에게 제출</strong>하여야 한다.<br><br>④ 제1항 또는 제2항에 따라 물질안전보건자료를 제출한 자는 고용노동부장관이 물질안전보건자료를 관리하기 위하여 부여하는 <strong>번호(제출번호)를 해당 물질안전보건자료에 반영</strong>하여야 한다.'
+            },
+            'law-111': {
+                title: '산업안전보건법 제111조 <br><span style="font-size:0.9rem; color:#64748b; font-weight:600;">(물질안전보건자료의 제공)</span>',
+                content: '① 물질안전보건자료대상물질을 <strong>양도하거나 제공하는 자(판매/유통업자)</strong>는 고용노동부령으로 정하는 방법에 따라 제110조제1항에 따라 <strong>작성된 물질안전보건자료</strong>(제출번호가 반영된 자료를 말한다)를 양도받거나 제공받는 자에게 <strong>제공하여야 한다.</strong><br><br><span style="color:#64748b; font-size:0.9rem;">※ 단순 판매/유통업자는 직접 작성하거나 정부에 제출할 의무가 없으며, 제조사로부터 받은 MSDS를 거래처에 그대로 전달할 의무만 부여됩니다.</span>'
+            },
+            'law-114': {
+                title: '산업안전보건법 제114조 <br><span style="font-size:0.9rem; color:#64748b; font-weight:600;">(물질안전보건자료의 게시 및 근로자 교육)</span>',
+                content: '① 물질안전보건자료대상물질을 취급하려는 <strong>사업주</strong>는 제공받은 물질안전보건자료를 팩토리 내에 <strong>근로자가 쉽게 볼 수 있는 장소에 게시하거나 비치</strong>하여야 한다.<br><br>② 사업주는 물질안전보건자료대상물질을 취급하는 근로자의 안전ㆍ보건을 위하여 고용노동부령으로 정하는 바에 따라 <strong>작업성격별로 물질안전보건자료대상물질에 대한 교육을 실시</strong>하고 교육시간 및 내용 등을 기록한 서류를 보관하여야 한다.'
+            },
+            'law-115': {
+                title: '산업안전보건법 제115조 <br><span style="font-size:0.9rem; color:#64748b; font-weight:600;">(경고표시의 부착)</span>',
+                content: '① 사업주는 물질안전보건자료대상물질을 취급하는 팩토리에서 사용하는 <strong>용기 및 포장에 경고표시를 하여야 한다.</strong> 다만, 용기 및 포장에 이미 경고표시가 되어 있는 등 고용노동부령으로 정하는 경우에는 그러하지 아니하다.<br><br>② 사업주는 물질안전보건자료대상물질을 사용하는 <strong>작업공정별로 경고표시를 설치하거나 부착</strong>하여야 한다.'
+            },
+            'law-86': {
+                title: '산업안전보건법 시행령 제86조 <br><span style="font-size:0.9rem; color:#64748b; font-weight:600;">(작성·제출 제외 대상 화학물질 등)</span>',
+                content: '법 제110조제1항 각 호 외의 부분 본문에서 "대통령령으로 정하는 화학물질 등"이란 다음 각 호의 어느 하나에 해당하는 화학물질을 말한다. (이하 MSDS 제외대상)<br><br>6. 「생활화학제품 및 살생물제의 안전관리에 관한 법률」 제3조제4호에 따른 안전확인대상생활화학제품<strong>(일반 소비자의 생활용으로 제공되는 제품으로 한정한다)</strong><br>16. 제1호부터 제15호까지의 규정 외의 화학물질 또는 혼합물로서 <strong>일반 소비자의 생활용으로 제공되는 것</strong><br><br><span style="color:#b91c1c; font-size:0.9rem; font-weight:600;">※ 중요: 제품의 포장 용량과 관계없이, 사업장 내에서 근로자가 세탁 및 처리 작업 등 업무상 취급하는 모든 물질은 "일반 소비자의 생활용으로 제공되는 것"에 해당하지 않으므로 면제 대상에서 제외되며, B2B 산업용으로 간주되어 전적으로 MSDS 의무(제출번호 반영 및 제공 의무)가 적용됩니다.</span>'
+            },
+            'law-175': {
+                title: '산업안전보건법 제175조 <br><span style="font-size:0.9rem; color:#64748b; font-weight:600;">(과태료)</span>',
+                content: '<strong>③ 다음 각 호의 어느 하나에 해당하는 자에게는 500만원 이하의 과태료를 부과한다.</strong><br>1. 제110조제1항을 위반하여 물질안전보건자료를 제출하지 아니하거나 거짓으로 제출한 자<br>1의2. 제110조제4항을 위반하여 제출번호를 반영하지 아니한 자<br>2. 제111조제1항을 위반하여 제공하지 아니하거나 거짓으로 제공한 자<br>3. 제114조제1항을 위반하여 게시하거나 비치하지 아니한 자<br><br><strong>④ 다음 각 호의 어느 하나에 해당하는 자에게는 300만원 이하의 과태료를 부과한다.</strong><br>2. 제114조제2항을 위반하여 근로자 교육을 실시하지 아니한 자<br>3. 제115조를 위반하여 경고표시를 하지 아니한 자'
+            }
+        };
+
+        // Modal Logic
+        const modal = document.getElementById('lawModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        const closeBtn = document.getElementById('modalClose');
+        const lawLinks = document.querySelectorAll('.law-link');
+
+        function openModal(lawKey) {
+            const data = lawData[lawKey];
+            if (data) {
+                modalTitle.innerHTML = data.title;
+                modalBody.innerHTML = data.content;
+                modal.classList.add('active');
+            }
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+
+        lawLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                const lawKey = this.getAttribute('data-law');
+                openModal(lawKey);
+            });
+        });
+
+        closeBtn.addEventListener('click', closeModal);
+
+        // Close on clicking outside the modal content
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
