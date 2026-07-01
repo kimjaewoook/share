@@ -446,7 +446,7 @@
   </div>
 
   <!-- Section 5 -->
-  <div class="section" style="margin-bottom:0;">
+  <div class="section">
     <div class="section-header">
       <div class="step-number">5</div>
       <h2 class="section-title">업체별 특수 예외 룰</h2>
@@ -511,7 +511,52 @@
         </ul>
       </div>
     </div>
-    
+  </div>
+
+  <!-- Section 6 -->
+  <div class="section" style="margin-bottom:0;">
+    <div class="section-header">
+      <div class="step-number">6</div>
+      <h2 class="section-title">자동화 스크립트 (GAS) 가이드</h2>
+    </div>
+    <p class="section-desc">발주관리 스프레드시트에는 단순 반복 업무를 제거하고 휴먼 에러를 방지하기 위한 구글 앱스 스크립트(Google Apps Script)가 내장되어 있습니다.</p>
+
+    <div class="vendor-grid">
+      <div class="vendor-card">
+        <h3 class="vendor-name"><span>🔢</span> 발주번호 자동 채번</h3>
+        <ul class="vendor-rules">
+          <li><strong>스마트 채번:</strong> 기존 번호를 스캔하여 날짜별 최대 시퀀스(예: <code>YYMMDD-001</code>)를 자동으로 이어서 부여합니다.</li>
+          <li><strong>발주 그룹화:</strong> 날짜와 업체가 동일한 품목들은 자동으로 하나의 발주번호로 묶여 전송됩니다.</li>
+          <li><strong>수동 보존:</strong> 시스템 외적으로 수동 입력된 번호가 있다면 덮어쓰지 않고 안전하게 보존합니다.</li>
+        </ul>
+      </div>
+
+      <div class="vendor-card">
+        <h3 class="vendor-name"><span>📄</span> 발주서 자동 생성 (PDF)</h3>
+        <ul class="vendor-rules">
+          <li><strong>원클릭 발급:</strong> "PO List"에서 발주번호 선택 시 양식 시트에 자동 매핑되어 PDF로 변환 후 구글 드라이브에 저장됩니다.</li>
+          <li><strong>데이터 고정(Hardcoding):</strong> 발주서 발행이 끝난 행은 L열 이후의 수식이 순수 값으로 변환되어 과거 데이터 변형을 막습니다.</li>
+          <li><strong>이메일 연동:</strong> 납품처 및 수량 정보가 포함된 발송용 이메일 초안(Draft)이 팝업과 함께 즉시 생성됩니다.</li>
+        </ul>
+      </div>
+
+      <div class="vendor-card">
+        <h3 class="vendor-name"><span>🔄</span> 정산 대상 업체 동적 필터링</h3>
+        <ul class="vendor-rules">
+          <li><strong>자동 스캔:</strong> 월말 정산 폼에서 '정산 월'을 변경하면, 해당 월에 거래가 발생한 업체만 스캔하여 드롭다운 목록을 갱신합니다.</li>
+          <li><strong>담당자 자동 매핑:</strong> <code>(담당자명) 업체명</code> 형태로 리스트업하여 누가 관리하는 건인지 직관적으로 파악할 수 있습니다.</li>
+        </ul>
+      </div>
+
+      <div class="vendor-card">
+        <h3 class="vendor-name"><span>💰</span> 월마감 이메일 초안 작성</h3>
+        <ul class="vendor-rules">
+          <li><strong>정밀 검증:</strong> 공급가, 부가세 합산 시 소수점 에러가 발생하는지 시스템이 스스로 검증하여 결산 오류를 원천 차단합니다.</li>
+          <li><strong>엑셀 클렌징:</strong> 함수 수식과 잉여 이미지를 깨끗하게 제거한 순수 데이터 값만의 <code>.xlsx</code> 명세서 파일을 자동 첨부합니다.</li>
+          <li><strong>정산 초안 자동화:</strong> 세금계산서 발행일(말일)과 총 정산 금액이 정확히 기재된 요청 메일 초안을 생성합니다.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
 </div>
