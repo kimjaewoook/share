@@ -109,7 +109,7 @@ table {
 th, td {
   padding: 16px 20px;
   border-bottom: 1px solid var(--border-color);
-  vertical-align: middle;
+  vertical-align: top;
 }
 th {
   background-color: var(--header-bg);
@@ -129,7 +129,7 @@ tr:hover {
   background-color: var(--row-hover);
   transition: background-color 0.2s ease;
 }
-td.col-rank { width: 6%; text-align: center; font-weight: 600; color: var(--text-muted); }
+td.col-rank { width: 6%; text-align: center; font-weight: 600; color: var(--text-muted); vertical-align: middle; }
 th.col-rank { width: 6%; text-align: center; }
 .col-table { width: 14%; word-break: break-all; }
 .table-name-badge {
@@ -144,7 +144,7 @@ th.col-rank { width: 6%; text-align: center; }
   border: 1px solid #e9ecef;
   word-break: break-all;
 }
-.col-count { width: 8%; text-align: center; }
+.col-count { width: 8%; text-align: center; vertical-align: middle; }
 .count-badge {
   display: inline-block;
   background-color: #e6f4ea;
@@ -154,10 +154,28 @@ th.col-rank { width: 6%; text-align: center; }
   font-weight: 700;
   font-size: 0.9rem;
 }
-td.col-cols { width: 40%; font-size: 0.9rem; color: #3c4043; line-height: 1.7; word-break: break-all; }
+td.col-cols { width: 40%; font-size: 0.9rem; color: #3c4043; line-height: 1.6; word-break: break-all; }
 th.col-cols { width: 40%; }
-td.col-role { width: 32%; font-weight: 600; color: #1967d2; font-size: 0.95rem; word-break: keep-all; }
+td.col-role { width: 32%; font-weight: 600; color: #1967d2; font-size: 0.95rem; word-break: keep-all; vertical-align: middle; }
 th.col-role { width: 32%; }
+.col-tag {
+  display: inline-block;
+  background: #f1f3f4;
+  border: 1px solid #dadce0;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #202124;
+  white-space: nowrap;
+  margin: 2px 4px 2px 0;
+  font-family: 'Fira Code', Consolas, monospace;
+}
+.col-meaning {
+  color: #1a73e8;
+  font-size: 0.95em;
+  margin-left: 4px;
+  font-family: 'Pretendard', sans-serif;
+}
 </style>
 </head>
 <body>
@@ -176,6 +194,7 @@ th.col-role { width: 32%; }
     <li><a href='#cat-I'>I. 서브쿼리 및 임시 별칭</a></li>
     <li><a href='#cat-J'>J. 그룹웨어</a></li>
     <li><a href='#cat-Z'>Z. 기타 및 공통 데이터</a></li>
+    <li style='margin-top:20px; border-top:1px solid #eee; padding-top:10px;'><a href='#cat-glossary' style='color:#d93025;'>🏷️ 컬럼 총정리 뷰</a></li>
   </ul>
 </div>
 <div class='main-content'>
@@ -190,77 +209,77 @@ th.col-role { width: 32%; }
 <td class='col-rank'>1</td>
 <td class='col-table'><span class='table-name-badge'>wash</span></td>
 <td class='col-count'><span class='count-badge'>1653</span></td>
-<td class='col-cols'>app_version, cancelled_at, collected_at, collection_created_at, collection_date, created_at, created_date, delivered_at, id, key, laundry24_franchise_cd, laundry24_pgi, lsf_factory_info_id, next_collection_date, prev_collection_date, real_collection_date, receipt_confirmed_at, release_deadline_date, second_collection_date, status, subscription_order_id, user_id, washed_at, 기준월, 아이언 작업자</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>app_version</code></div><div style='margin-bottom:3px;'><code>cancelled_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>collected_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>collection_created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>collection_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>created_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>delivered_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>key</code></div><div style='margin-bottom:3px;'><code>laundry24_franchise_cd</code></div><div style='margin-bottom:3px;'><code>laundry24_pgi</code></div><div style='margin-bottom:3px;'><code>lsf_factory_info_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 공장 식별키)</span></div><div style='margin-bottom:3px;'><code>next_collection_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>prev_collection_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>real_collection_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>receipt_confirmed_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>release_deadline_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>second_collection_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태값)</span></div><div style='margin-bottom:3px;'><code>subscription_order_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(구독 주문 식별키)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>washed_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>기준월</code></div><div style='margin-bottom:3px;'><code>아이언 작업자</code></div></td>
 <td class='col-role'>수거 세탁 상태 및 물류/결제 결합을 위한 다중 상태 메인 트랜잭션 (1:N 뼈대)</td>
 </tr>
 <tr>
 <td class='col-rank'>2</td>
 <td class='col-table'><span class='table-name-badge'>laundry_care_request</span></td>
 <td class='col-count'><span class='count-badge'>211</span></td>
-<td class='col-cols'>created_datetime, delete_yn, id, incoming_status, iron_status_type, lsf_wash_item_id, spotting_status_type, wash_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>incoming_status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태)</span></div><div style='margin-bottom:3px;'><code>iron_status_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>spotting_status_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 식별키)</span></div></td>
 <td class='col-role'>세탁 care 요청 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>3</td>
 <td class='col-table'><span class='table-name-badge'>map_wash_several_nights_delivery</span></td>
 <td class='col-count'><span class='count-badge'>183</span></td>
-<td class='col-cols'>id, several_nights_delivery_id, wash_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>several_nights_delivery_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(배송 식별키)</span></div><div style='margin-bottom:3px;'><code>wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 식별키)</span></div></td>
 <td class='col-role'>주문건의 한밤/여러밤 배송 유형을 결정짓는 핵심 물류 매핑 테이블</td>
 </tr>
 <tr>
 <td class='col-rank'>4</td>
 <td class='col-table'><span class='table-name-badge'>wash_item</span></td>
 <td class='col-count'><span class='count-badge'>154</span></td>
-<td class='col-cols'>accepted, created_date_time, id, laundry_category_id, old_subscription_order_id, premium_yn, subtracted, wash_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>accepted</code></div><div style='margin-bottom:3px;'><code>created_date_time</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(시간)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>laundry_category_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(카테고리 식별키)</span></div><div style='margin-bottom:3px;'><code>old_subscription_order_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(구독 주문 식별키)</span></div><div style='margin-bottom:3px;'><code>premium_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(프리미엄 여부)</span></div><div style='margin-bottom:3px;'><code>subtracted</code></div><div style='margin-bottom:3px;'><code>wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 식별키)</span></div></td>
 <td class='col-role'>세탁 의류 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>5</td>
 <td class='col-table'><span class='table-name-badge'>premium_request</span></td>
 <td class='col-count'><span class='count-badge'>149</span></td>
-<td class='col-cols'>delete_yn, id, iron_status_type, lsf_wash_item_id, spotting_status_type, wash_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>iron_status_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>spotting_status_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 식별키)</span></div></td>
 <td class='col-role'>프리미엄 요청 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>6</td>
 <td class='col-table'><span class='table-name-badge'>repair_order</span></td>
 <td class='col-count'><span class='count-badge'>132</span></td>
-<td class='col-cols'>created_at, delete_yn, id, lsf_wash_item_id, lsf_wash_process_item_id, wash_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_process_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 공정 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 식별키)</span></div></td>
 <td class='col-role'>수선 주문 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>7</td>
 <td class='col-table'><span class='table-name-badge'>map_laundry_care_request_intensive_care_request</span></td>
 <td class='col-count'><span class='count-badge'>89</span></td>
-<td class='col-cols'>laundry_care_request_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>laundry_care_request_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(요청 식별키)</span></div></td>
 <td class='col-role'>연결 세탁 care 요청 intensive care 요청 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>8</td>
 <td class='col-table'><span class='table-name-badge'>map_premium_request_intensive_care_request</span></td>
 <td class='col-count'><span class='count-badge'>51</span></td>
-<td class='col-cols'>premium_request_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>premium_request_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(프리미엄 요청 식별키)</span></div></td>
 <td class='col-role'>연결 프리미엄 요청 intensive care 요청 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>9</td>
 <td class='col-table'><span class='table-name-badge'>repair_product_order</span></td>
 <td class='col-count'><span class='count-badge'>44</span></td>
-<td class='col-cols'>created_at, status</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태값)</span></div></td>
 <td class='col-role'>수선 상품 주문 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>10</td>
 <td class='col-table'><span class='table-name-badge'>wash_delivery_option</span></td>
 <td class='col-count'><span class='count-badge'>24</span></td>
-<td class='col-cols'>delete_yn, packaging_type, wash_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>packaging_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 식별키)</span></div></td>
 <td class='col-role'>세탁 배송 option 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>11</td>
 <td class='col-table'><span class='table-name-badge'>rewash_laundry_care_request</span></td>
 <td class='col-count'><span class='count-badge'>21</span></td>
-<td class='col-cols'>laundry_care_request_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>laundry_care_request_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(요청 식별키)</span></div></td>
 <td class='col-role'>rewash 세탁 care 요청 데이터</td>
 </tr>
 <tr>
@@ -274,21 +293,21 @@ th.col-role { width: 32%; }
 <td class='col-rank'>13</td>
 <td class='col-table'><span class='table-name-badge'>wash_detail</span></td>
 <td class='col-count'><span class='count-badge'>16</span></td>
-<td class='col-cols'>precaution</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>precaution</code></div></td>
 <td class='col-role'>세탁 상세 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>14</td>
 <td class='col-table'><span class='table-name-badge'>premium_inspection</span></td>
 <td class='col-count'><span class='count-badge'>14</span></td>
-<td class='col-cols'>lsf_wash_item_id, modified_datetime</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>lsf_wash_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>modified_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div></td>
 <td class='col-role'>프리미엄 inspection 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>15</td>
 <td class='col-table'><span class='table-name-badge'>repair_product</span></td>
 <td class='col-count'><span class='count-badge'>13</span></td>
-<td class='col-cols'>use_yn</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>use_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div></td>
 <td class='col-role'>수선 상품 데이터</td>
 </tr>
 <tr>
@@ -302,7 +321,7 @@ th.col-role { width: 32%; }
 <td class='col-rank'>17</td>
 <td class='col-table'><span class='table-name-badge'>repair_way</span></td>
 <td class='col-count'><span class='count-badge'>11</span></td>
-<td class='col-cols'>id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div></td>
 <td class='col-role'>수선 way 데이터</td>
 </tr>
 </tbody></table></div>
@@ -315,168 +334,168 @@ th.col-role { width: 32%; }
 <td class='col-rank'>1</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_check_info</span></td>
 <td class='col-count'><span class='count-badge'>996</span></td>
-<td class='col-cols'>check_seq, check_status, completion_date, completion_type, cs_date, cs_msg, factory_seq_fk, laundry24_franchise_cd, laundry24_pgi, reg_date, reg_id, register_date, release_date, service_type, today_check_cnt, user_card_no, user_id, user_msg, wash_create_date, wash_id, wash_order_no, work_base_date</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>check_seq</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(순번)</span></div><div style='margin-bottom:3px;'><code>check_status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태)</span></div><div style='margin-bottom:3px;'><code>completion_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>completion_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>cs_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>cs_msg</code></div><div style='margin-bottom:3px;'><code>factory_seq_fk</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공장)</span></div><div style='margin-bottom:3px;'><code>laundry24_franchise_cd</code></div><div style='margin-bottom:3px;'><code>laundry24_pgi</code></div><div style='margin-bottom:3px;'><code>reg_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>reg_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>register_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>release_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>service_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(서비스 유형)</span></div><div style='margin-bottom:3px;'><code>today_check_cnt</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(수량)</span></div><div style='margin-bottom:3px;'><code>user_card_no</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 번호)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>user_msg</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객)</span></div><div style='margin-bottom:3px;'><code>wash_create_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 일자)</span></div><div style='margin-bottom:3px;'><code>wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 식별키)</span></div><div style='margin-bottom:3px;'><code>wash_order_no</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 주문 번호)</span></div><div style='margin-bottom:3px;'><code>work_base_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(기본 일자)</span></div></td>
 <td class='col-role'>스마트팩토리 공장 단위 수거물 입고 및 검수 헤더</td>
 </tr>
 <tr>
 <td class='col-rank'>2</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_item</span></td>
 <td class='col-count'><span class='count-badge'>595</span></td>
-<td class='col-cols'>barcode, before_qc_issue_yn, created_date, created_user_id, created_user_role_type, delete_yn, display_barcode, factory_process_status, id, item_type, kicker_barcode, lsf_category_id, lsf_wash_id, lsf_wash_no_reason_info_id, lsf_wash_process_item_id, lsf_wash_process_item_kicker_slot_id, modified_user_id, premium_type, release_date, repair_process_type, sku_id, wash_process_type</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>barcode</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(바코드)</span></div><div style='margin-bottom:3px;'><code>before_qc_issue_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div><div style='margin-bottom:3px;'><code>created_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>created_user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>created_user_role_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 유형)</span></div><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>display_barcode</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(바코드)</span></div><div style='margin-bottom:3px;'><code>factory_process_status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공장 공정 상태)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>item_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(의류 유형)</span></div><div style='margin-bottom:3px;'><code>kicker_barcode</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(바코드)</span></div><div style='margin-bottom:3px;'><code>lsf_category_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 카테고리 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_no_reason_info_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 사유 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_process_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 공정 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_process_item_kicker_slot_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 공정 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>modified_user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>premium_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(프리미엄 유형)</span></div><div style='margin-bottom:3px;'><code>release_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>repair_process_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(수선 공정 유형)</span></div><div style='margin-bottom:3px;'><code>sku_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>wash_process_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 공정 유형)</span></div></td>
 <td class='col-role'>공장 내 의류/품목 바코드 기준 세탁물 상세 정보 및 품질 검수 연동</td>
 </tr>
 <tr>
 <td class='col-rank'>3</td>
 <td class='col-table'><span class='table-name-badge'>lsf_factory_info</span></td>
 <td class='col-count'><span class='count-badge'>461</span></td>
-<td class='col-cols'>id, name</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(명칭)</span></div></td>
 <td class='col-role'>스마트팩토리 공장 지점 정보</td>
 </tr>
 <tr>
 <td class='col-rank'>4</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_process_info</span></td>
 <td class='col-count'><span class='count-badge'>368</span></td>
-<td class='col-cols'>billing_code_fk, check_seq_fk, created_datetime, del_yn, display_barcode, invoice_id_fk, item_type, large_name_fix, large_seq_fk, medium_seq_fk, premium_type, process_barcode, process_etc_method_type, process_method_type, process_reg_type, process_seq, process_status, product_order_item_id, reason_content_fix, reason_seq_fk, release_type, sku_id, small_seq_fk</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>billing_code_fk</code></div><div style='margin-bottom:3px;'><code>check_seq_fk</code></div><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>del_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div><div style='margin-bottom:3px;'><code>display_barcode</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(바코드)</span></div><div style='margin-bottom:3px;'><code>invoice_id_fk</code></div><div style='margin-bottom:3px;'><code>item_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(의류 유형)</span></div><div style='margin-bottom:3px;'><code>large_name_fix</code></div><div style='margin-bottom:3px;'><code>large_seq_fk</code></div><div style='margin-bottom:3px;'><code>medium_seq_fk</code></div><div style='margin-bottom:3px;'><code>premium_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(프리미엄 유형)</span></div><div style='margin-bottom:3px;'><code>process_barcode</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공정 바코드)</span></div><div style='margin-bottom:3px;'><code>process_etc_method_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공정 방식 유형)</span></div><div style='margin-bottom:3px;'><code>process_method_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공정 방식 유형)</span></div><div style='margin-bottom:3px;'><code>process_reg_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공정 유형)</span></div><div style='margin-bottom:3px;'><code>process_seq</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공정 순번)</span></div><div style='margin-bottom:3px;'><code>process_status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공정 상태)</span></div><div style='margin-bottom:3px;'><code>product_order_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상품 주문 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>reason_content_fix</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(사유)</span></div><div style='margin-bottom:3px;'><code>reason_seq_fk</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(사유)</span></div><div style='margin-bottom:3px;'><code>release_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>sku_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>small_seq_fk</code></div></td>
 <td class='col-role'>스마트팩토리 세탁 공정 기본정보 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>5</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash</span></td>
 <td class='col-count'><span class='count-badge'>338</span></td>
-<td class='col-cols'>created_at, created_date, id, lsf_factory_id, lsf_wash_check_info_id, lsf_wash_kicker_slot_id, release_date, today_check_cnt, user_id, wash_status, weight, 분류시간, 최초킥커시간, 출고확정시간</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>created_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_factory_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 공장 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_check_info_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_kicker_slot_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 식별키)</span></div><div style='margin-bottom:3px;'><code>release_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>today_check_cnt</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(수량)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>wash_status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 상태)</span></div><div style='margin-bottom:3px;'><code>weight</code></div><div style='margin-bottom:3px;'><code>분류시간</code></div><div style='margin-bottom:3px;'><code>최초킥커시간</code></div><div style='margin-bottom:3px;'><code>출고확정시간</code></div></td>
 <td class='col-role'>스마트팩토리 세탁 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>6</td>
 <td class='col-table'><span class='table-name-badge'>lsf_account_info</span></td>
 <td class='col-count'><span class='count-badge'>333</span></td>
-<td class='col-cols'>admin_duties, admin_id, admin_name, admin_seq, admin_seq_fk, capacity_seq, delete_yn, factory_seq_fk, last_logged_in_datetime, lsf_factory_info_id, reg_id, shiftee_employee_identification, type</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>admin_duties</code></div><div style='margin-bottom:3px;'><code>admin_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>admin_name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(명칭)</span></div><div style='margin-bottom:3px;'><code>admin_seq</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(순번)</span></div><div style='margin-bottom:3px;'><code>admin_seq_fk</code></div><div style='margin-bottom:3px;'><code>capacity_seq</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(순번)</span></div><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>factory_seq_fk</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공장)</span></div><div style='margin-bottom:3px;'><code>last_logged_in_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>lsf_factory_info_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 공장 식별키)</span></div><div style='margin-bottom:3px;'><code>reg_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>shiftee_employee_identification</code></div><div style='margin-bottom:3px;'><code>type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div></td>
 <td class='col-role'>스마트팩토리 account 기본정보 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>7</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_process_item_partner</span></td>
 <td class='col-count'><span class='count-badge'>225</span></td>
-<td class='col-cols'>created_datetime, id, lsf_wash_item_id, partner_factory_id, partner_process_type_code, process_confirmed_datetime</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>partner_factory_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(파트너 공장 식별키)</span></div><div style='margin-bottom:3px;'><code>partner_process_type_code</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(파트너 공정 코드)</span></div><div style='margin-bottom:3px;'><code>process_confirmed_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공정 일시)</span></div></td>
 <td class='col-role'>스마트팩토리 세탁 공정 의류 파트너 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>8</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_process_item</span></td>
 <td class='col-count'><span class='count-badge'>215</span></td>
-<td class='col-cols'>accepted, created_at, created_date, del_yn, display_barcode, id, item_type, lsf_category_id, lsf_etc_sub_category_info_id, lsf_process_detail_code, lsf_wash_id, lsf_wash_process_info_id, lsf_wash_process_item_kicker_slot_id, process_barcode, process_repair_status, process_wash_status, wash_possible_yn</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>accepted</code></div><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>created_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>del_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div><div style='margin-bottom:3px;'><code>display_barcode</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(바코드)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>item_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(의류 유형)</span></div><div style='margin-bottom:3px;'><code>lsf_category_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 카테고리 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_etc_sub_category_info_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 카테고리 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_process_detail_code</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 공정 코드)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_process_info_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 공정 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_process_item_kicker_slot_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 공정 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>process_barcode</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공정 바코드)</span></div><div style='margin-bottom:3px;'><code>process_repair_status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공정 수선 상태)</span></div><div style='margin-bottom:3px;'><code>process_wash_status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공정 세탁 상태)</span></div><div style='margin-bottom:3px;'><code>wash_possible_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 여부)</span></div></td>
 <td class='col-role'>스마트팩토리 세탁 공정 의류 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>9</td>
 <td class='col-table'><span class='table-name-badge'>lsf_category</span></td>
 <td class='col-count'><span class='count-badge'>188</span></td>
-<td class='col-cols'>id, kicker_yn, laundry_category_id, lsf_process_code, name, parent_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>kicker_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div><div style='margin-bottom:3px;'><code>laundry_category_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(카테고리 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_process_code</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 공정 코드)</span></div><div style='margin-bottom:3px;'><code>name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(명칭)</span></div><div style='margin-bottom:3px;'><code>parent_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div></td>
 <td class='col-role'>세탁물 분류 체계를 관리하는 런드리고 핵심 카테고리 마스터</td>
 </tr>
 <tr>
 <td class='col-rank'>10</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_process_item_iron_history</span></td>
 <td class='col-count'><span class='count-badge'>140</span></td>
-<td class='col-cols'>created_date, created_datetime, created_user_id, created_user_role_type, delete_yn, id, lsf_wash_item_id, lsf_wash_process_item_id, modified_datetime, process_action_type</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>created_user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>created_user_role_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 유형)</span></div><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_process_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 공정 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>modified_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>process_action_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공정 유형)</span></div></td>
 <td class='col-role'>스마트팩토리 세탁 공정 의류 iron 변경이력 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>11</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_item_history</span></td>
 <td class='col-count'><span class='count-badge'>136</span></td>
-<td class='col-cols'>created_date, created_datetime, created_user_id, lsf_wash_item_id, process_type</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>created_user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>process_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공정 유형)</span></div></td>
 <td class='col-role'>스마트팩토리 세탁 의류 변경이력 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>12</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_item_qc</span></td>
 <td class='col-count'><span class='count-badge'>91</span></td>
-<td class='col-cols'>created_date, created_datetime, delete_yn, lsf_wash_item_id, modified_datetime, qc_status</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>modified_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>qc_status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태)</span></div></td>
 <td class='col-role'>스마트팩토리 세탁 의류 품질검수 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>13</td>
 <td class='col-table'><span class='table-name-badge'>lsf_large_category_info</span></td>
 <td class='col-count'><span class='count-badge'>77</span></td>
-<td class='col-cols'>billing_code, large_name, large_seq, used_yn</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>billing_code</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(코드)</span></div><div style='margin-bottom:3px;'><code>large_name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(명칭)</span></div><div style='margin-bottom:3px;'><code>large_seq</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(순번)</span></div><div style='margin-bottom:3px;'><code>used_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div></td>
 <td class='col-role'>스마트팩토리 large 카테고리 기본정보 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>14</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_process_person_info</span></td>
 <td class='col-count'><span class='count-badge'>76</span></td>
-<td class='col-cols'>check_seq_fk, created_date, insert_type, person_seq, person_sequence_content, process_seq_fk, reg_date, reg_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>check_seq_fk</code></div><div style='margin-bottom:3px;'><code>created_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>insert_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>person_seq</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(순번)</span></div><div style='margin-bottom:3px;'><code>person_sequence_content</code></div><div style='margin-bottom:3px;'><code>process_seq_fk</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공정)</span></div><div style='margin-bottom:3px;'><code>reg_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>reg_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div></td>
 <td class='col-role'>스마트팩토리 세탁 공정 person 기본정보 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>15</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_img</span></td>
 <td class='col-count'><span class='count-badge'>59</span></td>
-<td class='col-cols'>barcode, camera_number, created_datetime, created_user_id, delete_yn, id, img_url, inspection_method_type, inspection_sequence_number, lsf_wash_item_id, lsf_wash_process_info_id, lsf_wash_process_item_id, problem_yn, represent_yn</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>barcode</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(바코드)</span></div><div style='margin-bottom:3px;'><code>camera_number</code></div><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>created_user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>img_url</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(URL)</span></div><div style='margin-bottom:3px;'><code>inspection_method_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(방식 유형)</span></div><div style='margin-bottom:3px;'><code>inspection_sequence_number</code></div><div style='margin-bottom:3px;'><code>lsf_wash_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_process_info_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 공정 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_process_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 공정 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>problem_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div><div style='margin-bottom:3px;'><code>represent_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div></td>
 <td class='col-role'>스마트팩토리 세탁 img 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>16</td>
 <td class='col-table'><span class='table-name-badge'>lsf_small_category_info</span></td>
 <td class='col-count'><span class='count-badge'>43</span></td>
-<td class='col-cols'>billing_code_fk, id, large_seq, medium_seq, medium_seq_fk, small_seq, used_yn</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>billing_code_fk</code></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>large_seq</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(순번)</span></div><div style='margin-bottom:3px;'><code>medium_seq</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(순번)</span></div><div style='margin-bottom:3px;'><code>medium_seq_fk</code></div><div style='margin-bottom:3px;'><code>small_seq</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(순번)</span></div><div style='margin-bottom:3px;'><code>used_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div></td>
 <td class='col-role'>스마트팩토리 small 카테고리 기본정보 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>17</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_process_item_kicker_slot</span></td>
 <td class='col-count'><span class='count-badge'>41</span></td>
-<td class='col-cols'>code, created_at, delete_yn, id, kicker_allocate_datetime, lsf_wash_kicker_slot_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>code</code></div><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>kicker_allocate_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_kicker_slot_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 식별키)</span></div></td>
 <td class='col-role'>스마트팩토리 세탁 공정 의류 키커 슬롯 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>18</td>
 <td class='col-table'><span class='table-name-badge'>lsf_receipt</span></td>
 <td class='col-count'><span class='count-badge'>41</span></td>
-<td class='col-cols'>delete_yn</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div></td>
 <td class='col-role'>스마트팩토리 접수 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>19</td>
 <td class='col-table'><span class='table-name-badge'>lsf_receipt_item</span></td>
 <td class='col-count'><span class='count-badge'>41</span></td>
-<td class='col-cols'>barcode_quantity, delete_yn</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>barcode_quantity</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(바코드)</span></div><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div></td>
 <td class='col-role'>스마트팩토리 접수 의류 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>20</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_kicker_slot</span></td>
 <td class='col-count'><span class='count-badge'>37</span></td>
-<td class='col-cols'>created_at, created_date, id, kicker_id, lsf_factory_id, status</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>created_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>kicker_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_factory_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 공장 식별키)</span></div><div style='margin-bottom:3px;'><code>status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태값)</span></div></td>
 <td class='col-role'>스마트팩토리 세탁 키커 슬롯 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>21</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_process_item_spotting_history</span></td>
 <td class='col-count'><span class='count-badge'>30</span></td>
-<td class='col-cols'>created_datetime, id, lsf_wash_item_id, lsf_wash_process_item_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_process_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 공정 의류 식별키)</span></div></td>
 <td class='col-role'>스마트팩토리 세탁 공정 의류 spotting 변경이력 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>22</td>
 <td class='col-table'><span class='table-name-badge'>lsf_clothes_storage_wash_item</span></td>
 <td class='col-count'><span class='count-badge'>30</span></td>
-<td class='col-cols'>id, lsf_wash_item_id, release_request_date, user_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>release_request_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(요청 일자)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div></td>
 <td class='col-role'>스마트팩토리 clothes storage 세탁 의류 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>23</td>
 <td class='col-table'><span class='table-name-badge'>lsf_medium_category_info</span></td>
 <td class='col-count'><span class='count-badge'>28</span></td>
-<td class='col-cols'>billing_code_fk, large_seq_fk, medium_name, medium_seq, small_name, used_yn</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>billing_code_fk</code></div><div style='margin-bottom:3px;'><code>large_seq_fk</code></div><div style='margin-bottom:3px;'><code>medium_name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(명칭)</span></div><div style='margin-bottom:3px;'><code>medium_seq</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(순번)</span></div><div style='margin-bottom:3px;'><code>small_name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(명칭)</span></div><div style='margin-bottom:3px;'><code>used_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div></td>
 <td class='col-role'>스마트팩토리 medium 카테고리 기본정보 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>24</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_process_item_log</span></td>
 <td class='col-count'><span class='count-badge'>28</span></td>
-<td class='col-cols'>created_at, lsf_process_detail_code, lsf_wash_process_item_id, reg_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>lsf_process_detail_code</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 공정 코드)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_process_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 공정 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>reg_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div></td>
 <td class='col-role'>스마트팩토리 세탁 공정 의류 로그 데이터</td>
 </tr>
 <tr>
@@ -490,154 +509,154 @@ th.col-role { width: 32%; }
 <td class='col-rank'>26</td>
 <td class='col-table'><span class='table-name-badge'>factory_item</span></td>
 <td class='col-count'><span class='count-badge'>27</span></td>
-<td class='col-cols'>complete_datetime, created_datetime, delete_yn, id, item_key, modified_datetime, status, work_date</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>complete_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(완료 일시)</span></div><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>item_key</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(의류 키)</span></div><div style='margin-bottom:3px;'><code>modified_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태값)</span></div><div style='margin-bottom:3px;'><code>work_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div></td>
 <td class='col-role'>공장지점 의류 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>27</td>
 <td class='col-table'><span class='table-name-badge'>lsf_kicker_slot_status_change_history</span></td>
 <td class='col-count'><span class='count-badge'>27</span></td>
-<td class='col-cols'>after_status, lsf_factory_id, lsf_wash_kicker_slot_id, modified_datetime</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>after_status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태)</span></div><div style='margin-bottom:3px;'><code>lsf_factory_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 공장 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_kicker_slot_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 식별키)</span></div><div style='margin-bottom:3px;'><code>modified_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div></td>
 <td class='col-role'>스마트팩토리 키커 슬롯 상태값 change 변경이력 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>28</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_postpone_release_info_log</span></td>
 <td class='col-count'><span class='count-badge'>24</span></td>
-<td class='col-cols'>check_seq_fk, created_date, id, postpone_reason_id, postpone_release_info_id, reg_date, release_at, type</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>check_seq_fk</code></div><div style='margin-bottom:3px;'><code>created_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>postpone_reason_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(사유 식별키)</span></div><div style='margin-bottom:3px;'><code>postpone_release_info_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>reg_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>release_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div></td>
 <td class='col-role'>스마트팩토리 세탁 postpone release 기본정보 로그 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>29</td>
 <td class='col-table'><span class='table-name-badge'>factory_item_category</span></td>
 <td class='col-count'><span class='count-badge'>21</span></td>
-<td class='col-cols'>delete_yn, factory_item_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>factory_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공장 의류 식별키)</span></div></td>
 <td class='col-role'>공장지점 의류 카테고리 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>30</td>
 <td class='col-table'><span class='table-name-badge'>lsf_trans_bag_management</span></td>
 <td class='col-count'><span class='count-badge'>21</span></td>
-<td class='col-cols'>created_datetime, delete_yn, trans_bag_code</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>trans_bag_code</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(코드)</span></div></td>
 <td class='col-role'>스마트팩토리 trans bag 관리 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>31</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_postpone_reason_info</span></td>
 <td class='col-count'><span class='count-badge'>20</span></td>
-<td class='col-cols'>postpone_message</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>postpone_message</code></div></td>
 <td class='col-role'>스마트팩토리 세탁 postpone 사유 기본정보 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>32</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_accessory_parts_info</span></td>
 <td class='col-count'><span class='count-badge'>20</span></td>
-<td class='col-cols'>acc_seq_fk, check_seq_fk, parts_display_barcode, parts_seq, parts_status, reason_seq_fk, release_type</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>acc_seq_fk</code></div><div style='margin-bottom:3px;'><code>check_seq_fk</code></div><div style='margin-bottom:3px;'><code>parts_display_barcode</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(바코드)</span></div><div style='margin-bottom:3px;'><code>parts_seq</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(순번)</span></div><div style='margin-bottom:3px;'><code>parts_status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태)</span></div><div style='margin-bottom:3px;'><code>reason_seq_fk</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(사유)</span></div><div style='margin-bottom:3px;'><code>release_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div></td>
 <td class='col-role'>스마트팩토리 세탁 accessory parts 기본정보 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>33</td>
 <td class='col-table'><span class='table-name-badge'>qc_inspection_result</span></td>
 <td class='col-count'><span class='count-badge'>20</span></td>
-<td class='col-cols'>created_datetime, delete_yn, lsf_wash_item_id, qc_inspection_menu, result_common_code</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>qc_inspection_menu</code></div><div style='margin-bottom:3px;'><code>result_common_code</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(코드)</span></div></td>
 <td class='col-role'>품질검수 inspection 결과 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>34</td>
 <td class='col-table'><span class='table-name-badge'>lsf_kicker_slot</span></td>
 <td class='col-count'><span class='count-badge'>18</span></td>
-<td class='col-cols'>lsf_factory_id, lsf_kicker_slot_id, lsf_wash_kicker_slot_id, status</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>lsf_factory_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 공장 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_kicker_slot_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_kicker_slot_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 식별키)</span></div><div style='margin-bottom:3px;'><code>status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태값)</span></div></td>
 <td class='col-role'>스마트팩토리 키커 슬롯 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>35</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_item_qc_reprocessing</span></td>
 <td class='col-count'><span class='count-badge'>18</span></td>
-<td class='col-cols'>created_date, delete_yn</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div></td>
 <td class='col-role'>스마트팩토리 세탁 의류 품질검수 reprocessing 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>36</td>
 <td class='col-table'><span class='table-name-badge'>lsf_qc_reprocessing_reason</span></td>
 <td class='col-count'><span class='count-badge'>17</span></td>
-<td class='col-cols'>reason</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>reason</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(사유)</span></div></td>
 <td class='col-role'>스마트팩토리 품질검수 reprocessing 사유 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>37</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_item_qc_customer_informed_release</span></td>
 <td class='col-count'><span class='count-badge'>16</span></td>
-<td class='col-cols'>created_date, delete_yn, lsf_wash_item_qc_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_item_qc_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 의류 식별키)</span></div></td>
 <td class='col-role'>스마트팩토리 세탁 의류 품질검수 customer informed release 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>38</td>
 <td class='col-table'><span class='table-name-badge'>lsf_combined_packaging_assigned_totebox</span></td>
 <td class='col-count'><span class='count-badge'>16</span></td>
-<td class='col-cols'>combined_packaging_id, id, status</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>combined_packaging_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태값)</span></div></td>
 <td class='col-role'>스마트팩토리 combined packaging assigned totebox 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>39</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_quantity_info</span></td>
 <td class='col-count'><span class='count-badge'>15</span></td>
-<td class='col-cols'>check_seq_fk, reg_date</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>check_seq_fk</code></div><div style='margin-bottom:3px;'><code>reg_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div></td>
 <td class='col-role'>스마트팩토리 세탁 quantity 기본정보 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>40</td>
 <td class='col-table'><span class='table-name-badge'>cmc_factory_sku_stock</span></td>
 <td class='col-count'><span class='count-badge'>14</span></td>
-<td class='col-cols'>lsf_factory_info_id, sku_id, support_kicker_yn</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>lsf_factory_info_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 공장 식별키)</span></div><div style='margin-bottom:3px;'><code>sku_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>support_kicker_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div></td>
 <td class='col-role'>cmc 공장지점 재고단위 재고 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>41</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_iron_info</span></td>
 <td class='col-count'><span class='count-badge'>14</span></td>
-<td class='col-cols'>barcode, created_at, created_date, display_barcode, last_worker_yn, lsf_wash_process_item_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>barcode</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(바코드)</span></div><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>created_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>display_barcode</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(바코드)</span></div><div style='margin-bottom:3px;'><code>last_worker_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_process_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 공정 의류 식별키)</span></div></td>
 <td class='col-role'>스마트팩토리 세탁 iron 기본정보 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>42</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_no_reason_info</span></td>
 <td class='col-count'><span class='count-badge'>14</span></td>
-<td class='col-cols'>reason_content, reason_seq</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>reason_content</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(사유)</span></div><div style='margin-bottom:3px;'><code>reason_seq</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(사유 순번)</span></div></td>
 <td class='col-role'>스마트팩토리 세탁 no 사유 기본정보 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>43</td>
 <td class='col-table'><span class='table-name-badge'>lsf_combined_packaging</span></td>
 <td class='col-count'><span class='count-badge'>13</span></td>
-<td class='col-cols'>created_datetime, del_yn, id, outbound_yn, wash_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>del_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>outbound_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div><div style='margin-bottom:3px;'><code>wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 식별키)</span></div></td>
 <td class='col-role'>스마트팩토리 combined packaging 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>44</td>
 <td class='col-table'><span class='table-name-badge'>lsf_kicker_slot_allocate_history</span></td>
 <td class='col-count'><span class='count-badge'>12</span></td>
-<td class='col-cols'>allocation_status, created_datetime, lsf_kicker_slot_id, lsf_wash_id, lsf_wash_item_id, modified_datetime, process_barcode</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>allocation_status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태)</span></div><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>lsf_kicker_slot_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>modified_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>process_barcode</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공정 바코드)</span></div></td>
 <td class='col-role'>스마트팩토리 키커 슬롯 allocate 변경이력 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>45</td>
 <td class='col-table'><span class='table-name-badge'>lsf_wash_item_image_analysis_result</span></td>
 <td class='col-count'><span class='count-badge'>12</span></td>
-<td class='col-cols'>color_hex_guess, created_datetime, delete_yn, success_yn</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>color_hex_guess</code></div><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>success_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div></td>
 <td class='col-role'>스마트팩토리 세탁 의류 사진 analysis 결과 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>46</td>
 <td class='col-table'><span class='table-name-badge'>lsf_combined_packaging_wash_item_in_assigned_totebox</span></td>
 <td class='col-count'><span class='count-badge'>12</span></td>
-<td class='col-cols'>assigned_totebox_id, lsf_wash_item_barcode</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>assigned_totebox_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_item_barcode</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 의류 바코드)</span></div></td>
 <td class='col-role'>스마트팩토리 combined packaging 세탁 의류 in assigned totebox 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>47</td>
 <td class='col-table'><span class='table-name-badge'>lsf_das_rack_wash</span></td>
 <td class='col-count'><span class='count-badge'>12</span></td>
-<td class='col-cols'>created_at, lsf_factory_id, lsf_wash_id, status</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>lsf_factory_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 공장 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 식별키)</span></div><div style='margin-bottom:3px;'><code>status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태값)</span></div></td>
 <td class='col-role'>스마트팩토리 das 보관랙 세탁 데이터</td>
 </tr>
 <tr>
@@ -657,56 +676,56 @@ th.col-role { width: 32%; }
 <td class='col-rank'>1</td>
 <td class='col-table'><span class='table-name-badge'>subscription</span></td>
 <td class='col-count'><span class='count-badge'>885</span></td>
-<td class='col-cols'>created_at, id, laundry_plan_id, laundry_plan_type, next_subs_date, price, s_rank, status, subs_date, temp, terminated_at, unsubs_date, user_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>laundry_plan_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(요금제 식별키)</span></div><div style='margin-bottom:3px;'><code>laundry_plan_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(요금제 유형)</span></div><div style='margin-bottom:3px;'><code>next_subs_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>price</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(가격)</span></div><div style='margin-bottom:3px;'><code>s_rank</code></div><div style='margin-bottom:3px;'><code>status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태값)</span></div><div style='margin-bottom:3px;'><code>subs_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>temp</code></div><div style='margin-bottom:3px;'><code>terminated_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>unsubs_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div></td>
 <td class='col-role'>특정 고객의 요금제 계약 인스턴스 이력</td>
 </tr>
 <tr>
 <td class='col-rank'>2</td>
 <td class='col-table'><span class='table-name-badge'>subscription_order</span></td>
 <td class='col-count'><span class='count-badge'>610</span></td>
-<td class='col-cols'>created_at, expired_at, id, key, payment_id, payment_status, sequence, subscription_id, termination_datetime, termination_yn, user_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>expired_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>key</code></div><div style='margin-bottom:3px;'><code>payment_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(결제 식별키)</span></div><div style='margin-bottom:3px;'><code>payment_status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(결제 상태)</span></div><div style='margin-bottom:3px;'><code>sequence</code></div><div style='margin-bottom:3px;'><code>subscription_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(구독 식별키)</span></div><div style='margin-bottom:3px;'><code>termination_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>termination_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div></td>
 <td class='col-role'>회차별 월정액 요금제 갱신 및 차감 단위 주문</td>
 </tr>
 <tr>
 <td class='col-rank'>3</td>
 <td class='col-table'><span class='table-name-badge'>laundry_plan</span></td>
 <td class='col-count'><span class='count-badge'>507</span></td>
-<td class='col-cols'>activated, created_at, id, item_count, laundrette_use_yn, laundry_delivery_id, laundry_plan_category_id, laundry_plan_type, list_shown, name, premium_unit_price, price_policy_id, unit_price</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>activated</code></div><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>item_count</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(의류 수량)</span></div><div style='margin-bottom:3px;'><code>laundrette_use_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div><div style='margin-bottom:3px;'><code>laundry_delivery_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(배송 식별키)</span></div><div style='margin-bottom:3px;'><code>laundry_plan_category_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(요금제 카테고리 식별키)</span></div><div style='margin-bottom:3px;'><code>laundry_plan_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(요금제 유형)</span></div><div style='margin-bottom:3px;'><code>list_shown</code></div><div style='margin-bottom:3px;'><code>name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(명칭)</span></div><div style='margin-bottom:3px;'><code>premium_unit_price</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(프리미엄 금액)</span></div><div style='margin-bottom:3px;'><code>price_policy_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>unit_price</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(금액)</span></div></td>
 <td class='col-role'>요금제 명칭 및 기초 혜택 정보가 담긴 진짜 요금제 마스터 테이블</td>
 </tr>
 <tr>
 <td class='col-rank'>4</td>
 <td class='col-table'><span class='table-name-badge'>subscription_payment</span></td>
 <td class='col-count'><span class='count-badge'>333</span></td>
-<td class='col-cols'>approved_at, approved_datetime, cancelled, coupon_reissue_yn, created_at, created_date, id, laundrette_return_id, laundry_plan_id, new_subscription_order_id, old_subscription_order_id, order_name, order_price, paid_price, parent_payment_id, pay_type, payment_reason_type, payment_type, point_price, status, status_type, succeeded, total_paid_price, user_id, user_laundrygo_coupon_promotion_id, user_phone_number, wash_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>approved_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>approved_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>cancelled</code></div><div style='margin-bottom:3px;'><code>coupon_reissue_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(쿠폰 여부)</span></div><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>created_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>laundrette_return_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(반납 식별키)</span></div><div style='margin-bottom:3px;'><code>laundry_plan_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(요금제 식별키)</span></div><div style='margin-bottom:3px;'><code>new_subscription_order_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(구독 주문 식별키)</span></div><div style='margin-bottom:3px;'><code>old_subscription_order_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(구독 주문 식별키)</span></div><div style='margin-bottom:3px;'><code>order_name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(주문 명칭)</span></div><div style='margin-bottom:3px;'><code>order_price</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(주문 금액)</span></div><div style='margin-bottom:3px;'><code>paid_price</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(금액)</span></div><div style='margin-bottom:3px;'><code>parent_payment_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(결제 식별키)</span></div><div style='margin-bottom:3px;'><code>pay_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>payment_reason_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(결제 사유 유형)</span></div><div style='margin-bottom:3px;'><code>payment_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(결제 유형)</span></div><div style='margin-bottom:3px;'><code>point_price</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(포인트 금액)</span></div><div style='margin-bottom:3px;'><code>status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태값)</span></div><div style='margin-bottom:3px;'><code>status_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>succeeded</code></div><div style='margin-bottom:3px;'><code>total_paid_price</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(총 금액)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>user_laundrygo_coupon_promotion_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 쿠폰 식별키)</span></div><div style='margin-bottom:3px;'><code>user_phone_number</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객)</span></div><div style='margin-bottom:3px;'><code>wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 식별키)</span></div></td>
 <td class='col-role'>월정액 결제 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>5</td>
 <td class='col-table'><span class='table-name-badge'>user_payment_method</span></td>
 <td class='col-count'><span class='count-badge'>39</span></td>
-<td class='col-cols'>created_at, deleted, pg_service_type, user_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>deleted</code></div><div style='margin-bottom:3px;'><code>pg_service_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(서비스 유형)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div></td>
 <td class='col-role'>고객 결제 method 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>6</td>
 <td class='col-table'><span class='table-name-badge'>laundrygo_point_charge_payment</span></td>
 <td class='col-count'><span class='count-badge'>19</span></td>
-<td class='col-cols'>approved_datetime, created_datetime, id, process_status, success_yn</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>approved_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>process_status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공정 상태)</span></div><div style='margin-bottom:3px;'><code>success_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div></td>
 <td class='col-role'>런드리고 포인트 charge 결제 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>7</td>
 <td class='col-table'><span class='table-name-badge'>laundry_plan_termination_history</span></td>
 <td class='col-count'><span class='count-badge'>17</span></td>
-<td class='col-cols'>created_at, reason_etc_detail, unsubscribe_reason_type, unsubscribe_type</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>reason_etc_detail</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(사유)</span></div><div style='margin-bottom:3px;'><code>unsubscribe_reason_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(사유 유형)</span></div><div style='margin-bottom:3px;'><code>unsubscribe_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div></td>
 <td class='col-role'>세탁 요금제 termination 변경이력 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>8</td>
 <td class='col-table'><span class='table-name-badge'>subscription_order_item</span></td>
 <td class='col-count'><span class='count-badge'>16</span></td>
-<td class='col-cols'>adjusted_count, purchase_count, subscription_order_id, use_count</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>adjusted_count</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(수량)</span></div><div style='margin-bottom:3px;'><code>purchase_count</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(수량)</span></div><div style='margin-bottom:3px;'><code>subscription_order_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(구독 주문 식별키)</span></div><div style='margin-bottom:3px;'><code>use_count</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(수량)</span></div></td>
 <td class='col-role'>월정액 주문 의류 데이터</td>
 </tr>
 <tr>
@@ -727,28 +746,28 @@ th.col-role { width: 32%; }
 <td class='col-rank'>11</td>
 <td class='col-table'><span class='table-name-badge'>subscription_agreement_list</span></td>
 <td class='col-count'><span class='count-badge'>15</span></td>
-<td class='col-cols'>id, laundry_plan_id, status, subscription_agreement_id, subscription_change_id, termination_yn, user_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>laundry_plan_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(요금제 식별키)</span></div><div style='margin-bottom:3px;'><code>status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태값)</span></div><div style='margin-bottom:3px;'><code>subscription_agreement_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(구독 식별키)</span></div><div style='margin-bottom:3px;'><code>subscription_change_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(구독 식별키)</span></div><div style='margin-bottom:3px;'><code>termination_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div></td>
 <td class='col-role'>월정액 agreement 목록 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>12</td>
 <td class='col-table'><span class='table-name-badge'>laundry_plan_item</span></td>
 <td class='col-count'><span class='count-badge'>14</span></td>
-<td class='col-cols'>laundry_category_group_id, laundry_plan_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>laundry_category_group_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(카테고리 그룹 식별키)</span></div><div style='margin-bottom:3px;'><code>laundry_plan_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(요금제 식별키)</span></div></td>
 <td class='col-role'>세탁 요금제 의류 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>13</td>
 <td class='col-table'><span class='table-name-badge'>cmc_product_payment</span></td>
 <td class='col-count'><span class='count-badge'>14</span></td>
-<td class='col-cols'>approved_datetime, created_datetime, id, paid_price, parent_payment_id, status_type</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>approved_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>paid_price</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(금액)</span></div><div style='margin-bottom:3px;'><code>parent_payment_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(결제 식별키)</span></div><div style='margin-bottom:3px;'><code>status_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div></td>
 <td class='col-role'>cmc 상품 결제 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>14</td>
 <td class='col-table'><span class='table-name-badge'>payment_history</span></td>
 <td class='col-count'><span class='count-badge'>13</span></td>
-<td class='col-cols'>approved_at, created_at, id, laundry_plan_type, payment_type, subscription_payment_id, succeeded</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>approved_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>laundry_plan_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(요금제 유형)</span></div><div style='margin-bottom:3px;'><code>payment_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(결제 유형)</span></div><div style='margin-bottom:3px;'><code>subscription_payment_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(구독 결제 식별키)</span></div><div style='margin-bottom:3px;'><code>succeeded</code></div></td>
 <td class='col-role'>결제 변경이력 데이터</td>
 </tr>
 </tbody></table></div>
@@ -761,84 +780,84 @@ th.col-role { width: 32%; }
 <td class='col-rank'>1</td>
 <td class='col-table'><span class='table-name-badge'>user</span></td>
 <td class='col-count'><span class='count-badge'>1187</span></td>
-<td class='col-cols'>account_type, cell_phone_number, child_id, corporate_yn, created_at, deleted, deleted_at, depth, email, id, key, last_visit_at, marketing_push, marketing_push_changed_at, marketing_sms, name, order_state</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>account_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>cell_phone_number</code></div><div style='margin-bottom:3px;'><code>child_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>corporate_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>deleted</code></div><div style='margin-bottom:3px;'><code>deleted_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>depth</code></div><div style='margin-bottom:3px;'><code>email</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(이메일)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>key</code></div><div style='margin-bottom:3px;'><code>last_visit_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>marketing_push</code></div><div style='margin-bottom:3px;'><code>marketing_push_changed_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>marketing_sms</code></div><div style='margin-bottom:3px;'><code>name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(명칭)</span></div><div style='margin-bottom:3px;'><code>order_state</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(주문)</span></div></td>
 <td class='col-role'>고객 기본 정보 및 활성/휴면/탈퇴 상태 추적을 위한 생애주기 메타데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>2</td>
 <td class='col-table'><span class='table-name-badge'>user_address</span></td>
 <td class='col-count'><span class='count-badge'>199</span></td>
-<td class='col-cols'>basic_address, created_at, deleted, jibun_address, represented, user_id, zone_code</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>basic_address</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(주소)</span></div><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>deleted</code></div><div style='margin-bottom:3px;'><code>jibun_address</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(주소)</span></div><div style='margin-bottom:3px;'><code>represented</code></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>zone_code</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(구역 코드)</span></div></td>
 <td class='col-role'>고객 주소지 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>3</td>
 <td class='col-table'><span class='table-name-badge'>laundrygo_point</span></td>
 <td class='col-count'><span class='count-badge'>129</span></td>
-<td class='col-cols'>created_at, expired_at, id, laundrygo_point_charge_payment_id, log_type, point_type, provision_type_id, user_id, 기준월</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>expired_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>laundrygo_point_charge_payment_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(포인트 결제 식별키)</span></div><div style='margin-bottom:3px;'><code>log_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>point_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(포인트 유형)</span></div><div style='margin-bottom:3px;'><code>provision_type_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>기준월</code></div></td>
 <td class='col-role'>런드리고 포인트 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>4</td>
 <td class='col-table'><span class='table-name-badge'>user_laundrygo_coupon_promotion</span></td>
 <td class='col-count'><span class='count-badge'>108</span></td>
-<td class='col-cols'>created_datetime, expiration_start_datetime, id, laundrygo_coupon_promotion_id, status, subscription_id, user_id, wash_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>expiration_start_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(시작 일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>laundrygo_coupon_promotion_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(쿠폰 식별키)</span></div><div style='margin-bottom:3px;'><code>status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태값)</span></div><div style='margin-bottom:3px;'><code>subscription_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(구독 식별키)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 식별키)</span></div></td>
 <td class='col-role'>고객 런드리고 쿠폰 프로모션 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>5</td>
 <td class='col-table'><span class='table-name-badge'>laundrygo_point_log</span></td>
 <td class='col-count'><span class='count-badge'>105</span></td>
-<td class='col-cols'>amount, created_at, id, laundrygo_point_id, log_type, reason, rn, subscription_order_id, subscription_payment_id, user_id, wash_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>amount</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(금액)</span></div><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>laundrygo_point_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(포인트 식별키)</span></div><div style='margin-bottom:3px;'><code>log_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>reason</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(사유)</span></div><div style='margin-bottom:3px;'><code>rn</code></div><div style='margin-bottom:3px;'><code>subscription_order_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(구독 주문 식별키)</span></div><div style='margin-bottom:3px;'><code>subscription_payment_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(구독 결제 식별키)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 식별키)</span></div></td>
 <td class='col-role'>런드리고 포인트 로그 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>6</td>
 <td class='col-table'><span class='table-name-badge'>laundrygo_point_provision_log</span></td>
 <td class='col-count'><span class='count-badge'>54</span></td>
-<td class='col-cols'>created_at, id, laundrygo_coupon_id, type</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>laundrygo_coupon_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(쿠폰 식별키)</span></div><div style='margin-bottom:3px;'><code>type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div></td>
 <td class='col-role'>런드리고 포인트 provision 로그 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>7</td>
 <td class='col-table'><span class='table-name-badge'>laundrygo_coupon</span></td>
 <td class='col-count'><span class='count-badge'>42</span></td>
-<td class='col-cols'>created_at, expired_at, id, name, provision_type_id, use_yn, 기준월</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>expired_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(명칭)</span></div><div style='margin-bottom:3px;'><code>provision_type_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>use_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div><div style='margin-bottom:3px;'><code>기준월</code></div></td>
 <td class='col-role'>런드리고 쿠폰 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>8</td>
 <td class='col-table'><span class='table-name-badge'>laundrygo_coupon_promotion</span></td>
 <td class='col-count'><span class='count-badge'>33</span></td>
-<td class='col-cols'>benefit_type, id, name, point_provision_type_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>benefit_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(명칭)</span></div><div style='margin-bottom:3px;'><code>point_provision_type_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(포인트 식별키)</span></div></td>
 <td class='col-role'>런드리고 쿠폰 프로모션 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>9</td>
 <td class='col-table'><span class='table-name-badge'>user_laundry_go_kit</span></td>
 <td class='col-count'><span class='count-badge'>32</span></td>
-<td class='col-cols'>created_at, delivery_status, laundry_go_kit_id, status, user_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>delivery_status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(배송 상태)</span></div><div style='margin-bottom:3px;'><code>laundry_go_kit_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태값)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div></td>
 <td class='col-role'>고객 세탁 go kit 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>10</td>
 <td class='col-table'><span class='table-name-badge'>friend_invite_group</span></td>
 <td class='col-count'><span class='count-badge'>29</span></td>
-<td class='col-cols'>created_at, recommendee_user_id, recommender_user_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>recommendee_user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>recommender_user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div></td>
 <td class='col-role'>friend invite group 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>11</td>
 <td class='col-table'><span class='table-name-badge'>laundrygo_point_forfeit_log</span></td>
 <td class='col-count'><span class='count-badge'>24</span></td>
-<td class='col-cols'>id, type</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div></td>
 <td class='col-role'>런드리고 포인트 forfeit 로그 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>12</td>
 <td class='col-table'><span class='table-name-badge'>laundrygo_point_coupon</span></td>
 <td class='col-count'><span class='count-badge'>23</span></td>
-<td class='col-cols'>created_at</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div></td>
 <td class='col-role'>런드리고 포인트 쿠폰 데이터</td>
 </tr>
 <tr>
@@ -852,42 +871,42 @@ th.col-role { width: 32%; }
 <td class='col-rank'>14</td>
 <td class='col-table'><span class='table-name-badge'>laundrygo_coupon_log</span></td>
 <td class='col-count'><span class='count-badge'>22</span></td>
-<td class='col-cols'>created_at, log_type</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>log_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div></td>
 <td class='col-role'>런드리고 쿠폰 로그 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>15</td>
 <td class='col-table'><span class='table-name-badge'>laundrygo_point_usage_log</span></td>
 <td class='col-count'><span class='count-badge'>19</span></td>
-<td class='col-cols'>type</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div></td>
 <td class='col-role'>런드리고 포인트 usage 로그 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>16</td>
 <td class='col-table'><span class='table-name-badge'>laundrygo_coupon_forfeit_log</span></td>
 <td class='col-count'><span class='count-badge'>16</span></td>
-<td class='col-cols'>type</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div></td>
 <td class='col-role'>런드리고 쿠폰 forfeit 로그 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>17</td>
 <td class='col-table'><span class='table-name-badge'>laundrygo_coupon_provision_log</span></td>
 <td class='col-count'><span class='count-badge'>15</span></td>
-<td class='col-cols'>type</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div></td>
 <td class='col-role'>런드리고 쿠폰 provision 로그 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>18</td>
 <td class='col-table'><span class='table-name-badge'>friend_invite</span></td>
 <td class='col-count'><span class='count-badge'>13</span></td>
-<td class='col-cols'>type</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div></td>
 <td class='col-role'>friend invite 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>19</td>
 <td class='col-table'><span class='table-name-badge'>user_external_account</span></td>
 <td class='col-count'><span class='count-badge'>12</span></td>
-<td class='col-cols'>created_at</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div></td>
 <td class='col-role'>고객 external account 데이터</td>
 </tr>
 </tbody></table></div>
@@ -900,14 +919,14 @@ th.col-role { width: 32%; }
 <td class='col-rank'>1</td>
 <td class='col-table'><span class='table-name-badge'>transportorderinfo</span></td>
 <td class='col-count'><span class='count-badge'>147</span></td>
-<td class='col-cols'>area_address, completiondate, created_datetime, delivery_start_date, engineerid, lsf_factory_info_id, ordercstype, orderdate, orderid, ordername, orderno, orderseq, orderstate, ordertype, stroller_car_seat_count, transport_delayed_reason_info_id, transportstartdate, user_id, usercardno, wash_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>area_address</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(주소)</span></div><div style='margin-bottom:3px;'><code>completiondate</code></div><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>delivery_start_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(배송 시작 일자)</span></div><div style='margin-bottom:3px;'><code>engineerid</code></div><div style='margin-bottom:3px;'><code>lsf_factory_info_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 공장 식별키)</span></div><div style='margin-bottom:3px;'><code>ordercstype</code></div><div style='margin-bottom:3px;'><code>orderdate</code></div><div style='margin-bottom:3px;'><code>orderid</code></div><div style='margin-bottom:3px;'><code>ordername</code></div><div style='margin-bottom:3px;'><code>orderno</code></div><div style='margin-bottom:3px;'><code>orderseq</code></div><div style='margin-bottom:3px;'><code>orderstate</code></div><div style='margin-bottom:3px;'><code>ordertype</code></div><div style='margin-bottom:3px;'><code>stroller_car_seat_count</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(수량)</span></div><div style='margin-bottom:3px;'><code>transport_delayed_reason_info_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(물류 사유 식별키)</span></div><div style='margin-bottom:3px;'><code>transportstartdate</code></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>usercardno</code></div><div style='margin-bottom:3px;'><code>wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 식별키)</span></div></td>
 <td class='col-role'>물류 기사들의 실제 수거/배송 지시서 역할을 하는 메인 운송 테이블</td>
 </tr>
 <tr>
 <td class='col-rank'>2</td>
 <td class='col-table'><span class='table-name-badge'>transportaddress</span></td>
 <td class='col-count'><span class='count-badge'>114</span></td>
-<td class='col-cols'>addrgu, addrsi, lsf_factory_info_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>addrgu</code></div><div style='margin-bottom:3px;'><code>addrsi</code></div><div style='margin-bottom:3px;'><code>lsf_factory_info_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 공장 식별키)</span></div></td>
 <td class='col-role'>transportaddress 데이터</td>
 </tr>
 <tr>
@@ -921,7 +940,7 @@ th.col-role { width: 32%; }
 <td class='col-rank'>4</td>
 <td class='col-table'><span class='table-name-badge'>transportengineerinfo</span></td>
 <td class='col-count'><span class='count-badge'>26</span></td>
-<td class='col-cols'>engid, engname, lsf_factory_info_id, stateyn</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>engid</code></div><div style='margin-bottom:3px;'><code>engname</code></div><div style='margin-bottom:3px;'><code>lsf_factory_info_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 공장 식별키)</span></div><div style='margin-bottom:3px;'><code>stateyn</code></div></td>
 <td class='col-role'>transportengineerinfo 데이터</td>
 </tr>
 <tr>
@@ -935,7 +954,7 @@ th.col-role { width: 32%; }
 <td class='col-rank'>6</td>
 <td class='col-table'><span class='table-name-badge'>transportorderloginfo</span></td>
 <td class='col-count'><span class='count-badge'>21</span></td>
-<td class='col-cols'>logprev01, logtype, orderseq</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>logprev01</code></div><div style='margin-bottom:3px;'><code>logtype</code></div><div style='margin-bottom:3px;'><code>orderseq</code></div></td>
 <td class='col-role'>transportorderloginfo 데이터</td>
 </tr>
 </tbody></table></div>
@@ -948,7 +967,7 @@ th.col-role { width: 32%; }
 <td class='col-rank'>1</td>
 <td class='col-table'><span class='table-name-badge'>zendesk_ticket</span></td>
 <td class='col-count'><span class='count-badge'>164</span></td>
-<td class='col-cols'>delete_yn, description, id, subject, wash_id, zendesk_created_date, zendesk_created_datetime, zendesk_custom_status_id, zendesk_modified_datetime, zendesk_ticket_form_id, zendesk_ticket_id, zendesk_ticket_status</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>description</code></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>subject</code></div><div style='margin-bottom:3px;'><code>wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 식별키)</span></div><div style='margin-bottom:3px;'><code>zendesk_created_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>zendesk_created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>zendesk_custom_status_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>zendesk_modified_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>zendesk_ticket_form_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(CS티켓 식별키)</span></div><div style='margin-bottom:3px;'><code>zendesk_ticket_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(CS티켓 식별키)</span></div><div style='margin-bottom:3px;'><code>zendesk_ticket_status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(CS티켓 상태)</span></div></td>
 <td class='col-role'>Zendesk CS티켓 데이터</td>
 </tr>
 <tr>
@@ -962,28 +981,28 @@ th.col-role { width: 32%; }
 <td class='col-rank'>3</td>
 <td class='col-table'><span class='table-name-badge'>zendesk_sync_ticket_comment_according_ticket_form</span></td>
 <td class='col-count'><span class='count-badge'>120</span></td>
-<td class='col-cols'>zendesk_ticket_form_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>zendesk_ticket_form_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(CS티켓 식별키)</span></div></td>
 <td class='col-role'>Zendesk sync CS티켓 댓글 according CS티켓 form 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>4</td>
 <td class='col-table'><span class='table-name-badge'>zendesk_admin_user</span></td>
 <td class='col-count'><span class='count-badge'>110</span></td>
-<td class='col-cols'>name</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(명칭)</span></div></td>
 <td class='col-role'>Zendesk admin 고객 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>5</td>
 <td class='col-table'><span class='table-name-badge'>zendesk_ticket_comment</span></td>
 <td class='col-count'><span class='count-badge'>45</span></td>
-<td class='col-cols'>role_type, zendesk_comment_id, zendesk_created_datetime, zendesk_ticket_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>role_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>zendesk_comment_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>zendesk_created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>zendesk_ticket_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(CS티켓 식별키)</span></div></td>
 <td class='col-role'>Zendesk CS티켓 댓글 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>6</td>
 <td class='col-table'><span class='table-name-badge'>inquire</span></td>
 <td class='col-count'><span class='count-badge'>32</span></td>
-<td class='col-cols'>category_id, content, created_at, created_date, del_yn, id, inquire_id, status, terminated_at, title, user_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>category_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(카테고리 식별키)</span></div><div style='margin-bottom:3px;'><code>content</code></div><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>created_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>del_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>inquire_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태값)</span></div><div style='margin-bottom:3px;'><code>terminated_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>title</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(제목)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div></td>
 <td class='col-role'>inquire 데이터</td>
 </tr>
 <tr>
@@ -997,14 +1016,14 @@ th.col-role { width: 32%; }
 <td class='col-rank'>8</td>
 <td class='col-table'><span class='table-name-badge'>inquire_category</span></td>
 <td class='col-count'><span class='count-badge'>16</span></td>
-<td class='col-cols'>depth, id, user_use_yn</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>depth</code></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>user_use_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 여부)</span></div></td>
 <td class='col-role'>inquire 카테고리 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>9</td>
 <td class='col-table'><span class='table-name-badge'>inquire_thread</span></td>
 <td class='col-count'><span class='count-badge'>16</span></td>
-<td class='col-cols'>created_datetime, id, inquire_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>inquire_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div></td>
 <td class='col-role'>inquire thread 데이터</td>
 </tr>
 <tr>
@@ -1018,7 +1037,7 @@ th.col-role { width: 32%; }
 <td class='col-rank'>11</td>
 <td class='col-table'><span class='table-name-badge'>inquire_category_tree_maps</span></td>
 <td class='col-count'><span class='count-badge'>13</span></td>
-<td class='col-cols'>category_id, child_id, created_at, depth, terminated_at</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>category_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(카테고리 식별키)</span></div><div style='margin-bottom:3px;'><code>child_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>depth</code></div><div style='margin-bottom:3px;'><code>terminated_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div></td>
 <td class='col-role'>inquire 카테고리 tree maps 데이터</td>
 </tr>
 </tbody></table></div>
@@ -1031,56 +1050,56 @@ th.col-role { width: 32%; }
 <td class='col-rank'>1</td>
 <td class='col-table'><span class='table-name-badge'>cmc_product_order</span></td>
 <td class='col-count'><span class='count-badge'>79</span></td>
-<td class='col-cols'>cancel_price, created_datetime, id, order_confirmation_datetime, order_price, order_type, parent_order_id, status_type, user_id, wash_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>cancel_price</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(취소 금액)</span></div><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>order_confirmation_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(주문 일시)</span></div><div style='margin-bottom:3px;'><code>order_price</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(주문 금액)</span></div><div style='margin-bottom:3px;'><code>order_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(주문 유형)</span></div><div style='margin-bottom:3px;'><code>parent_order_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(주문 식별키)</span></div><div style='margin-bottom:3px;'><code>status_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 식별키)</span></div></td>
 <td class='col-role'>cmc 상품 주문 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>2</td>
 <td class='col-table'><span class='table-name-badge'>cmc_product_order_items</span></td>
 <td class='col-count'><span class='count-badge'>55</span></td>
-<td class='col-cols'>cancel_price, id, order_id, order_price, order_type, parent_order_id, parent_order_item_id, product_id, sell_price, status_type, wash_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>cancel_price</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(취소 금액)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>order_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(주문 식별키)</span></div><div style='margin-bottom:3px;'><code>order_price</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(주문 금액)</span></div><div style='margin-bottom:3px;'><code>order_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(주문 유형)</span></div><div style='margin-bottom:3px;'><code>parent_order_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(주문 식별키)</span></div><div style='margin-bottom:3px;'><code>parent_order_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(주문 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>product_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상품 식별키)</span></div><div style='margin-bottom:3px;'><code>sell_price</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(금액)</span></div><div style='margin-bottom:3px;'><code>status_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 식별키)</span></div></td>
 <td class='col-role'>cmc 상품 주문 의류 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>3</td>
 <td class='col-table'><span class='table-name-badge'>cmc_sku</span></td>
 <td class='col-count'><span class='count-badge'>23</span></td>
-<td class='col-cols'>id, sku_group_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>sku_group_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(그룹 식별키)</span></div></td>
 <td class='col-role'>cmc 재고단위 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>4</td>
 <td class='col-table'><span class='table-name-badge'>marketing_monthly_retention</span></td>
 <td class='col-count'><span class='count-badge'>15</span></td>
-<td class='col-cols'>id, marketing_monthly_retention_policy_id, user_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>marketing_monthly_retention_policy_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div></td>
 <td class='col-role'>마케팅 monthly retention 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>5</td>
 <td class='col-table'><span class='table-name-badge'>cmc_product</span></td>
 <td class='col-count'><span class='count-badge'>15</span></td>
-<td class='col-cols'>delete_yn</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div></td>
 <td class='col-role'>cmc 상품 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>6</td>
 <td class='col-table'><span class='table-name-badge'>cmc_sku_group</span></td>
 <td class='col-count'><span class='count-badge'>13</span></td>
-<td class='col-cols'>id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div></td>
 <td class='col-role'>cmc 재고단위 group 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>7</td>
 <td class='col-table'><span class='table-name-badge'>cmc_map_product_sku_group</span></td>
 <td class='col-count'><span class='count-badge'>11</span></td>
-<td class='col-cols'>sku_group_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>sku_group_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(그룹 식별키)</span></div></td>
 <td class='col-role'>cmc 연결 상품 재고단위 group 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>8</td>
 <td class='col-table'><span class='table-name-badge'>cmc_map_sku_product_option_attribute</span></td>
 <td class='col-count'><span class='count-badge'>11</span></td>
-<td class='col-cols'>delete_yn, sku_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>sku_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div></td>
 <td class='col-role'>cmc 연결 재고단위 상품 option attribute 데이터</td>
 </tr>
 <tr>
@@ -1100,7 +1119,7 @@ th.col-role { width: 32%; }
 <td class='col-rank'>1</td>
 <td class='col-table'><span class='table-name-badge'>map_zendesk_ticket_field</span></td>
 <td class='col-count'><span class='count-badge'>140</span></td>
-<td class='col-cols'>value, zendesk_field_id, zendesk_ticket_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>value</code></div><div style='margin-bottom:3px;'><code>zendesk_field_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>zendesk_ticket_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(CS티켓 식별키)</span></div></td>
 <td class='col-role'>고객센터 티켓의 커스텀 필드 매핑 정보</td>
 </tr>
 </tbody></table></div>
@@ -1113,35 +1132,35 @@ th.col-role { width: 32%; }
 <td class='col-rank'>1</td>
 <td class='col-table'><span class='table-name-badge'>tmp</span></td>
 <td class='col-count'><span class='count-badge'>247</span></td>
-<td class='col-cols'>laundry_plan_type, real_collection_date, recent_subs, signup_date, storage_expired_date, storage_start_date, subs_date, subs_order_created_at, subs_order_id, user_id, 수거신청(1), 수령확인일, 요금제구분, 유저아이디, 첫수거신청여부</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>laundry_plan_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(요금제 유형)</span></div><div style='margin-bottom:3px;'><code>real_collection_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>recent_subs</code></div><div style='margin-bottom:3px;'><code>signup_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>storage_expired_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>storage_start_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(시작 일자)</span></div><div style='margin-bottom:3px;'><code>subs_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>subs_order_created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(주문 일시)</span></div><div style='margin-bottom:3px;'><code>subs_order_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(주문 식별키)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>수거신청(1)</code></div><div style='margin-bottom:3px;'><code>수령확인일</code></div><div style='margin-bottom:3px;'><code>요금제구분</code></div><div style='margin-bottom:3px;'><code>유저아이디</code></div><div style='margin-bottom:3px;'><code>첫수거신청여부</code></div></td>
 <td class='col-role'>다수의 프로덕션 쿼리에서 임시 집계 및 공통 테이블 표현식으로 활용되는 핵심 서브쿼리용 네이밍</td>
 </tr>
 <tr>
 <td class='col-rank'>2</td>
 <td class='col-table'><span class='table-name-badge'>ss</span></td>
 <td class='col-count'><span class='count-badge'>63</span></td>
-<td class='col-cols'>user_status</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>user_status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 상태)</span></div></td>
 <td class='col-role'>분석가들이 쿼리 내에서 임시로 명명한 서브쿼리 또는 임시 별칭</td>
 </tr>
 <tr>
 <td class='col-rank'>3</td>
 <td class='col-table'><span class='table-name-badge'>tmp2</span></td>
 <td class='col-count'><span class='count-badge'>39</span></td>
-<td class='col-cols'>유저 아이디</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>유저 아이디</code></div></td>
 <td class='col-role'>분석가들이 쿼리 내에서 임시로 명명한 서브쿼리 또는 임시 별칭</td>
 </tr>
 <tr>
 <td class='col-rank'>4</td>
 <td class='col-table'><span class='table-name-badge'>tmp1</span></td>
 <td class='col-count'><span class='count-badge'>29</span></td>
-<td class='col-cols'>next_subs_id, prev_subs_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>next_subs_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>prev_subs_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div></td>
 <td class='col-role'>분석가들이 쿼리 내에서 임시로 명명한 서브쿼리 또는 임시 별칭</td>
 </tr>
 <tr>
 <td class='col-rank'>5</td>
 <td class='col-table'><span class='table-name-badge'>w</span></td>
 <td class='col-count'><span class='count-badge'>22</span></td>
-<td class='col-cols'>after_feb_wash_count, before_feb_wash_count, key, laundry24_pgi, real_collection_date, status, user_id, washed_at</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>after_feb_wash_count</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 수량)</span></div><div style='margin-bottom:3px;'><code>before_feb_wash_count</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 수량)</span></div><div style='margin-bottom:3px;'><code>key</code></div><div style='margin-bottom:3px;'><code>laundry24_pgi</code></div><div style='margin-bottom:3px;'><code>real_collection_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태값)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>washed_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div></td>
 <td class='col-role'>분석가들이 쿼리 내에서 임시로 명명한 서브쿼리 또는 임시 별칭</td>
 </tr>
 <tr>
@@ -1155,7 +1174,7 @@ th.col-role { width: 32%; }
 <td class='col-rank'>7</td>
 <td class='col-table'><span class='table-name-badge'>temp</span></td>
 <td class='col-count'><span class='count-badge'>12</span></td>
-<td class='col-cols'>created_at, user_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div></td>
 <td class='col-role'>분석가들이 쿼리 내에서 임시로 명명한 서브쿼리 또는 임시 별칭</td>
 </tr>
 </tbody></table></div>
@@ -1168,21 +1187,21 @@ th.col-role { width: 32%; }
 <td class='col-rank'>1</td>
 <td class='col-table'><span class='table-name-badge'>gw_warehousing</span></td>
 <td class='col-count'><span class='count-badge'>96</span></td>
-<td class='col-cols'>created_at, id, lsf_factory_info_id, memo, staff_id, transport_start_date, type, user_id, wash_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_factory_info_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 공장 식별키)</span></div><div style='margin-bottom:3px;'><code>memo</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(메모)</span></div><div style='margin-bottom:3px;'><code>staff_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>transport_start_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(물류 시작 일자)</span></div><div style='margin-bottom:3px;'><code>type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 식별키)</span></div></td>
 <td class='col-role'>그룹웨어 warehousing 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>2</td>
 <td class='col-table'><span class='table-name-badge'>gw_warehousing_details</span></td>
 <td class='col-count'><span class='count-badge'>48</span></td>
-<td class='col-cols'>matching_type</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>matching_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div></td>
 <td class='col-role'>그룹웨어 warehousing 상세 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>3</td>
 <td class='col-table'><span class='table-name-badge'>gw_members</span></td>
 <td class='col-count'><span class='count-badge'>37</span></td>
-<td class='col-cols'>seq</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>seq</code></div></td>
 <td class='col-role'>그룹웨어 members 데이터</td>
 </tr>
 </tbody></table></div>
@@ -1195,49 +1214,49 @@ th.col-role { width: 32%; }
 <td class='col-rank'>1</td>
 <td class='col-table'><span class='table-name-badge'>view_lsf_category_flat_table</span></td>
 <td class='col-count'><span class='count-badge'>392</span></td>
-<td class='col-cols'>large_category_id, large_category_name, large_lsf_category_id, large_lsf_category_name, lsf_category_id, lsf_category_name, medium_category_id, medium_category_name, small_category_id, small_category_name</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>large_category_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(카테고리 식별키)</span></div><div style='margin-bottom:3px;'><code>large_category_name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(카테고리 명칭)</span></div><div style='margin-bottom:3px;'><code>large_lsf_category_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 카테고리 식별키)</span></div><div style='margin-bottom:3px;'><code>large_lsf_category_name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 카테고리 명칭)</span></div><div style='margin-bottom:3px;'><code>lsf_category_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 카테고리 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_category_name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 카테고리 명칭)</span></div><div style='margin-bottom:3px;'><code>medium_category_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(카테고리 식별키)</span></div><div style='margin-bottom:3px;'><code>medium_category_name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(카테고리 명칭)</span></div><div style='margin-bottom:3px;'><code>small_category_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(카테고리 식별키)</span></div><div style='margin-bottom:3px;'><code>small_category_name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(카테고리 명칭)</span></div></td>
 <td class='col-role'>스마트팩토리 대/중/소 분류 체계를 펼쳐놓은 뷰 테이블</td>
 </tr>
 <tr>
 <td class='col-rank'>2</td>
 <td class='col-table'><span class='table-name-badge'>laundry_category</span></td>
 <td class='col-count'><span class='count-badge'>118</span></td>
-<td class='col-cols'>id, name, parent_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(명칭)</span></div><div style='margin-bottom:3px;'><code>parent_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div></td>
 <td class='col-role'>세탁 카테고리 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>3</td>
 <td class='col-table'><span class='table-name-badge'>intensive_care_request</span></td>
 <td class='col-count'><span class='count-badge'>105</span></td>
-<td class='col-cols'>delete_yn, id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div></td>
 <td class='col-role'>intensive care 요청 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>4</td>
 <td class='col-table'><span class='table-name-badge'>laundry_progress_history</span></td>
 <td class='col-count'><span class='count-badge'>97</span></td>
-<td class='col-cols'>created_datetime, factory_id, lsf_wash_item_id, process_type_code</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>factory_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공장 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 의류 식별키)</span></div><div style='margin-bottom:3px;'><code>process_type_code</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공정 코드)</span></div></td>
 <td class='col-role'>세탁 progress 변경이력 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>5</td>
 <td class='col-table'><span class='table-name-badge'>intensive_care</span></td>
 <td class='col-count'><span class='count-badge'>90</span></td>
-<td class='col-cols'>id, parent_id, process_type_code, 집중케어 포함 유뮤(y/n)</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>parent_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>process_type_code</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공정 코드)</span></div><div style='margin-bottom:3px;'><code>집중케어 포함 유뮤(y/n)</code></div></td>
 <td class='col-role'>intensive care 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>6</td>
 <td class='col-table'><span class='table-name-badge'>provision_type</span></td>
 <td class='col-count'><span class='count-badge'>73</span></td>
-<td class='col-cols'>id, key, name, type</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>key</code></div><div style='margin-bottom:3px;'><code>name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(명칭)</span></div><div style='margin-bottom:3px;'><code>type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div></td>
 <td class='col-role'>provision 유형 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>7</td>
 <td class='col-table'><span class='table-name-badge'>laundry_product</span></td>
 <td class='col-count'><span class='count-badge'>71</span></td>
-<td class='col-cols'>id, name, premium_unit_price_in_plan, price_policy_id, rate_plan_type, unit_price, unit_price_in_plan</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(명칭)</span></div><div style='margin-bottom:3px;'><code>premium_unit_price_in_plan</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(프리미엄 요금제)</span></div><div style='margin-bottom:3px;'><code>price_policy_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>rate_plan_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(요금제 유형)</span></div><div style='margin-bottom:3px;'><code>unit_price</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(금액)</span></div><div style='margin-bottom:3px;'><code>unit_price_in_plan</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(요금제)</span></div></td>
 <td class='col-role'>세탁 상품 데이터</td>
 </tr>
 <tr>
@@ -1265,7 +1284,7 @@ th.col-role { width: 32%; }
 <td class='col-rank'>11</td>
 <td class='col-table'><span class='table-name-badge'>common_code</span></td>
 <td class='col-count'><span class='count-badge'>46</span></td>
-<td class='col-cols'>app_display_name, common_code</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>app_display_name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(명칭)</span></div><div style='margin-bottom:3px;'><code>common_code</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(코드)</span></div></td>
 <td class='col-role'>common 코드 데이터</td>
 </tr>
 <tr>
@@ -1279,7 +1298,7 @@ th.col-role { width: 32%; }
 <td class='col-rank'>13</td>
 <td class='col-table'><span class='table-name-badge'>laundrygo_receipt_order</span></td>
 <td class='col-count'><span class='count-badge'>37</span></td>
-<td class='col-cols'>created_datetime, delete_yn, id, normal_laundry_price, order_type, payment_status_type, wash_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>normal_laundry_price</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(금액)</span></div><div style='margin-bottom:3px;'><code>order_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(주문 유형)</span></div><div style='margin-bottom:3px;'><code>payment_status_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(결제 유형)</span></div><div style='margin-bottom:3px;'><code>wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 식별키)</span></div></td>
 <td class='col-role'>런드리고 접수 주문 데이터</td>
 </tr>
 <tr>
@@ -1307,14 +1326,14 @@ th.col-role { width: 32%; }
 <td class='col-rank'>17</td>
 <td class='col-table'><span class='table-name-badge'>customer</span></td>
 <td class='col-count'><span class='count-badge'>32</span></td>
-<td class='col-cols'>delete_yn, id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div></td>
 <td class='col-role'>customer 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>18</td>
 <td class='col-table'><span class='table-name-badge'>laundry_go_kit</span></td>
 <td class='col-count'><span class='count-badge'>28</span></td>
-<td class='col-cols'>id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div></td>
 <td class='col-role'>세탁 go kit 데이터</td>
 </tr>
 <tr>
@@ -1335,7 +1354,7 @@ th.col-role { width: 32%; }
 <td class='col-rank'>21</td>
 <td class='col-table'><span class='table-name-badge'>laundrygo_receipt_order_item</span></td>
 <td class='col-count'><span class='count-badge'>24</span></td>
-<td class='col-cols'>delete_yn, item_subtract_type, laundry_product_id, laundry_type, laundrygo_receipt_order_id, lsf_category_name, ordered_service_list, wash_yn</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>item_subtract_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(의류 유형)</span></div><div style='margin-bottom:3px;'><code>laundry_product_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상품 식별키)</span></div><div style='margin-bottom:3px;'><code>laundry_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>laundrygo_receipt_order_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(주문 식별키)</span></div><div style='margin-bottom:3px;'><code>lsf_category_name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 카테고리 명칭)</span></div><div style='margin-bottom:3px;'><code>ordered_service_list</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(서비스)</span></div><div style='margin-bottom:3px;'><code>wash_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 여부)</span></div></td>
 <td class='col-role'>런드리고 접수 주문 의류 데이터</td>
 </tr>
 <tr>
@@ -1349,14 +1368,14 @@ th.col-role { width: 32%; }
 <td class='col-rank'>23</td>
 <td class='col-table'><span class='table-name-badge'>laundrette_cycle_history</span></td>
 <td class='col-count'><span class='count-badge'>22</span></td>
-<td class='col-cols'>cancel_yn, detach_datetime, id, laundry_go_kit_id, registration_type, user_id, wash_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>cancel_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(취소 여부)</span></div><div style='margin-bottom:3px;'><code>detach_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>laundry_go_kit_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>registration_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 식별키)</span></div></td>
 <td class='col-role'>laundrette cycle 변경이력 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>24</td>
 <td class='col-table'><span class='table-name-badge'>franchise</span></td>
 <td class='col-count'><span class='count-badge'>21</span></td>
-<td class='col-cols'>del_yn, id, laundry24_cd, name, use_yn</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>del_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>laundry24_cd</code></div><div style='margin-bottom:3px;'><code>name</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(명칭)</span></div><div style='margin-bottom:3px;'><code>use_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div></td>
 <td class='col-role'>franchise 데이터</td>
 </tr>
 <tr>
@@ -1370,21 +1389,21 @@ th.col-role { width: 32%; }
 <td class='col-rank'>26</td>
 <td class='col-table'><span class='table-name-badge'>cart</span></td>
 <td class='col-count'><span class='count-badge'>21</span></td>
-<td class='col-cols'>code</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>code</code></div></td>
 <td class='col-role'>cart 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>27</td>
 <td class='col-table'><span class='table-name-badge'>unsubscribe_reservation</span></td>
 <td class='col-count'><span class='count-badge'>19</span></td>
-<td class='col-cols'>created_at, id, modified_at, status</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>modified_at</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태값)</span></div></td>
 <td class='col-role'>unsubscribe reservation 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>28</td>
 <td class='col-table'><span class='table-name-badge'>laundrette_cycle</span></td>
 <td class='col-count'><span class='count-badge'>18</span></td>
-<td class='col-cols'>delete_yn, status, user_id, wash_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>delete_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(삭제여부)</span></div><div style='margin-bottom:3px;'><code>status</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(상태값)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div><div style='margin-bottom:3px;'><code>wash_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(세탁 식별키)</span></div></td>
 <td class='col-role'>laundrette cycle 데이터</td>
 </tr>
 <tr>
@@ -1398,14 +1417,14 @@ th.col-role { width: 32%; }
 <td class='col-rank'>30</td>
 <td class='col-table'><span class='table-name-badge'>issue_clothing_confirmation_history</span></td>
 <td class='col-count'><span class='count-badge'>16</span></td>
-<td class='col-cols'>confirmation_unknown_release_yn, etc_yn, existing_damage_yn, modified_datetime, repair_again_yn</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>confirmation_unknown_release_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div><div style='margin-bottom:3px;'><code>etc_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div><div style='margin-bottom:3px;'><code>existing_damage_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div><div style='margin-bottom:3px;'><code>modified_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>repair_again_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(수선 여부)</span></div></td>
 <td class='col-role'>issue clothing confirmation 변경이력 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>31</td>
 <td class='col-table'><span class='table-name-badge'>stroller_car_seat_request</span></td>
 <td class='col-count'><span class='count-badge'>15</span></td>
-<td class='col-cols'>created_datetime</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div></td>
 <td class='col-role'>stroller car seat 요청 데이터</td>
 </tr>
 <tr>
@@ -1419,7 +1438,7 @@ th.col-role { width: 32%; }
 <td class='col-rank'>33</td>
 <td class='col-table'><span class='table-name-badge'>secondhand_clothes_collection_request</span></td>
 <td class='col-count'><span class='count-badge'>14</span></td>
-<td class='col-cols'>id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div></td>
 <td class='col-role'>secondhand clothes collection 요청 데이터</td>
 </tr>
 <tr>
@@ -1433,14 +1452,14 @@ th.col-role { width: 32%; }
 <td class='col-rank'>35</td>
 <td class='col-table'><span class='table-name-badge'>style_scanner_hanger_management_history</span></td>
 <td class='col-count'><span class='count-badge'>13</span></td>
-<td class='col-cols'>attach_datetime, lsf_wash_process_item_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>attach_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>lsf_wash_process_item_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(스팩 세탁 공정 의류 식별키)</span></div></td>
 <td class='col-role'>style scanner hanger 관리 변경이력 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>36</td>
 <td class='col-table'><span class='table-name-badge'>device</span></td>
 <td class='col-count'><span class='count-badge'>13</span></td>
-<td class='col-cols'>app_update_datetime, app_version, os_type</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>app_update_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일시)</span></div><div style='margin-bottom:3px;'><code>app_version</code></div><div style='margin-bottom:3px;'><code>os_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(유형)</span></div></td>
 <td class='col-role'>기기 데이터</td>
 </tr>
 <tr>
@@ -1454,7 +1473,7 @@ th.col-role { width: 32%; }
 <td class='col-rank'>38</td>
 <td class='col-table'><span class='table-name-badge'>ai_inquiry_chat_message</span></td>
 <td class='col-count'><span class='count-badge'>12</span></td>
-<td class='col-cols'>ai_inquiry_chat_room_id, created_datetime, direct_yn</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>ai_inquiry_chat_room_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>direct_yn</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(여부)</span></div></td>
 <td class='col-role'>ai inquiry chat message 데이터</td>
 </tr>
 <tr>
@@ -1468,21 +1487,21 @@ th.col-role { width: 32%; }
 <td class='col-rank'>40</td>
 <td class='col-table'><span class='table-name-badge'>laundry_delivery</span></td>
 <td class='col-count'><span class='count-badge'>11</span></td>
-<td class='col-cols'>id, unit_price</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>unit_price</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(금액)</span></div></td>
 <td class='col-role'>세탁 배송 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>41</td>
 <td class='col-table'><span class='table-name-badge'>base_data</span></td>
 <td class='col-count'><span class='count-badge'>11</span></td>
-<td class='col-cols'>factory_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>factory_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공장 식별키)</span></div></td>
 <td class='col-role'>base data 데이터</td>
 </tr>
 <tr>
 <td class='col-rank'>42</td>
 <td class='col-table'><span class='table-name-badge'>laundrette_return</span></td>
 <td class='col-count'><span class='count-badge'>11</span></td>
-<td class='col-cols'>created_datetime, id, process_status_type, request_type, retrieval_visit_date, user_id</td>
+<td class='col-cols'><div style='margin-bottom:3px;'><code>created_datetime</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(생성일시)</span></div><div style='margin-bottom:3px;'><code>id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(식별키)</span></div><div style='margin-bottom:3px;'><code>process_status_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(공정 유형)</span></div><div style='margin-bottom:3px;'><code>request_type</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(요청 유형)</span></div><div style='margin-bottom:3px;'><code>retrieval_visit_date</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(일자)</span></div><div style='margin-bottom:3px;'><code>user_id</code> <span style='color:#1a73e8; font-weight:600; font-size:0.9em;'>(고객 식별키)</span></div></td>
 <td class='col-role'>laundrette 반납 데이터</td>
 </tr>
 <tr>
@@ -1500,4 +1519,397 @@ th.col-role { width: 32%; }
 <td class='col-role'>intensive care 주문 데이터</td>
 </tr>
 </tbody></table></div>
+<h2 id='cat-glossary'>🏷️ 통합 컬럼 마스터 뷰 (Glossary)</h2>
+<div class='table-container' style='padding: 24px; background: #ffffff;'>
+<div style='margin-bottom:16px; color:#5f6368; font-size:0.95rem;'>전체 179개 핵심 테이블에서 사용된 모든 유효 컬럼들을 한 곳에 모은 색인(Index)입니다. 공간을 최소화하기 위해 태그 클라우드 형태로 압축했습니다.</div>
+<div style='display: flex; flex-wrap: wrap; gap: 6px; align-items: center;'>
+<span class='col-tag'>acc_seq_fk</span>
+<span class='col-tag'>accepted</span>
+<span class='col-tag'>account_type<span class='col-meaning'>(유형)</span></span>
+<span class='col-tag'>activated</span>
+<span class='col-tag'>addrgu</span>
+<span class='col-tag'>addrsi</span>
+<span class='col-tag'>adjusted_count<span class='col-meaning'>(수량)</span></span>
+<span class='col-tag'>admin_duties</span>
+<span class='col-tag'>admin_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>admin_name<span class='col-meaning'>(명칭)</span></span>
+<span class='col-tag'>admin_seq<span class='col-meaning'>(순번)</span></span>
+<span class='col-tag'>admin_seq_fk</span>
+<span class='col-tag'>after_feb_wash_count<span class='col-meaning'>(세탁 수량)</span></span>
+<span class='col-tag'>after_status<span class='col-meaning'>(상태)</span></span>
+<span class='col-tag'>ai_inquiry_chat_room_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>allocation_status<span class='col-meaning'>(상태)</span></span>
+<span class='col-tag'>amount<span class='col-meaning'>(금액)</span></span>
+<span class='col-tag'>app_display_name<span class='col-meaning'>(명칭)</span></span>
+<span class='col-tag'>app_update_datetime<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>app_version</span>
+<span class='col-tag'>approved_at<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>approved_datetime<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>area_address<span class='col-meaning'>(주소)</span></span>
+<span class='col-tag'>assigned_totebox_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>attach_datetime<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>barcode<span class='col-meaning'>(바코드)</span></span>
+<span class='col-tag'>barcode_quantity<span class='col-meaning'>(바코드)</span></span>
+<span class='col-tag'>basic_address<span class='col-meaning'>(주소)</span></span>
+<span class='col-tag'>before_feb_wash_count<span class='col-meaning'>(세탁 수량)</span></span>
+<span class='col-tag'>before_qc_issue_yn<span class='col-meaning'>(여부)</span></span>
+<span class='col-tag'>benefit_type<span class='col-meaning'>(유형)</span></span>
+<span class='col-tag'>billing_code<span class='col-meaning'>(코드)</span></span>
+<span class='col-tag'>billing_code_fk</span>
+<span class='col-tag'>camera_number</span>
+<span class='col-tag'>cancel_price<span class='col-meaning'>(취소 금액)</span></span>
+<span class='col-tag'>cancel_yn<span class='col-meaning'>(취소 여부)</span></span>
+<span class='col-tag'>cancelled</span>
+<span class='col-tag'>cancelled_at<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>capacity_seq<span class='col-meaning'>(순번)</span></span>
+<span class='col-tag'>category_id<span class='col-meaning'>(카테고리 식별키)</span></span>
+<span class='col-tag'>cell_phone_number</span>
+<span class='col-tag'>check_seq<span class='col-meaning'>(순번)</span></span>
+<span class='col-tag'>check_seq_fk</span>
+<span class='col-tag'>check_status<span class='col-meaning'>(상태)</span></span>
+<span class='col-tag'>child_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>code</span>
+<span class='col-tag'>collected_at<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>collection_created_at<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>collection_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>color_hex_guess</span>
+<span class='col-tag'>combined_packaging_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>common_code<span class='col-meaning'>(코드)</span></span>
+<span class='col-tag'>complete_datetime<span class='col-meaning'>(완료 일시)</span></span>
+<span class='col-tag'>completion_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>completion_type<span class='col-meaning'>(유형)</span></span>
+<span class='col-tag'>completiondate</span>
+<span class='col-tag'>confirmation_unknown_release_yn<span class='col-meaning'>(여부)</span></span>
+<span class='col-tag'>content</span>
+<span class='col-tag'>corporate_yn<span class='col-meaning'>(여부)</span></span>
+<span class='col-tag'>coupon_reissue_yn<span class='col-meaning'>(쿠폰 여부)</span></span>
+<span class='col-tag'>created_at<span class='col-meaning'>(생성일시)</span></span>
+<span class='col-tag'>created_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>created_date_time<span class='col-meaning'>(시간)</span></span>
+<span class='col-tag'>created_datetime<span class='col-meaning'>(생성일시)</span></span>
+<span class='col-tag'>created_user_id<span class='col-meaning'>(고객 식별키)</span></span>
+<span class='col-tag'>created_user_role_type<span class='col-meaning'>(고객 유형)</span></span>
+<span class='col-tag'>cs_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>cs_msg</span>
+<span class='col-tag'>del_yn<span class='col-meaning'>(여부)</span></span>
+<span class='col-tag'>delete_yn<span class='col-meaning'>(삭제여부)</span></span>
+<span class='col-tag'>deleted</span>
+<span class='col-tag'>deleted_at<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>delivered_at<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>delivery_start_date<span class='col-meaning'>(배송 시작 일자)</span></span>
+<span class='col-tag'>delivery_status<span class='col-meaning'>(배송 상태)</span></span>
+<span class='col-tag'>depth</span>
+<span class='col-tag'>description</span>
+<span class='col-tag'>detach_datetime<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>direct_yn<span class='col-meaning'>(여부)</span></span>
+<span class='col-tag'>display_barcode<span class='col-meaning'>(바코드)</span></span>
+<span class='col-tag'>email<span class='col-meaning'>(이메일)</span></span>
+<span class='col-tag'>engid</span>
+<span class='col-tag'>engineerid</span>
+<span class='col-tag'>engname</span>
+<span class='col-tag'>etc_yn<span class='col-meaning'>(여부)</span></span>
+<span class='col-tag'>existing_damage_yn<span class='col-meaning'>(여부)</span></span>
+<span class='col-tag'>expiration_start_datetime<span class='col-meaning'>(시작 일시)</span></span>
+<span class='col-tag'>expired_at<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>factory_id<span class='col-meaning'>(공장 식별키)</span></span>
+<span class='col-tag'>factory_item_id<span class='col-meaning'>(공장 의류 식별키)</span></span>
+<span class='col-tag'>factory_process_status<span class='col-meaning'>(공장 공정 상태)</span></span>
+<span class='col-tag'>factory_seq_fk<span class='col-meaning'>(공장)</span></span>
+<span class='col-tag'>id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>img_url<span class='col-meaning'>(URL)</span></span>
+<span class='col-tag'>incoming_status<span class='col-meaning'>(상태)</span></span>
+<span class='col-tag'>inquire_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>insert_type<span class='col-meaning'>(유형)</span></span>
+<span class='col-tag'>inspection_method_type<span class='col-meaning'>(방식 유형)</span></span>
+<span class='col-tag'>inspection_sequence_number</span>
+<span class='col-tag'>invoice_id_fk</span>
+<span class='col-tag'>iron_status_type<span class='col-meaning'>(유형)</span></span>
+<span class='col-tag'>item_count<span class='col-meaning'>(의류 수량)</span></span>
+<span class='col-tag'>item_key<span class='col-meaning'>(의류 키)</span></span>
+<span class='col-tag'>item_subtract_type<span class='col-meaning'>(의류 유형)</span></span>
+<span class='col-tag'>item_type<span class='col-meaning'>(의류 유형)</span></span>
+<span class='col-tag'>jibun_address<span class='col-meaning'>(주소)</span></span>
+<span class='col-tag'>key</span>
+<span class='col-tag'>kicker_allocate_datetime<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>kicker_barcode<span class='col-meaning'>(바코드)</span></span>
+<span class='col-tag'>kicker_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>kicker_yn<span class='col-meaning'>(여부)</span></span>
+<span class='col-tag'>large_category_id<span class='col-meaning'>(카테고리 식별키)</span></span>
+<span class='col-tag'>large_category_name<span class='col-meaning'>(카테고리 명칭)</span></span>
+<span class='col-tag'>large_lsf_category_id<span class='col-meaning'>(스팩 카테고리 식별키)</span></span>
+<span class='col-tag'>large_lsf_category_name<span class='col-meaning'>(스팩 카테고리 명칭)</span></span>
+<span class='col-tag'>large_name<span class='col-meaning'>(명칭)</span></span>
+<span class='col-tag'>large_name_fix</span>
+<span class='col-tag'>large_seq<span class='col-meaning'>(순번)</span></span>
+<span class='col-tag'>large_seq_fk</span>
+<span class='col-tag'>last_logged_in_datetime<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>last_visit_at<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>last_worker_yn<span class='col-meaning'>(여부)</span></span>
+<span class='col-tag'>laundrette_return_id<span class='col-meaning'>(반납 식별키)</span></span>
+<span class='col-tag'>laundrette_use_yn<span class='col-meaning'>(여부)</span></span>
+<span class='col-tag'>laundry24_cd</span>
+<span class='col-tag'>laundry24_franchise_cd</span>
+<span class='col-tag'>laundry24_pgi</span>
+<span class='col-tag'>laundry_care_request_id<span class='col-meaning'>(요청 식별키)</span></span>
+<span class='col-tag'>laundry_category_group_id<span class='col-meaning'>(카테고리 그룹 식별키)</span></span>
+<span class='col-tag'>laundry_category_id<span class='col-meaning'>(카테고리 식별키)</span></span>
+<span class='col-tag'>laundry_delivery_id<span class='col-meaning'>(배송 식별키)</span></span>
+<span class='col-tag'>laundry_go_kit_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>laundry_plan_category_id<span class='col-meaning'>(요금제 카테고리 식별키)</span></span>
+<span class='col-tag'>laundry_plan_id<span class='col-meaning'>(요금제 식별키)</span></span>
+<span class='col-tag'>laundry_plan_type<span class='col-meaning'>(요금제 유형)</span></span>
+<span class='col-tag'>laundry_product_id<span class='col-meaning'>(상품 식별키)</span></span>
+<span class='col-tag'>laundry_type<span class='col-meaning'>(유형)</span></span>
+<span class='col-tag'>laundrygo_coupon_id<span class='col-meaning'>(쿠폰 식별키)</span></span>
+<span class='col-tag'>laundrygo_coupon_promotion_id<span class='col-meaning'>(쿠폰 식별키)</span></span>
+<span class='col-tag'>laundrygo_point_charge_payment_id<span class='col-meaning'>(포인트 결제 식별키)</span></span>
+<span class='col-tag'>laundrygo_point_id<span class='col-meaning'>(포인트 식별키)</span></span>
+<span class='col-tag'>laundrygo_receipt_order_id<span class='col-meaning'>(주문 식별키)</span></span>
+<span class='col-tag'>list_shown</span>
+<span class='col-tag'>log_type<span class='col-meaning'>(유형)</span></span>
+<span class='col-tag'>logprev01</span>
+<span class='col-tag'>logtype</span>
+<span class='col-tag'>lsf_category_id<span class='col-meaning'>(스팩 카테고리 식별키)</span></span>
+<span class='col-tag'>lsf_category_name<span class='col-meaning'>(스팩 카테고리 명칭)</span></span>
+<span class='col-tag'>lsf_etc_sub_category_info_id<span class='col-meaning'>(스팩 카테고리 식별키)</span></span>
+<span class='col-tag'>lsf_factory_id<span class='col-meaning'>(스팩 공장 식별키)</span></span>
+<span class='col-tag'>lsf_factory_info_id<span class='col-meaning'>(스팩 공장 식별키)</span></span>
+<span class='col-tag'>lsf_kicker_slot_id<span class='col-meaning'>(스팩 식별키)</span></span>
+<span class='col-tag'>lsf_process_code<span class='col-meaning'>(스팩 공정 코드)</span></span>
+<span class='col-tag'>lsf_process_detail_code<span class='col-meaning'>(스팩 공정 코드)</span></span>
+<span class='col-tag'>lsf_wash_check_info_id<span class='col-meaning'>(스팩 세탁 식별키)</span></span>
+<span class='col-tag'>lsf_wash_id<span class='col-meaning'>(스팩 세탁 식별키)</span></span>
+<span class='col-tag'>lsf_wash_item_barcode<span class='col-meaning'>(스팩 세탁 의류 바코드)</span></span>
+<span class='col-tag'>lsf_wash_item_id<span class='col-meaning'>(스팩 세탁 의류 식별키)</span></span>
+<span class='col-tag'>lsf_wash_item_qc_id<span class='col-meaning'>(스팩 세탁 의류 식별키)</span></span>
+<span class='col-tag'>lsf_wash_kicker_slot_id<span class='col-meaning'>(스팩 세탁 식별키)</span></span>
+<span class='col-tag'>lsf_wash_no_reason_info_id<span class='col-meaning'>(스팩 세탁 사유 식별키)</span></span>
+<span class='col-tag'>lsf_wash_process_info_id<span class='col-meaning'>(스팩 세탁 공정 식별키)</span></span>
+<span class='col-tag'>lsf_wash_process_item_id<span class='col-meaning'>(스팩 세탁 공정 의류 식별키)</span></span>
+<span class='col-tag'>lsf_wash_process_item_kicker_slot_id<span class='col-meaning'>(스팩 세탁 공정 의류 식별키)</span></span>
+<span class='col-tag'>marketing_monthly_retention_policy_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>marketing_push</span>
+<span class='col-tag'>marketing_push_changed_at<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>marketing_sms</span>
+<span class='col-tag'>matching_type<span class='col-meaning'>(유형)</span></span>
+<span class='col-tag'>medium_category_id<span class='col-meaning'>(카테고리 식별키)</span></span>
+<span class='col-tag'>medium_category_name<span class='col-meaning'>(카테고리 명칭)</span></span>
+<span class='col-tag'>medium_name<span class='col-meaning'>(명칭)</span></span>
+<span class='col-tag'>medium_seq<span class='col-meaning'>(순번)</span></span>
+<span class='col-tag'>medium_seq_fk</span>
+<span class='col-tag'>memo<span class='col-meaning'>(메모)</span></span>
+<span class='col-tag'>modified_at<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>modified_datetime<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>modified_user_id<span class='col-meaning'>(고객 식별키)</span></span>
+<span class='col-tag'>name<span class='col-meaning'>(명칭)</span></span>
+<span class='col-tag'>new_subscription_order_id<span class='col-meaning'>(구독 주문 식별키)</span></span>
+<span class='col-tag'>next_collection_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>next_subs_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>next_subs_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>normal_laundry_price<span class='col-meaning'>(금액)</span></span>
+<span class='col-tag'>old_subscription_order_id<span class='col-meaning'>(구독 주문 식별키)</span></span>
+<span class='col-tag'>order_confirmation_datetime<span class='col-meaning'>(주문 일시)</span></span>
+<span class='col-tag'>order_id<span class='col-meaning'>(주문 식별키)</span></span>
+<span class='col-tag'>order_name<span class='col-meaning'>(주문 명칭)</span></span>
+<span class='col-tag'>order_price<span class='col-meaning'>(주문 금액)</span></span>
+<span class='col-tag'>order_state<span class='col-meaning'>(주문)</span></span>
+<span class='col-tag'>order_type<span class='col-meaning'>(주문 유형)</span></span>
+<span class='col-tag'>ordercstype</span>
+<span class='col-tag'>orderdate</span>
+<span class='col-tag'>ordered_service_list<span class='col-meaning'>(서비스)</span></span>
+<span class='col-tag'>orderid</span>
+<span class='col-tag'>ordername</span>
+<span class='col-tag'>orderno</span>
+<span class='col-tag'>orderseq</span>
+<span class='col-tag'>orderstate</span>
+<span class='col-tag'>ordertype</span>
+<span class='col-tag'>os_type<span class='col-meaning'>(유형)</span></span>
+<span class='col-tag'>outbound_yn<span class='col-meaning'>(여부)</span></span>
+<span class='col-tag'>packaging_type<span class='col-meaning'>(유형)</span></span>
+<span class='col-tag'>paid_price<span class='col-meaning'>(금액)</span></span>
+<span class='col-tag'>parent_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>parent_order_id<span class='col-meaning'>(주문 식별키)</span></span>
+<span class='col-tag'>parent_order_item_id<span class='col-meaning'>(주문 의류 식별키)</span></span>
+<span class='col-tag'>parent_payment_id<span class='col-meaning'>(결제 식별키)</span></span>
+<span class='col-tag'>partner_factory_id<span class='col-meaning'>(파트너 공장 식별키)</span></span>
+<span class='col-tag'>partner_process_type_code<span class='col-meaning'>(파트너 공정 코드)</span></span>
+<span class='col-tag'>parts_display_barcode<span class='col-meaning'>(바코드)</span></span>
+<span class='col-tag'>parts_seq<span class='col-meaning'>(순번)</span></span>
+<span class='col-tag'>parts_status<span class='col-meaning'>(상태)</span></span>
+<span class='col-tag'>pay_type<span class='col-meaning'>(유형)</span></span>
+<span class='col-tag'>payment_id<span class='col-meaning'>(결제 식별키)</span></span>
+<span class='col-tag'>payment_reason_type<span class='col-meaning'>(결제 사유 유형)</span></span>
+<span class='col-tag'>payment_status<span class='col-meaning'>(결제 상태)</span></span>
+<span class='col-tag'>payment_status_type<span class='col-meaning'>(결제 유형)</span></span>
+<span class='col-tag'>payment_type<span class='col-meaning'>(결제 유형)</span></span>
+<span class='col-tag'>person_seq<span class='col-meaning'>(순번)</span></span>
+<span class='col-tag'>person_sequence_content</span>
+<span class='col-tag'>pg_service_type<span class='col-meaning'>(서비스 유형)</span></span>
+<span class='col-tag'>point_price<span class='col-meaning'>(포인트 금액)</span></span>
+<span class='col-tag'>point_provision_type_id<span class='col-meaning'>(포인트 식별키)</span></span>
+<span class='col-tag'>point_type<span class='col-meaning'>(포인트 유형)</span></span>
+<span class='col-tag'>postpone_message</span>
+<span class='col-tag'>postpone_reason_id<span class='col-meaning'>(사유 식별키)</span></span>
+<span class='col-tag'>postpone_release_info_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>precaution</span>
+<span class='col-tag'>premium_request_id<span class='col-meaning'>(프리미엄 요청 식별키)</span></span>
+<span class='col-tag'>premium_type<span class='col-meaning'>(프리미엄 유형)</span></span>
+<span class='col-tag'>premium_unit_price<span class='col-meaning'>(프리미엄 금액)</span></span>
+<span class='col-tag'>premium_unit_price_in_plan<span class='col-meaning'>(프리미엄 요금제)</span></span>
+<span class='col-tag'>premium_yn<span class='col-meaning'>(프리미엄 여부)</span></span>
+<span class='col-tag'>prev_collection_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>prev_subs_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>price<span class='col-meaning'>(가격)</span></span>
+<span class='col-tag'>price_policy_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>problem_yn<span class='col-meaning'>(여부)</span></span>
+<span class='col-tag'>process_action_type<span class='col-meaning'>(공정 유형)</span></span>
+<span class='col-tag'>process_barcode<span class='col-meaning'>(공정 바코드)</span></span>
+<span class='col-tag'>process_confirmed_datetime<span class='col-meaning'>(공정 일시)</span></span>
+<span class='col-tag'>process_etc_method_type<span class='col-meaning'>(공정 방식 유형)</span></span>
+<span class='col-tag'>process_method_type<span class='col-meaning'>(공정 방식 유형)</span></span>
+<span class='col-tag'>process_reg_type<span class='col-meaning'>(공정 유형)</span></span>
+<span class='col-tag'>process_repair_status<span class='col-meaning'>(공정 수선 상태)</span></span>
+<span class='col-tag'>process_seq<span class='col-meaning'>(공정 순번)</span></span>
+<span class='col-tag'>process_seq_fk<span class='col-meaning'>(공정)</span></span>
+<span class='col-tag'>process_status<span class='col-meaning'>(공정 상태)</span></span>
+<span class='col-tag'>process_status_type<span class='col-meaning'>(공정 유형)</span></span>
+<span class='col-tag'>process_type<span class='col-meaning'>(공정 유형)</span></span>
+<span class='col-tag'>process_type_code<span class='col-meaning'>(공정 코드)</span></span>
+<span class='col-tag'>process_wash_status<span class='col-meaning'>(공정 세탁 상태)</span></span>
+<span class='col-tag'>product_id<span class='col-meaning'>(상품 식별키)</span></span>
+<span class='col-tag'>product_order_item_id<span class='col-meaning'>(상품 주문 의류 식별키)</span></span>
+<span class='col-tag'>provision_type_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>purchase_count<span class='col-meaning'>(수량)</span></span>
+<span class='col-tag'>qc_inspection_menu</span>
+<span class='col-tag'>qc_status<span class='col-meaning'>(상태)</span></span>
+<span class='col-tag'>rate_plan_type<span class='col-meaning'>(요금제 유형)</span></span>
+<span class='col-tag'>real_collection_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>reason<span class='col-meaning'>(사유)</span></span>
+<span class='col-tag'>reason_content<span class='col-meaning'>(사유)</span></span>
+<span class='col-tag'>reason_content_fix<span class='col-meaning'>(사유)</span></span>
+<span class='col-tag'>reason_etc_detail<span class='col-meaning'>(사유)</span></span>
+<span class='col-tag'>reason_seq<span class='col-meaning'>(사유 순번)</span></span>
+<span class='col-tag'>reason_seq_fk<span class='col-meaning'>(사유)</span></span>
+<span class='col-tag'>receipt_confirmed_at<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>recent_subs</span>
+<span class='col-tag'>recommendee_user_id<span class='col-meaning'>(고객 식별키)</span></span>
+<span class='col-tag'>recommender_user_id<span class='col-meaning'>(고객 식별키)</span></span>
+<span class='col-tag'>reg_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>reg_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>register_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>registration_type<span class='col-meaning'>(유형)</span></span>
+<span class='col-tag'>release_at<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>release_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>release_deadline_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>release_request_date<span class='col-meaning'>(요청 일자)</span></span>
+<span class='col-tag'>release_type<span class='col-meaning'>(유형)</span></span>
+<span class='col-tag'>repair_again_yn<span class='col-meaning'>(수선 여부)</span></span>
+<span class='col-tag'>repair_process_type<span class='col-meaning'>(수선 공정 유형)</span></span>
+<span class='col-tag'>represent_yn<span class='col-meaning'>(여부)</span></span>
+<span class='col-tag'>represented</span>
+<span class='col-tag'>request_type<span class='col-meaning'>(요청 유형)</span></span>
+<span class='col-tag'>result_common_code<span class='col-meaning'>(코드)</span></span>
+<span class='col-tag'>retrieval_visit_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>rn</span>
+<span class='col-tag'>role_type<span class='col-meaning'>(유형)</span></span>
+<span class='col-tag'>s_rank</span>
+<span class='col-tag'>second_collection_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>sell_price<span class='col-meaning'>(금액)</span></span>
+<span class='col-tag'>seq</span>
+<span class='col-tag'>sequence</span>
+<span class='col-tag'>service_type<span class='col-meaning'>(서비스 유형)</span></span>
+<span class='col-tag'>several_nights_delivery_id<span class='col-meaning'>(배송 식별키)</span></span>
+<span class='col-tag'>shiftee_employee_identification</span>
+<span class='col-tag'>signup_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>sku_group_id<span class='col-meaning'>(그룹 식별키)</span></span>
+<span class='col-tag'>sku_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>small_category_id<span class='col-meaning'>(카테고리 식별키)</span></span>
+<span class='col-tag'>small_category_name<span class='col-meaning'>(카테고리 명칭)</span></span>
+<span class='col-tag'>small_name<span class='col-meaning'>(명칭)</span></span>
+<span class='col-tag'>small_seq<span class='col-meaning'>(순번)</span></span>
+<span class='col-tag'>small_seq_fk</span>
+<span class='col-tag'>spotting_status_type<span class='col-meaning'>(유형)</span></span>
+<span class='col-tag'>staff_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>stateyn</span>
+<span class='col-tag'>status<span class='col-meaning'>(상태값)</span></span>
+<span class='col-tag'>status_type<span class='col-meaning'>(유형)</span></span>
+<span class='col-tag'>storage_expired_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>storage_start_date<span class='col-meaning'>(시작 일자)</span></span>
+<span class='col-tag'>stroller_car_seat_count<span class='col-meaning'>(수량)</span></span>
+<span class='col-tag'>subject</span>
+<span class='col-tag'>subs_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>subs_order_created_at<span class='col-meaning'>(주문 일시)</span></span>
+<span class='col-tag'>subs_order_id<span class='col-meaning'>(주문 식별키)</span></span>
+<span class='col-tag'>subscription_agreement_id<span class='col-meaning'>(구독 식별키)</span></span>
+<span class='col-tag'>subscription_change_id<span class='col-meaning'>(구독 식별키)</span></span>
+<span class='col-tag'>subscription_id<span class='col-meaning'>(구독 식별키)</span></span>
+<span class='col-tag'>subscription_order_id<span class='col-meaning'>(구독 주문 식별키)</span></span>
+<span class='col-tag'>subscription_payment_id<span class='col-meaning'>(구독 결제 식별키)</span></span>
+<span class='col-tag'>subtracted</span>
+<span class='col-tag'>succeeded</span>
+<span class='col-tag'>success_yn<span class='col-meaning'>(여부)</span></span>
+<span class='col-tag'>support_kicker_yn<span class='col-meaning'>(여부)</span></span>
+<span class='col-tag'>temp</span>
+<span class='col-tag'>terminated_at<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>termination_datetime<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>termination_yn<span class='col-meaning'>(여부)</span></span>
+<span class='col-tag'>title<span class='col-meaning'>(제목)</span></span>
+<span class='col-tag'>today_check_cnt<span class='col-meaning'>(수량)</span></span>
+<span class='col-tag'>total_paid_price<span class='col-meaning'>(총 금액)</span></span>
+<span class='col-tag'>trans_bag_code<span class='col-meaning'>(코드)</span></span>
+<span class='col-tag'>transport_delayed_reason_info_id<span class='col-meaning'>(물류 사유 식별키)</span></span>
+<span class='col-tag'>transport_start_date<span class='col-meaning'>(물류 시작 일자)</span></span>
+<span class='col-tag'>transportstartdate</span>
+<span class='col-tag'>type<span class='col-meaning'>(유형)</span></span>
+<span class='col-tag'>unit_price<span class='col-meaning'>(금액)</span></span>
+<span class='col-tag'>unit_price_in_plan<span class='col-meaning'>(요금제)</span></span>
+<span class='col-tag'>unsubs_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>unsubscribe_reason_type<span class='col-meaning'>(사유 유형)</span></span>
+<span class='col-tag'>unsubscribe_type<span class='col-meaning'>(유형)</span></span>
+<span class='col-tag'>use_count<span class='col-meaning'>(수량)</span></span>
+<span class='col-tag'>use_yn<span class='col-meaning'>(여부)</span></span>
+<span class='col-tag'>used_yn<span class='col-meaning'>(여부)</span></span>
+<span class='col-tag'>user_card_no<span class='col-meaning'>(고객 번호)</span></span>
+<span class='col-tag'>user_id<span class='col-meaning'>(고객 식별키)</span></span>
+<span class='col-tag'>user_laundrygo_coupon_promotion_id<span class='col-meaning'>(고객 쿠폰 식별키)</span></span>
+<span class='col-tag'>user_msg<span class='col-meaning'>(고객)</span></span>
+<span class='col-tag'>user_phone_number<span class='col-meaning'>(고객)</span></span>
+<span class='col-tag'>user_status<span class='col-meaning'>(고객 상태)</span></span>
+<span class='col-tag'>user_use_yn<span class='col-meaning'>(고객 여부)</span></span>
+<span class='col-tag'>usercardno</span>
+<span class='col-tag'>value</span>
+<span class='col-tag'>wash_create_date<span class='col-meaning'>(세탁 일자)</span></span>
+<span class='col-tag'>wash_id<span class='col-meaning'>(세탁 식별키)</span></span>
+<span class='col-tag'>wash_order_no<span class='col-meaning'>(세탁 주문 번호)</span></span>
+<span class='col-tag'>wash_possible_yn<span class='col-meaning'>(세탁 여부)</span></span>
+<span class='col-tag'>wash_process_type<span class='col-meaning'>(세탁 공정 유형)</span></span>
+<span class='col-tag'>wash_status<span class='col-meaning'>(세탁 상태)</span></span>
+<span class='col-tag'>wash_yn<span class='col-meaning'>(세탁 여부)</span></span>
+<span class='col-tag'>washed_at<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>weight</span>
+<span class='col-tag'>work_base_date<span class='col-meaning'>(기본 일자)</span></span>
+<span class='col-tag'>work_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>zendesk_comment_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>zendesk_created_date<span class='col-meaning'>(일자)</span></span>
+<span class='col-tag'>zendesk_created_datetime<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>zendesk_custom_status_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>zendesk_field_id<span class='col-meaning'>(식별키)</span></span>
+<span class='col-tag'>zendesk_modified_datetime<span class='col-meaning'>(일시)</span></span>
+<span class='col-tag'>zendesk_ticket_form_id<span class='col-meaning'>(CS티켓 식별키)</span></span>
+<span class='col-tag'>zendesk_ticket_id<span class='col-meaning'>(CS티켓 식별키)</span></span>
+<span class='col-tag'>zendesk_ticket_status<span class='col-meaning'>(CS티켓 상태)</span></span>
+<span class='col-tag'>zone_code<span class='col-meaning'>(구역 코드)</span></span>
+<span class='col-tag'>기준월</span>
+<span class='col-tag'>분류시간</span>
+<span class='col-tag'>수거신청(1)</span>
+<span class='col-tag'>수령확인일</span>
+<span class='col-tag'>아이언 작업자</span>
+<span class='col-tag'>요금제구분</span>
+<span class='col-tag'>유저 아이디</span>
+<span class='col-tag'>유저아이디</span>
+<span class='col-tag'>집중케어 포함 유뮤(y/n)</span>
+<span class='col-tag'>첫수거신청여부</span>
+<span class='col-tag'>최초킥커시간</span>
+<span class='col-tag'>출고확정시간</span>
+</div></div>
 </div></div></body></html>
