@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>런드리고 Raw Data 테이블 사전</title>
+<link rel='stylesheet' as='style' crossorigin href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css' />
+<style>
+:root {
+  --bg-color: #f4f6f8;
+  --text-main: #202124;
+  --text-muted: #5f6368;
+  --accent-blue: #1a73e8;
+  --header-bg: #343a40;
+  --header-text: #ffffff;
+  --border-color: #e0e0e0;
+  --row-hover: #f1f3f4;
+  --code-bg: #f8f9fa;
+  --code-color: #d93025;
+}
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  margin: 0;
+  line-height: 1.6;
+}
+.sidebar {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  width: 260px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: 20px;
+  height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+.sidebar h3 {
+  font-size: 1.1rem;
+  color: var(--text-main);
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar li {
+  margin-bottom: 10px;
+}
+.sidebar a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: block;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+.sidebar a:hover {
+  background-color: #e8f0fe;
+  color: var(--accent-blue);
+}
+.main-content {
+  margin-left: 340px;
+  padding: 40px 60px 40px 0;
+  max-width: 1300px;
+}
+h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+.subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+}
+h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent-blue);
+  margin-top: 60px;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent-blue);
+  display: inline-block;
+}
+.table-container {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  text-align: left;
+}
+th, td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+}
+th {
+  background-color: var(--header-bg);
+  color: var(--header-text) !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+tr:nth-child(even) {
+  background-color: #fafbfc;
+}
+tr:hover {
+  background-color: var(--row-hover);
+  transition: background-color 0.2s ease;
+}
+td.col-rank { width: 6%; text-align: center; font-weight: 600; color: var(--text-muted); }
+th.col-rank { width: 6%; text-align: center; }
+.col-table { width: 14%; word-break: break-all; }
+.table-name-badge {
+  display: inline-block;
+  font-family: 'Fira Code', Consolas, monospace;
+  background-color: var(--code-bg);
+  color: var(--code-color);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1px solid #e9ecef;
+  word-break: break-all;
+}
+.col-count { width: 8%; text-align: center; }
+.count-badge {
+  display: inline-block;
+  background-color: #e6f4ea;
+  color: #137333;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+td.col-cols { width: 40%; font-size: 0.9rem; color: #3c4043; line-height: 1.7; word-break: break-all; }
+th.col-cols { width: 40%; }
+td.col-role { width: 32%; font-weight: 600; color: #1967d2; font-size: 0.95rem; word-break: keep-all; }
+th.col-role { width: 32%; }
+.tip-box {
+  background: #e8f0fe;
+  border-left: 4px solid var(--accent-blue);
+  padding: 16px 20px;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem;
+  color: #1967d2;
+  margin-bottom: 30px;
+}
+</style>
+</head>
+<body>
+<div class='layout'>
+<div class='sidebar'>
+  <h3>📑 도메인 목차</h3>
+  <ul>
+    <li><a href='#cat-A'>A. 세탁 및 주문 트랜잭션</a></li>
+    <li><a href='#cat-B'>B. 스마트팩토리 공정</a></li>
+    <li><a href='#cat-C'>C. 요금제 및 결제</a></li>
+    <li><a href='#cat-D'>D. 고객 및 혜택</a></li>
+    <li><a href='#cat-E'>E. 물류 및 배송</a></li>
+    <li><a href='#cat-F'>F. CS 및 고객 지원</a></li>
+    <li><a href='#cat-G'>G. 커머스 및 마케팅</a></li>
+    <li><a href='#cat-H'>H. 다대다 매핑 테이블</a></li>
+    <li><a href='#cat-I'>I. 서브쿼리 및 임시 별칭</a></li>
+    <li><a href='#cat-J'>J. 그룹웨어</a></li>
+    <li><a href='#cat-Z'>Z. 기타 및 공통 데이터</a></li>
+  </ul>
+</div>
+<div class='main-content'>
+<h1>📊 런드리고 179개 핵심 Raw Data 통합 사전</h1>
+<div class='subtitle'>감시관 에이전트 그룹이 3,352개 프로덕션 쿼리를 전수 분석 및 교차 검증하여 추출한 데이터 파이프라인 실무 카탈로그입니다. (조회수 10회 이하 마이너 테이블 제외)</div>
+<div class='tip-box'><b>💡 실무 활용 팁:</b> '실제 사용된 주요 컬럼'은 쿼리 내에서 실제로 SELECT 되거나 WHERE 절 필터링에 1회 이상 사용된 팩트 기반 데이터만 추출한 것입니다.</div>
+<h2 id='cat-A'>A. 세탁 및 주문 트랜잭션</h2>
+<div class='table-container'>
+<table>
+<thead><tr><th class='col-rank'>순위</th><th class='col-table'>테이블명</th><th class='col-count'>조회수</th><th class='col-cols'>실제 사용된 주요 컬럼</th><th class='col-role'>💡 단어 매핑 기반 직역/유추</th></tr></thead>
+<tbody>
+<tr>
+<td class='col-rank'>1</td>
+<td class='col-table'><span class='table-name-badge'>wash</span></td>
+<td class='col-count'><span class='count-badge'>1653</span></td>
+<td class='col-cols'>app_version, cancelled_at, collected_at, collection_created_at, collection_date, created_at, created_date, delivered_at, id, key, laundry24_franchise_cd, laundry24_pgi, lsf_factory_info_id, next_collection_date, prev_collection_date, real_collection_date, receipt_confirmed_at, release_deadline_date, second_collection_date, status, subscription_order_id, user_id, washed_at, 기준월, 아이언 작업자</td>
+<td class='col-role'>수거 세탁 상태 및 물류/결제 결합을 위한 다중 상태 메인 트랜잭션 (1:N 뼈대)</td>
+</tr>
+<tr>
+<td class='col-rank'>2</td>
+<td class='col-table'><span class='table-name-badge'>laundry_care_request</span></td>
+<td class='col-count'><span class='count-badge'>211</span></td>
+<td class='col-cols'>created_datetime, delete_yn, id, incoming_status, iron_status_type, lsf_wash_item_id, spotting_status_type, wash_id</td>
+<td class='col-role'>세탁 care 요청 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>3</td>
+<td class='col-table'><span class='table-name-badge'>map_wash_several_nights_delivery</span></td>
+<td class='col-count'><span class='count-badge'>183</span></td>
+<td class='col-cols'>id, several_nights_delivery_id, wash_id</td>
+<td class='col-role'>주문건의 한밤/여러밤 배송 유형을 결정짓는 핵심 물류 매핑 테이블</td>
+</tr>
+<tr>
+<td class='col-rank'>4</td>
+<td class='col-table'><span class='table-name-badge'>wash_item</span></td>
+<td class='col-count'><span class='count-badge'>154</span></td>
+<td class='col-cols'>accepted, created_date_time, id, laundry_category_id, old_subscription_order_id, premium_yn, subtracted, wash_id</td>
+<td class='col-role'>세탁 의류 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>5</td>
+<td class='col-table'><span class='table-name-badge'>premium_request</span></td>
+<td class='col-count'><span class='count-badge'>149</span></td>
+<td class='col-cols'>delete_yn, id, iron_status_type, lsf_wash_item_id, spotting_status_type, wash_id</td>
+<td class='col-role'>프리미엄 요청 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>6</td>
+<td class='col-table'><span class='table-name-badge'>repair_order</span></td>
+<td class='col-count'><span class='count-badge'>132</span></td>
+<td class='col-cols'>created_at, delete_yn, id, lsf_wash_item_id, lsf_wash_process_item_id, wash_id</td>
+<td class='col-role'>수선 주문 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>7</td>
+<td class='col-table'><span class='table-name-badge'>map_laundry_care_request_intensive_care_request</span></td>
+<td class='col-count'><span class='count-badge'>89</span></td>
+<td class='col-cols'>laundry_care_request_id</td>
+<td class='col-role'>연결 세탁 care 요청 intensive care 요청 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>8</td>
+<td class='col-table'><span class='table-name-badge'>map_premium_request_intensive_care_request</span></td>
+<td class='col-count'><span class='count-badge'>51</span></td>
+<td class='col-cols'>premium_request_id</td>
+<td class='col-role'>연결 프리미엄 요청 intensive care 요청 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>9</td>
+<td class='col-table'><span class='table-name-badge'>repair_product_order</span></td>
+<td class='col-count'><span class='count-badge'>44</span></td>
+<td class='col-cols'>created_at, status</td>
+<td class='col-role'>수선 상품 주문 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>10</td>
+<td class='col-table'><span class='table-name-badge'>wash_delivery_option</span></td>
+<td class='col-count'><span class='count-badge'>24</span></td>
+<td class='col-cols'>delete_yn, packaging_type, wash_id</td>
+<td class='col-role'>세탁 배송 option 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>11</td>
+<td class='col-table'><span class='table-name-badge'>rewash_laundry_care_request</span></td>
+<td class='col-count'><span class='count-badge'>21</span></td>
+<td class='col-cols'>laundry_care_request_id</td>
+<td class='col-role'>rewash 세탁 care 요청 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>12</td>
+<td class='col-table'><span class='table-name-badge'>repair_category</span></td>
+<td class='col-count'><span class='count-badge'>20</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>수선 카테고리 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>13</td>
+<td class='col-table'><span class='table-name-badge'>wash_detail</span></td>
+<td class='col-count'><span class='count-badge'>16</span></td>
+<td class='col-cols'>precaution</td>
+<td class='col-role'>세탁 상세 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>14</td>
+<td class='col-table'><span class='table-name-badge'>premium_inspection</span></td>
+<td class='col-count'><span class='count-badge'>14</span></td>
+<td class='col-cols'>lsf_wash_item_id, modified_datetime</td>
+<td class='col-role'>프리미엄 inspection 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>15</td>
+<td class='col-table'><span class='table-name-badge'>repair_product</span></td>
+<td class='col-count'><span class='count-badge'>13</span></td>
+<td class='col-cols'>use_yn</td>
+<td class='col-role'>수선 상품 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>16</td>
+<td class='col-table'><span class='table-name-badge'>wash_delivery_method</span></td>
+<td class='col-count'><span class='count-badge'>12</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>세탁 배송 method 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>17</td>
+<td class='col-table'><span class='table-name-badge'>repair_way</span></td>
+<td class='col-count'><span class='count-badge'>11</span></td>
+<td class='col-cols'>id</td>
+<td class='col-role'>수선 way 데이터</td>
+</tr>
+</tbody></table></div>
+<h2 id='cat-B'>B. 스마트팩토리 공정</h2>
+<div class='table-container'>
+<table>
+<thead><tr><th class='col-rank'>순위</th><th class='col-table'>테이블명</th><th class='col-count'>조회수</th><th class='col-cols'>실제 사용된 주요 컬럼</th><th class='col-role'>💡 단어 매핑 기반 직역/유추</th></tr></thead>
+<tbody>
+<tr>
+<td class='col-rank'>1</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_check_info</span></td>
+<td class='col-count'><span class='count-badge'>996</span></td>
+<td class='col-cols'>check_seq, check_status, completion_date, completion_type, cs_date, cs_msg, factory_seq_fk, laundry24_franchise_cd, laundry24_pgi, reg_date, reg_id, register_date, release_date, service_type, today_check_cnt, user_card_no, user_id, user_msg, wash_create_date, wash_id, wash_order_no, work_base_date</td>
+<td class='col-role'>스마트팩토리 공장 단위 수거물 입고 및 검수 헤더</td>
+</tr>
+<tr>
+<td class='col-rank'>2</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_item</span></td>
+<td class='col-count'><span class='count-badge'>595</span></td>
+<td class='col-cols'>barcode, before_qc_issue_yn, created_date, created_user_id, created_user_role_type, delete_yn, display_barcode, factory_process_status, id, item_type, kicker_barcode, lsf_category_id, lsf_wash_id, lsf_wash_no_reason_info_id, lsf_wash_process_item_id, lsf_wash_process_item_kicker_slot_id, modified_user_id, premium_type, release_date, repair_process_type, sku_id, wash_process_type</td>
+<td class='col-role'>공장 내 의류/품목 바코드 기준 세탁물 상세 정보 및 품질 검수 연동</td>
+</tr>
+<tr>
+<td class='col-rank'>3</td>
+<td class='col-table'><span class='table-name-badge'>lsf_factory_info</span></td>
+<td class='col-count'><span class='count-badge'>461</span></td>
+<td class='col-cols'>id, name</td>
+<td class='col-role'>스마트팩토리 공장 지점 정보</td>
+</tr>
+<tr>
+<td class='col-rank'>4</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_process_info</span></td>
+<td class='col-count'><span class='count-badge'>368</span></td>
+<td class='col-cols'>billing_code_fk, check_seq_fk, created_datetime, del_yn, display_barcode, invoice_id_fk, item_type, large_name_fix, large_seq_fk, medium_seq_fk, premium_type, process_barcode, process_etc_method_type, process_method_type, process_reg_type, process_seq, process_status, product_order_item_id, reason_content_fix, reason_seq_fk, release_type, sku_id, small_seq_fk</td>
+<td class='col-role'>스마트팩토리 세탁 공정 기본정보 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>5</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash</span></td>
+<td class='col-count'><span class='count-badge'>338</span></td>
+<td class='col-cols'>created_at, created_date, id, lsf_factory_id, lsf_wash_check_info_id, lsf_wash_kicker_slot_id, release_date, today_check_cnt, user_id, wash_status, weight, 분류시간, 최초킥커시간, 출고확정시간</td>
+<td class='col-role'>스마트팩토리 세탁 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>6</td>
+<td class='col-table'><span class='table-name-badge'>lsf_account_info</span></td>
+<td class='col-count'><span class='count-badge'>333</span></td>
+<td class='col-cols'>admin_duties, admin_id, admin_name, admin_seq, admin_seq_fk, capacity_seq, delete_yn, factory_seq_fk, last_logged_in_datetime, lsf_factory_info_id, reg_id, shiftee_employee_identification, type</td>
+<td class='col-role'>스마트팩토리 account 기본정보 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>7</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_process_item_partner</span></td>
+<td class='col-count'><span class='count-badge'>225</span></td>
+<td class='col-cols'>created_datetime, id, lsf_wash_item_id, partner_factory_id, partner_process_type_code, process_confirmed_datetime</td>
+<td class='col-role'>스마트팩토리 세탁 공정 의류 파트너 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>8</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_process_item</span></td>
+<td class='col-count'><span class='count-badge'>215</span></td>
+<td class='col-cols'>accepted, created_at, created_date, del_yn, display_barcode, id, item_type, lsf_category_id, lsf_etc_sub_category_info_id, lsf_process_detail_code, lsf_wash_id, lsf_wash_process_info_id, lsf_wash_process_item_kicker_slot_id, process_barcode, process_repair_status, process_wash_status, wash_possible_yn</td>
+<td class='col-role'>스마트팩토리 세탁 공정 의류 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>9</td>
+<td class='col-table'><span class='table-name-badge'>lsf_category</span></td>
+<td class='col-count'><span class='count-badge'>188</span></td>
+<td class='col-cols'>id, kicker_yn, laundry_category_id, lsf_process_code, name, parent_id</td>
+<td class='col-role'>세탁물 분류 체계를 관리하는 런드리고 핵심 카테고리 마스터</td>
+</tr>
+<tr>
+<td class='col-rank'>10</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_process_item_iron_history</span></td>
+<td class='col-count'><span class='count-badge'>140</span></td>
+<td class='col-cols'>created_date, created_datetime, created_user_id, created_user_role_type, delete_yn, id, lsf_wash_item_id, lsf_wash_process_item_id, modified_datetime, process_action_type</td>
+<td class='col-role'>스마트팩토리 세탁 공정 의류 iron 변경이력 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>11</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_item_history</span></td>
+<td class='col-count'><span class='count-badge'>136</span></td>
+<td class='col-cols'>created_date, created_datetime, created_user_id, lsf_wash_item_id, process_type</td>
+<td class='col-role'>스마트팩토리 세탁 의류 변경이력 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>12</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_item_qc</span></td>
+<td class='col-count'><span class='count-badge'>91</span></td>
+<td class='col-cols'>created_date, created_datetime, delete_yn, lsf_wash_item_id, modified_datetime, qc_status</td>
+<td class='col-role'>스마트팩토리 세탁 의류 품질검수 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>13</td>
+<td class='col-table'><span class='table-name-badge'>lsf_large_category_info</span></td>
+<td class='col-count'><span class='count-badge'>77</span></td>
+<td class='col-cols'>billing_code, large_name, large_seq, used_yn</td>
+<td class='col-role'>스마트팩토리 large 카테고리 기본정보 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>14</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_process_person_info</span></td>
+<td class='col-count'><span class='count-badge'>76</span></td>
+<td class='col-cols'>check_seq_fk, created_date, insert_type, person_seq, person_sequence_content, process_seq_fk, reg_date, reg_id</td>
+<td class='col-role'>스마트팩토리 세탁 공정 person 기본정보 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>15</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_img</span></td>
+<td class='col-count'><span class='count-badge'>59</span></td>
+<td class='col-cols'>barcode, camera_number, created_datetime, created_user_id, delete_yn, id, img_url, inspection_method_type, inspection_sequence_number, lsf_wash_item_id, lsf_wash_process_info_id, lsf_wash_process_item_id, problem_yn, represent_yn</td>
+<td class='col-role'>스마트팩토리 세탁 img 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>16</td>
+<td class='col-table'><span class='table-name-badge'>lsf_small_category_info</span></td>
+<td class='col-count'><span class='count-badge'>43</span></td>
+<td class='col-cols'>billing_code_fk, id, large_seq, medium_seq, medium_seq_fk, small_seq, used_yn</td>
+<td class='col-role'>스마트팩토리 small 카테고리 기본정보 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>17</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_process_item_kicker_slot</span></td>
+<td class='col-count'><span class='count-badge'>41</span></td>
+<td class='col-cols'>code, created_at, delete_yn, id, kicker_allocate_datetime, lsf_wash_kicker_slot_id</td>
+<td class='col-role'>스마트팩토리 세탁 공정 의류 키커 슬롯 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>18</td>
+<td class='col-table'><span class='table-name-badge'>lsf_receipt</span></td>
+<td class='col-count'><span class='count-badge'>41</span></td>
+<td class='col-cols'>delete_yn</td>
+<td class='col-role'>스마트팩토리 접수 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>19</td>
+<td class='col-table'><span class='table-name-badge'>lsf_receipt_item</span></td>
+<td class='col-count'><span class='count-badge'>41</span></td>
+<td class='col-cols'>barcode_quantity, delete_yn</td>
+<td class='col-role'>스마트팩토리 접수 의류 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>20</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_kicker_slot</span></td>
+<td class='col-count'><span class='count-badge'>37</span></td>
+<td class='col-cols'>created_at, created_date, id, kicker_id, lsf_factory_id, status</td>
+<td class='col-role'>스마트팩토리 세탁 키커 슬롯 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>21</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_process_item_spotting_history</span></td>
+<td class='col-count'><span class='count-badge'>30</span></td>
+<td class='col-cols'>created_datetime, id, lsf_wash_item_id, lsf_wash_process_item_id</td>
+<td class='col-role'>스마트팩토리 세탁 공정 의류 spotting 변경이력 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>22</td>
+<td class='col-table'><span class='table-name-badge'>lsf_clothes_storage_wash_item</span></td>
+<td class='col-count'><span class='count-badge'>30</span></td>
+<td class='col-cols'>id, lsf_wash_item_id, release_request_date, user_id</td>
+<td class='col-role'>스마트팩토리 clothes storage 세탁 의류 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>23</td>
+<td class='col-table'><span class='table-name-badge'>lsf_medium_category_info</span></td>
+<td class='col-count'><span class='count-badge'>28</span></td>
+<td class='col-cols'>billing_code_fk, large_seq_fk, medium_name, medium_seq, small_name, used_yn</td>
+<td class='col-role'>스마트팩토리 medium 카테고리 기본정보 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>24</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_process_item_log</span></td>
+<td class='col-count'><span class='count-badge'>28</span></td>
+<td class='col-cols'>created_at, lsf_process_detail_code, lsf_wash_process_item_id, reg_id</td>
+<td class='col-role'>스마트팩토리 세탁 공정 의류 로그 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>25</td>
+<td class='col-table'><span class='table-name-badge'>lsf_clothes_storage_wash_item_aud</span></td>
+<td class='col-count'><span class='count-badge'>27</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>스마트팩토리 clothes storage 세탁 의류 aud 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>26</td>
+<td class='col-table'><span class='table-name-badge'>factory_item</span></td>
+<td class='col-count'><span class='count-badge'>27</span></td>
+<td class='col-cols'>complete_datetime, created_datetime, delete_yn, id, item_key, modified_datetime, status, work_date</td>
+<td class='col-role'>공장지점 의류 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>27</td>
+<td class='col-table'><span class='table-name-badge'>lsf_kicker_slot_status_change_history</span></td>
+<td class='col-count'><span class='count-badge'>27</span></td>
+<td class='col-cols'>after_status, lsf_factory_id, lsf_wash_kicker_slot_id, modified_datetime</td>
+<td class='col-role'>스마트팩토리 키커 슬롯 상태값 change 변경이력 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>28</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_postpone_release_info_log</span></td>
+<td class='col-count'><span class='count-badge'>24</span></td>
+<td class='col-cols'>check_seq_fk, created_date, id, postpone_reason_id, postpone_release_info_id, reg_date, release_at, type</td>
+<td class='col-role'>스마트팩토리 세탁 postpone release 기본정보 로그 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>29</td>
+<td class='col-table'><span class='table-name-badge'>factory_item_category</span></td>
+<td class='col-count'><span class='count-badge'>21</span></td>
+<td class='col-cols'>delete_yn, factory_item_id</td>
+<td class='col-role'>공장지점 의류 카테고리 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>30</td>
+<td class='col-table'><span class='table-name-badge'>lsf_trans_bag_management</span></td>
+<td class='col-count'><span class='count-badge'>21</span></td>
+<td class='col-cols'>created_datetime, delete_yn, trans_bag_code</td>
+<td class='col-role'>스마트팩토리 trans bag 관리 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>31</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_postpone_reason_info</span></td>
+<td class='col-count'><span class='count-badge'>20</span></td>
+<td class='col-cols'>postpone_message</td>
+<td class='col-role'>스마트팩토리 세탁 postpone 사유 기본정보 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>32</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_accessory_parts_info</span></td>
+<td class='col-count'><span class='count-badge'>20</span></td>
+<td class='col-cols'>acc_seq_fk, check_seq_fk, parts_display_barcode, parts_seq, parts_status, reason_seq_fk, release_type</td>
+<td class='col-role'>스마트팩토리 세탁 accessory parts 기본정보 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>33</td>
+<td class='col-table'><span class='table-name-badge'>qc_inspection_result</span></td>
+<td class='col-count'><span class='count-badge'>20</span></td>
+<td class='col-cols'>created_datetime, delete_yn, lsf_wash_item_id, qc_inspection_menu, result_common_code</td>
+<td class='col-role'>품질검수 inspection 결과 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>34</td>
+<td class='col-table'><span class='table-name-badge'>lsf_kicker_slot</span></td>
+<td class='col-count'><span class='count-badge'>18</span></td>
+<td class='col-cols'>lsf_factory_id, lsf_kicker_slot_id, lsf_wash_kicker_slot_id, status</td>
+<td class='col-role'>스마트팩토리 키커 슬롯 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>35</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_item_qc_reprocessing</span></td>
+<td class='col-count'><span class='count-badge'>18</span></td>
+<td class='col-cols'>created_date, delete_yn</td>
+<td class='col-role'>스마트팩토리 세탁 의류 품질검수 reprocessing 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>36</td>
+<td class='col-table'><span class='table-name-badge'>lsf_qc_reprocessing_reason</span></td>
+<td class='col-count'><span class='count-badge'>17</span></td>
+<td class='col-cols'>reason</td>
+<td class='col-role'>스마트팩토리 품질검수 reprocessing 사유 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>37</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_item_qc_customer_informed_release</span></td>
+<td class='col-count'><span class='count-badge'>16</span></td>
+<td class='col-cols'>created_date, delete_yn, lsf_wash_item_qc_id</td>
+<td class='col-role'>스마트팩토리 세탁 의류 품질검수 customer informed release 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>38</td>
+<td class='col-table'><span class='table-name-badge'>lsf_combined_packaging_assigned_totebox</span></td>
+<td class='col-count'><span class='count-badge'>16</span></td>
+<td class='col-cols'>combined_packaging_id, id, status</td>
+<td class='col-role'>스마트팩토리 combined packaging assigned totebox 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>39</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_quantity_info</span></td>
+<td class='col-count'><span class='count-badge'>15</span></td>
+<td class='col-cols'>check_seq_fk, reg_date</td>
+<td class='col-role'>스마트팩토리 세탁 quantity 기본정보 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>40</td>
+<td class='col-table'><span class='table-name-badge'>cmc_factory_sku_stock</span></td>
+<td class='col-count'><span class='count-badge'>14</span></td>
+<td class='col-cols'>lsf_factory_info_id, sku_id, support_kicker_yn</td>
+<td class='col-role'>cmc 공장지점 재고단위 재고 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>41</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_iron_info</span></td>
+<td class='col-count'><span class='count-badge'>14</span></td>
+<td class='col-cols'>barcode, created_at, created_date, display_barcode, last_worker_yn, lsf_wash_process_item_id</td>
+<td class='col-role'>스마트팩토리 세탁 iron 기본정보 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>42</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_no_reason_info</span></td>
+<td class='col-count'><span class='count-badge'>14</span></td>
+<td class='col-cols'>reason_content, reason_seq</td>
+<td class='col-role'>스마트팩토리 세탁 no 사유 기본정보 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>43</td>
+<td class='col-table'><span class='table-name-badge'>lsf_combined_packaging</span></td>
+<td class='col-count'><span class='count-badge'>13</span></td>
+<td class='col-cols'>created_datetime, del_yn, id, outbound_yn, wash_id</td>
+<td class='col-role'>스마트팩토리 combined packaging 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>44</td>
+<td class='col-table'><span class='table-name-badge'>lsf_kicker_slot_allocate_history</span></td>
+<td class='col-count'><span class='count-badge'>12</span></td>
+<td class='col-cols'>allocation_status, created_datetime, lsf_kicker_slot_id, lsf_wash_id, lsf_wash_item_id, modified_datetime, process_barcode</td>
+<td class='col-role'>스마트팩토리 키커 슬롯 allocate 변경이력 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>45</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_item_image_analysis_result</span></td>
+<td class='col-count'><span class='count-badge'>12</span></td>
+<td class='col-cols'>color_hex_guess, created_datetime, delete_yn, success_yn</td>
+<td class='col-role'>스마트팩토리 세탁 의류 사진 analysis 결과 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>46</td>
+<td class='col-table'><span class='table-name-badge'>lsf_combined_packaging_wash_item_in_assigned_totebox</span></td>
+<td class='col-count'><span class='count-badge'>12</span></td>
+<td class='col-cols'>assigned_totebox_id, lsf_wash_item_barcode</td>
+<td class='col-role'>스마트팩토리 combined packaging 세탁 의류 in assigned totebox 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>47</td>
+<td class='col-table'><span class='table-name-badge'>lsf_das_rack_wash</span></td>
+<td class='col-count'><span class='count-badge'>12</span></td>
+<td class='col-cols'>created_at, lsf_factory_id, lsf_wash_id, status</td>
+<td class='col-role'>스마트팩토리 das 보관랙 세탁 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>48</td>
+<td class='col-table'><span class='table-name-badge'>lsf_wash_process_item_iron_history_invalid_reason</span></td>
+<td class='col-count'><span class='count-badge'>11</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>스마트팩토리 세탁 공정 의류 iron 변경이력 invalid 사유 데이터</td>
+</tr>
+</tbody></table></div>
+<h2 id='cat-C'>C. 요금제 및 결제</h2>
+<div class='table-container'>
+<table>
+<thead><tr><th class='col-rank'>순위</th><th class='col-table'>테이블명</th><th class='col-count'>조회수</th><th class='col-cols'>실제 사용된 주요 컬럼</th><th class='col-role'>💡 단어 매핑 기반 직역/유추</th></tr></thead>
+<tbody>
+<tr>
+<td class='col-rank'>1</td>
+<td class='col-table'><span class='table-name-badge'>subscription</span></td>
+<td class='col-count'><span class='count-badge'>885</span></td>
+<td class='col-cols'>created_at, id, laundry_plan_id, laundry_plan_type, next_subs_date, price, s_rank, status, subs_date, temp, terminated_at, unsubs_date, user_id</td>
+<td class='col-role'>특정 고객의 요금제 계약 인스턴스 이력</td>
+</tr>
+<tr>
+<td class='col-rank'>2</td>
+<td class='col-table'><span class='table-name-badge'>subscription_order</span></td>
+<td class='col-count'><span class='count-badge'>610</span></td>
+<td class='col-cols'>created_at, expired_at, id, key, payment_id, payment_status, sequence, subscription_id, termination_datetime, termination_yn, user_id</td>
+<td class='col-role'>회차별 월정액 요금제 갱신 및 차감 단위 주문</td>
+</tr>
+<tr>
+<td class='col-rank'>3</td>
+<td class='col-table'><span class='table-name-badge'>laundry_plan</span></td>
+<td class='col-count'><span class='count-badge'>507</span></td>
+<td class='col-cols'>activated, created_at, id, item_count, laundrette_use_yn, laundry_delivery_id, laundry_plan_category_id, laundry_plan_type, list_shown, name, premium_unit_price, price_policy_id, unit_price</td>
+<td class='col-role'>요금제 명칭 및 기초 혜택 정보가 담긴 진짜 요금제 마스터 테이블</td>
+</tr>
+<tr>
+<td class='col-rank'>4</td>
+<td class='col-table'><span class='table-name-badge'>subscription_payment</span></td>
+<td class='col-count'><span class='count-badge'>333</span></td>
+<td class='col-cols'>approved_at, approved_datetime, cancelled, coupon_reissue_yn, created_at, created_date, id, laundrette_return_id, laundry_plan_id, new_subscription_order_id, old_subscription_order_id, order_name, order_price, paid_price, parent_payment_id, pay_type, payment_reason_type, payment_type, point_price, status, status_type, succeeded, total_paid_price, user_id, user_laundrygo_coupon_promotion_id, user_phone_number, wash_id</td>
+<td class='col-role'>월정액 결제 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>5</td>
+<td class='col-table'><span class='table-name-badge'>user_payment_method</span></td>
+<td class='col-count'><span class='count-badge'>39</span></td>
+<td class='col-cols'>created_at, deleted, pg_service_type, user_id</td>
+<td class='col-role'>고객 결제 method 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>6</td>
+<td class='col-table'><span class='table-name-badge'>laundrygo_point_charge_payment</span></td>
+<td class='col-count'><span class='count-badge'>19</span></td>
+<td class='col-cols'>approved_datetime, created_datetime, id, process_status, success_yn</td>
+<td class='col-role'>런드리고 포인트 charge 결제 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>7</td>
+<td class='col-table'><span class='table-name-badge'>laundry_plan_termination_history</span></td>
+<td class='col-count'><span class='count-badge'>17</span></td>
+<td class='col-cols'>created_at, reason_etc_detail, unsubscribe_reason_type, unsubscribe_type</td>
+<td class='col-role'>세탁 요금제 termination 변경이력 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>8</td>
+<td class='col-table'><span class='table-name-badge'>subscription_order_item</span></td>
+<td class='col-count'><span class='count-badge'>16</span></td>
+<td class='col-cols'>adjusted_count, purchase_count, subscription_order_id, use_count</td>
+<td class='col-role'>월정액 주문 의류 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>9</td>
+<td class='col-table'><span class='table-name-badge'>subscription_payment_detail</span></td>
+<td class='col-count'><span class='count-badge'>16</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>월정액 결제 상세 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>10</td>
+<td class='col-table'><span class='table-name-badge'>laundry_plan_category</span></td>
+<td class='col-count'><span class='count-badge'>15</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>세탁 요금제 카테고리 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>11</td>
+<td class='col-table'><span class='table-name-badge'>subscription_agreement_list</span></td>
+<td class='col-count'><span class='count-badge'>15</span></td>
+<td class='col-cols'>id, laundry_plan_id, status, subscription_agreement_id, subscription_change_id, termination_yn, user_id</td>
+<td class='col-role'>월정액 agreement 목록 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>12</td>
+<td class='col-table'><span class='table-name-badge'>laundry_plan_item</span></td>
+<td class='col-count'><span class='count-badge'>14</span></td>
+<td class='col-cols'>laundry_category_group_id, laundry_plan_id</td>
+<td class='col-role'>세탁 요금제 의류 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>13</td>
+<td class='col-table'><span class='table-name-badge'>cmc_product_payment</span></td>
+<td class='col-count'><span class='count-badge'>14</span></td>
+<td class='col-cols'>approved_datetime, created_datetime, id, paid_price, parent_payment_id, status_type</td>
+<td class='col-role'>cmc 상품 결제 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>14</td>
+<td class='col-table'><span class='table-name-badge'>payment_history</span></td>
+<td class='col-count'><span class='count-badge'>13</span></td>
+<td class='col-cols'>approved_at, created_at, id, laundry_plan_type, payment_type, subscription_payment_id, succeeded</td>
+<td class='col-role'>결제 변경이력 데이터</td>
+</tr>
+</tbody></table></div>
+<h2 id='cat-D'>D. 고객 및 혜택</h2>
+<div class='table-container'>
+<table>
+<thead><tr><th class='col-rank'>순위</th><th class='col-table'>테이블명</th><th class='col-count'>조회수</th><th class='col-cols'>실제 사용된 주요 컬럼</th><th class='col-role'>💡 단어 매핑 기반 직역/유추</th></tr></thead>
+<tbody>
+<tr>
+<td class='col-rank'>1</td>
+<td class='col-table'><span class='table-name-badge'>user</span></td>
+<td class='col-count'><span class='count-badge'>1187</span></td>
+<td class='col-cols'>account_type, cell_phone_number, child_id, corporate_yn, created_at, deleted, deleted_at, depth, email, id, key, last_visit_at, marketing_push, marketing_push_changed_at, marketing_sms, name, order_state</td>
+<td class='col-role'>고객 기본 정보 및 활성/휴면/탈퇴 상태 추적을 위한 생애주기 메타데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>2</td>
+<td class='col-table'><span class='table-name-badge'>user_address</span></td>
+<td class='col-count'><span class='count-badge'>199</span></td>
+<td class='col-cols'>basic_address, created_at, deleted, jibun_address, represented, user_id, zone_code</td>
+<td class='col-role'>고객 주소지 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>3</td>
+<td class='col-table'><span class='table-name-badge'>laundrygo_point</span></td>
+<td class='col-count'><span class='count-badge'>129</span></td>
+<td class='col-cols'>created_at, expired_at, id, laundrygo_point_charge_payment_id, log_type, point_type, provision_type_id, user_id, 기준월</td>
+<td class='col-role'>런드리고 포인트 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>4</td>
+<td class='col-table'><span class='table-name-badge'>user_laundrygo_coupon_promotion</span></td>
+<td class='col-count'><span class='count-badge'>108</span></td>
+<td class='col-cols'>created_datetime, expiration_start_datetime, id, laundrygo_coupon_promotion_id, status, subscription_id, user_id, wash_id</td>
+<td class='col-role'>고객 런드리고 쿠폰 프로모션 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>5</td>
+<td class='col-table'><span class='table-name-badge'>laundrygo_point_log</span></td>
+<td class='col-count'><span class='count-badge'>105</span></td>
+<td class='col-cols'>amount, created_at, id, laundrygo_point_id, log_type, reason, rn, subscription_order_id, subscription_payment_id, user_id, wash_id</td>
+<td class='col-role'>런드리고 포인트 로그 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>6</td>
+<td class='col-table'><span class='table-name-badge'>laundrygo_point_provision_log</span></td>
+<td class='col-count'><span class='count-badge'>54</span></td>
+<td class='col-cols'>created_at, id, laundrygo_coupon_id, type</td>
+<td class='col-role'>런드리고 포인트 provision 로그 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>7</td>
+<td class='col-table'><span class='table-name-badge'>laundrygo_coupon</span></td>
+<td class='col-count'><span class='count-badge'>42</span></td>
+<td class='col-cols'>created_at, expired_at, id, name, provision_type_id, use_yn, 기준월</td>
+<td class='col-role'>런드리고 쿠폰 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>8</td>
+<td class='col-table'><span class='table-name-badge'>laundrygo_coupon_promotion</span></td>
+<td class='col-count'><span class='count-badge'>33</span></td>
+<td class='col-cols'>benefit_type, id, name, point_provision_type_id</td>
+<td class='col-role'>런드리고 쿠폰 프로모션 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>9</td>
+<td class='col-table'><span class='table-name-badge'>user_laundry_go_kit</span></td>
+<td class='col-count'><span class='count-badge'>32</span></td>
+<td class='col-cols'>created_at, delivery_status, laundry_go_kit_id, status, user_id</td>
+<td class='col-role'>고객 세탁 go kit 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>10</td>
+<td class='col-table'><span class='table-name-badge'>friend_invite_group</span></td>
+<td class='col-count'><span class='count-badge'>29</span></td>
+<td class='col-cols'>created_at, recommendee_user_id, recommender_user_id</td>
+<td class='col-role'>friend invite group 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>11</td>
+<td class='col-table'><span class='table-name-badge'>laundrygo_point_forfeit_log</span></td>
+<td class='col-count'><span class='count-badge'>24</span></td>
+<td class='col-cols'>id, type</td>
+<td class='col-role'>런드리고 포인트 forfeit 로그 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>12</td>
+<td class='col-table'><span class='table-name-badge'>laundrygo_point_coupon</span></td>
+<td class='col-count'><span class='count-badge'>23</span></td>
+<td class='col-cols'>created_at</td>
+<td class='col-role'>런드리고 포인트 쿠폰 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>13</td>
+<td class='col-table'><span class='table-name-badge'>dormant_user</span></td>
+<td class='col-count'><span class='count-badge'>23</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>휴면 고객 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>14</td>
+<td class='col-table'><span class='table-name-badge'>laundrygo_coupon_log</span></td>
+<td class='col-count'><span class='count-badge'>22</span></td>
+<td class='col-cols'>created_at, log_type</td>
+<td class='col-role'>런드리고 쿠폰 로그 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>15</td>
+<td class='col-table'><span class='table-name-badge'>laundrygo_point_usage_log</span></td>
+<td class='col-count'><span class='count-badge'>19</span></td>
+<td class='col-cols'>type</td>
+<td class='col-role'>런드리고 포인트 usage 로그 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>16</td>
+<td class='col-table'><span class='table-name-badge'>laundrygo_coupon_forfeit_log</span></td>
+<td class='col-count'><span class='count-badge'>16</span></td>
+<td class='col-cols'>type</td>
+<td class='col-role'>런드리고 쿠폰 forfeit 로그 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>17</td>
+<td class='col-table'><span class='table-name-badge'>laundrygo_coupon_provision_log</span></td>
+<td class='col-count'><span class='count-badge'>15</span></td>
+<td class='col-cols'>type</td>
+<td class='col-role'>런드리고 쿠폰 provision 로그 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>18</td>
+<td class='col-table'><span class='table-name-badge'>friend_invite</span></td>
+<td class='col-count'><span class='count-badge'>13</span></td>
+<td class='col-cols'>type</td>
+<td class='col-role'>friend invite 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>19</td>
+<td class='col-table'><span class='table-name-badge'>user_external_account</span></td>
+<td class='col-count'><span class='count-badge'>12</span></td>
+<td class='col-cols'>created_at</td>
+<td class='col-role'>고객 external account 데이터</td>
+</tr>
+</tbody></table></div>
+<h2 id='cat-E'>E. 물류 및 배송</h2>
+<div class='table-container'>
+<table>
+<thead><tr><th class='col-rank'>순위</th><th class='col-table'>테이블명</th><th class='col-count'>조회수</th><th class='col-cols'>실제 사용된 주요 컬럼</th><th class='col-role'>💡 단어 매핑 기반 직역/유추</th></tr></thead>
+<tbody>
+<tr>
+<td class='col-rank'>1</td>
+<td class='col-table'><span class='table-name-badge'>transportorderinfo</span></td>
+<td class='col-count'><span class='count-badge'>147</span></td>
+<td class='col-cols'>area_address, completiondate, created_datetime, delivery_start_date, engineerid, lsf_factory_info_id, ordercstype, orderdate, orderid, ordername, orderno, orderseq, orderstate, ordertype, stroller_car_seat_count, transport_delayed_reason_info_id, transportstartdate, user_id, usercardno, wash_id</td>
+<td class='col-role'>물류 기사들의 실제 수거/배송 지시서 역할을 하는 메인 운송 테이블</td>
+</tr>
+<tr>
+<td class='col-rank'>2</td>
+<td class='col-table'><span class='table-name-badge'>transportaddress</span></td>
+<td class='col-count'><span class='count-badge'>114</span></td>
+<td class='col-cols'>addrgu, addrsi, lsf_factory_info_id</td>
+<td class='col-role'>transportaddress 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>3</td>
+<td class='col-table'><span class='table-name-badge'>transportorderdetailinfo</span></td>
+<td class='col-count'><span class='count-badge'>27</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>transportorderdetailinfo 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>4</td>
+<td class='col-table'><span class='table-name-badge'>transportengineerinfo</span></td>
+<td class='col-count'><span class='count-badge'>26</span></td>
+<td class='col-cols'>engid, engname, lsf_factory_info_id, stateyn</td>
+<td class='col-role'>transportengineerinfo 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>5</td>
+<td class='col-table'><span class='table-name-badge'>transportareainfo</span></td>
+<td class='col-count'><span class='count-badge'>23</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>transportareainfo 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>6</td>
+<td class='col-table'><span class='table-name-badge'>transportorderloginfo</span></td>
+<td class='col-count'><span class='count-badge'>21</span></td>
+<td class='col-cols'>logprev01, logtype, orderseq</td>
+<td class='col-role'>transportorderloginfo 데이터</td>
+</tr>
+</tbody></table></div>
+<h2 id='cat-F'>F. CS 및 고객 지원</h2>
+<div class='table-container'>
+<table>
+<thead><tr><th class='col-rank'>순위</th><th class='col-table'>테이블명</th><th class='col-count'>조회수</th><th class='col-cols'>실제 사용된 주요 컬럼</th><th class='col-role'>💡 단어 매핑 기반 직역/유추</th></tr></thead>
+<tbody>
+<tr>
+<td class='col-rank'>1</td>
+<td class='col-table'><span class='table-name-badge'>zendesk_ticket</span></td>
+<td class='col-count'><span class='count-badge'>164</span></td>
+<td class='col-cols'>delete_yn, description, id, subject, wash_id, zendesk_created_date, zendesk_created_datetime, zendesk_custom_status_id, zendesk_modified_datetime, zendesk_ticket_form_id, zendesk_ticket_id, zendesk_ticket_status</td>
+<td class='col-role'>Zendesk CS티켓 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>2</td>
+<td class='col-table'><span class='table-name-badge'>zendesk_custom_status</span></td>
+<td class='col-count'><span class='count-badge'>120</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>Zendesk custom 상태값 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>3</td>
+<td class='col-table'><span class='table-name-badge'>zendesk_sync_ticket_comment_according_ticket_form</span></td>
+<td class='col-count'><span class='count-badge'>120</span></td>
+<td class='col-cols'>zendesk_ticket_form_id</td>
+<td class='col-role'>Zendesk sync CS티켓 댓글 according CS티켓 form 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>4</td>
+<td class='col-table'><span class='table-name-badge'>zendesk_admin_user</span></td>
+<td class='col-count'><span class='count-badge'>110</span></td>
+<td class='col-cols'>name</td>
+<td class='col-role'>Zendesk admin 고객 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>5</td>
+<td class='col-table'><span class='table-name-badge'>zendesk_ticket_comment</span></td>
+<td class='col-count'><span class='count-badge'>45</span></td>
+<td class='col-cols'>role_type, zendesk_comment_id, zendesk_created_datetime, zendesk_ticket_id</td>
+<td class='col-role'>Zendesk CS티켓 댓글 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>6</td>
+<td class='col-table'><span class='table-name-badge'>inquire</span></td>
+<td class='col-count'><span class='count-badge'>32</span></td>
+<td class='col-cols'>category_id, content, created_at, created_date, del_yn, id, inquire_id, status, terminated_at, title, user_id</td>
+<td class='col-role'>inquire 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>7</td>
+<td class='col-table'><span class='table-name-badge'>zendesk_comment_attachment</span></td>
+<td class='col-count'><span class='count-badge'>18</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>Zendesk 댓글 attachment 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>8</td>
+<td class='col-table'><span class='table-name-badge'>inquire_category</span></td>
+<td class='col-count'><span class='count-badge'>16</span></td>
+<td class='col-cols'>depth, id, user_use_yn</td>
+<td class='col-role'>inquire 카테고리 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>9</td>
+<td class='col-table'><span class='table-name-badge'>inquire_thread</span></td>
+<td class='col-count'><span class='count-badge'>16</span></td>
+<td class='col-cols'>created_datetime, id, inquire_id</td>
+<td class='col-role'>inquire thread 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>10</td>
+<td class='col-table'><span class='table-name-badge'>hour_for_statistics</span></td>
+<td class='col-count'><span class='count-badge'>14</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>hour for 통계 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>11</td>
+<td class='col-table'><span class='table-name-badge'>inquire_category_tree_maps</span></td>
+<td class='col-count'><span class='count-badge'>13</span></td>
+<td class='col-cols'>category_id, child_id, created_at, depth, terminated_at</td>
+<td class='col-role'>inquire 카테고리 tree maps 데이터</td>
+</tr>
+</tbody></table></div>
+<h2 id='cat-G'>G. 커머스 및 마케팅</h2>
+<div class='table-container'>
+<table>
+<thead><tr><th class='col-rank'>순위</th><th class='col-table'>테이블명</th><th class='col-count'>조회수</th><th class='col-cols'>실제 사용된 주요 컬럼</th><th class='col-role'>💡 단어 매핑 기반 직역/유추</th></tr></thead>
+<tbody>
+<tr>
+<td class='col-rank'>1</td>
+<td class='col-table'><span class='table-name-badge'>cmc_product_order</span></td>
+<td class='col-count'><span class='count-badge'>79</span></td>
+<td class='col-cols'>cancel_price, created_datetime, id, order_confirmation_datetime, order_price, order_type, parent_order_id, status_type, user_id, wash_id</td>
+<td class='col-role'>cmc 상품 주문 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>2</td>
+<td class='col-table'><span class='table-name-badge'>cmc_product_order_items</span></td>
+<td class='col-count'><span class='count-badge'>55</span></td>
+<td class='col-cols'>cancel_price, id, order_id, order_price, order_type, parent_order_id, parent_order_item_id, product_id, sell_price, status_type, wash_id</td>
+<td class='col-role'>cmc 상품 주문 의류 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>3</td>
+<td class='col-table'><span class='table-name-badge'>cmc_sku</span></td>
+<td class='col-count'><span class='count-badge'>23</span></td>
+<td class='col-cols'>id, sku_group_id</td>
+<td class='col-role'>cmc 재고단위 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>4</td>
+<td class='col-table'><span class='table-name-badge'>marketing_monthly_retention</span></td>
+<td class='col-count'><span class='count-badge'>15</span></td>
+<td class='col-cols'>id, marketing_monthly_retention_policy_id, user_id</td>
+<td class='col-role'>마케팅 monthly retention 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>5</td>
+<td class='col-table'><span class='table-name-badge'>cmc_product</span></td>
+<td class='col-count'><span class='count-badge'>15</span></td>
+<td class='col-cols'>delete_yn</td>
+<td class='col-role'>cmc 상품 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>6</td>
+<td class='col-table'><span class='table-name-badge'>cmc_sku_group</span></td>
+<td class='col-count'><span class='count-badge'>13</span></td>
+<td class='col-cols'>id</td>
+<td class='col-role'>cmc 재고단위 group 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>7</td>
+<td class='col-table'><span class='table-name-badge'>cmc_map_product_sku_group</span></td>
+<td class='col-count'><span class='count-badge'>11</span></td>
+<td class='col-cols'>sku_group_id</td>
+<td class='col-role'>cmc 연결 상품 재고단위 group 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>8</td>
+<td class='col-table'><span class='table-name-badge'>cmc_map_sku_product_option_attribute</span></td>
+<td class='col-count'><span class='count-badge'>11</span></td>
+<td class='col-cols'>delete_yn, sku_id</td>
+<td class='col-role'>cmc 연결 재고단위 상품 option attribute 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>9</td>
+<td class='col-table'><span class='table-name-badge'>cmc_product_option_attribute</span></td>
+<td class='col-count'><span class='count-badge'>11</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>cmc 상품 option attribute 데이터</td>
+</tr>
+</tbody></table></div>
+<h2 id='cat-H'>H. 다대다 매핑 테이블</h2>
+<div class='table-container'>
+<table>
+<thead><tr><th class='col-rank'>순위</th><th class='col-table'>테이블명</th><th class='col-count'>조회수</th><th class='col-cols'>실제 사용된 주요 컬럼</th><th class='col-role'>💡 단어 매핑 기반 직역/유추</th></tr></thead>
+<tbody>
+<tr>
+<td class='col-rank'>1</td>
+<td class='col-table'><span class='table-name-badge'>map_zendesk_ticket_field</span></td>
+<td class='col-count'><span class='count-badge'>140</span></td>
+<td class='col-cols'>value, zendesk_field_id, zendesk_ticket_id</td>
+<td class='col-role'>고객센터 티켓의 커스텀 필드 매핑 정보</td>
+</tr>
+</tbody></table></div>
+<h2 id='cat-I'>I. 서브쿼리 및 임시 별칭</h2>
+<div class='table-container'>
+<table>
+<thead><tr><th class='col-rank'>순위</th><th class='col-table'>테이블명</th><th class='col-count'>조회수</th><th class='col-cols'>실제 사용된 주요 컬럼</th><th class='col-role'>💡 단어 매핑 기반 직역/유추</th></tr></thead>
+<tbody>
+<tr>
+<td class='col-rank'>1</td>
+<td class='col-table'><span class='table-name-badge'>tmp</span></td>
+<td class='col-count'><span class='count-badge'>247</span></td>
+<td class='col-cols'>laundry_plan_type, real_collection_date, recent_subs, signup_date, storage_expired_date, storage_start_date, subs_date, subs_order_created_at, subs_order_id, user_id, 수거신청(1), 수령확인일, 요금제구분, 유저아이디, 첫수거신청여부</td>
+<td class='col-role'>다수의 프로덕션 쿼리에서 임시 집계 및 공통 테이블 표현식으로 활용되는 핵심 서브쿼리용 네이밍</td>
+</tr>
+<tr>
+<td class='col-rank'>2</td>
+<td class='col-table'><span class='table-name-badge'>ss</span></td>
+<td class='col-count'><span class='count-badge'>63</span></td>
+<td class='col-cols'>user_status</td>
+<td class='col-role'>분석가들이 쿼리 내에서 임시로 명명한 서브쿼리 또는 임시 별칭</td>
+</tr>
+<tr>
+<td class='col-rank'>3</td>
+<td class='col-table'><span class='table-name-badge'>tmp2</span></td>
+<td class='col-count'><span class='count-badge'>39</span></td>
+<td class='col-cols'>유저 아이디</td>
+<td class='col-role'>분석가들이 쿼리 내에서 임시로 명명한 서브쿼리 또는 임시 별칭</td>
+</tr>
+<tr>
+<td class='col-rank'>4</td>
+<td class='col-table'><span class='table-name-badge'>tmp1</span></td>
+<td class='col-count'><span class='count-badge'>29</span></td>
+<td class='col-cols'>next_subs_id, prev_subs_id</td>
+<td class='col-role'>분석가들이 쿼리 내에서 임시로 명명한 서브쿼리 또는 임시 별칭</td>
+</tr>
+<tr>
+<td class='col-rank'>5</td>
+<td class='col-table'><span class='table-name-badge'>w</span></td>
+<td class='col-count'><span class='count-badge'>22</span></td>
+<td class='col-cols'>after_feb_wash_count, before_feb_wash_count, key, laundry24_pgi, real_collection_date, status, user_id, washed_at</td>
+<td class='col-role'>분석가들이 쿼리 내에서 임시로 명명한 서브쿼리 또는 임시 별칭</td>
+</tr>
+<tr>
+<td class='col-rank'>6</td>
+<td class='col-table'><span class='table-name-badge'>st</span></td>
+<td class='col-count'><span class='count-badge'>19</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>분석가들이 쿼리 내에서 임시로 명명한 서브쿼리 또는 임시 별칭</td>
+</tr>
+<tr>
+<td class='col-rank'>7</td>
+<td class='col-table'><span class='table-name-badge'>temp</span></td>
+<td class='col-count'><span class='count-badge'>12</span></td>
+<td class='col-cols'>created_at, user_id</td>
+<td class='col-role'>분석가들이 쿼리 내에서 임시로 명명한 서브쿼리 또는 임시 별칭</td>
+</tr>
+</tbody></table></div>
+<h2 id='cat-J'>J. 그룹웨어</h2>
+<div class='table-container'>
+<table>
+<thead><tr><th class='col-rank'>순위</th><th class='col-table'>테이블명</th><th class='col-count'>조회수</th><th class='col-cols'>실제 사용된 주요 컬럼</th><th class='col-role'>💡 단어 매핑 기반 직역/유추</th></tr></thead>
+<tbody>
+<tr>
+<td class='col-rank'>1</td>
+<td class='col-table'><span class='table-name-badge'>gw_warehousing</span></td>
+<td class='col-count'><span class='count-badge'>96</span></td>
+<td class='col-cols'>created_at, id, lsf_factory_info_id, memo, staff_id, transport_start_date, type, user_id, wash_id</td>
+<td class='col-role'>그룹웨어 warehousing 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>2</td>
+<td class='col-table'><span class='table-name-badge'>gw_warehousing_details</span></td>
+<td class='col-count'><span class='count-badge'>48</span></td>
+<td class='col-cols'>matching_type</td>
+<td class='col-role'>그룹웨어 warehousing 상세 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>3</td>
+<td class='col-table'><span class='table-name-badge'>gw_members</span></td>
+<td class='col-count'><span class='count-badge'>37</span></td>
+<td class='col-cols'>seq</td>
+<td class='col-role'>그룹웨어 members 데이터</td>
+</tr>
+</tbody></table></div>
+<h2 id='cat-Z'>Z. 기타 및 공통 데이터</h2>
+<div class='table-container'>
+<table>
+<thead><tr><th class='col-rank'>순위</th><th class='col-table'>테이블명</th><th class='col-count'>조회수</th><th class='col-cols'>실제 사용된 주요 컬럼</th><th class='col-role'>💡 단어 매핑 기반 직역/유추</th></tr></thead>
+<tbody>
+<tr>
+<td class='col-rank'>1</td>
+<td class='col-table'><span class='table-name-badge'>view_lsf_category_flat_table</span></td>
+<td class='col-count'><span class='count-badge'>392</span></td>
+<td class='col-cols'>large_category_id, large_category_name, large_lsf_category_id, large_lsf_category_name, lsf_category_id, lsf_category_name, medium_category_id, medium_category_name, small_category_id, small_category_name</td>
+<td class='col-role'>스마트팩토리 대/중/소 분류 체계를 펼쳐놓은 뷰 테이블</td>
+</tr>
+<tr>
+<td class='col-rank'>2</td>
+<td class='col-table'><span class='table-name-badge'>laundry_category</span></td>
+<td class='col-count'><span class='count-badge'>118</span></td>
+<td class='col-cols'>id, name, parent_id</td>
+<td class='col-role'>세탁 카테고리 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>3</td>
+<td class='col-table'><span class='table-name-badge'>intensive_care_request</span></td>
+<td class='col-count'><span class='count-badge'>105</span></td>
+<td class='col-cols'>delete_yn, id</td>
+<td class='col-role'>intensive care 요청 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>4</td>
+<td class='col-table'><span class='table-name-badge'>laundry_progress_history</span></td>
+<td class='col-count'><span class='count-badge'>97</span></td>
+<td class='col-cols'>created_datetime, factory_id, lsf_wash_item_id, process_type_code</td>
+<td class='col-role'>세탁 progress 변경이력 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>5</td>
+<td class='col-table'><span class='table-name-badge'>intensive_care</span></td>
+<td class='col-count'><span class='count-badge'>90</span></td>
+<td class='col-cols'>id, parent_id, process_type_code, 집중케어 포함 유뮤(y/n)</td>
+<td class='col-role'>intensive care 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>6</td>
+<td class='col-table'><span class='table-name-badge'>provision_type</span></td>
+<td class='col-count'><span class='count-badge'>73</span></td>
+<td class='col-cols'>id, key, name, type</td>
+<td class='col-role'>provision 유형 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>7</td>
+<td class='col-table'><span class='table-name-badge'>laundry_product</span></td>
+<td class='col-count'><span class='count-badge'>71</span></td>
+<td class='col-cols'>id, name, premium_unit_price_in_plan, price_policy_id, rate_plan_type, unit_price, unit_price_in_plan</td>
+<td class='col-role'>세탁 상품 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>8</td>
+<td class='col-table'><span class='table-name-badge'>cv_t</span></td>
+<td class='col-count'><span class='count-badge'>54</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>cv t 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>9</td>
+<td class='col-table'><span class='table-name-badge'>cv</span></td>
+<td class='col-count'><span class='count-badge'>54</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>cv 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>10</td>
+<td class='col-table'><span class='table-name-badge'>source</span></td>
+<td class='col-count'><span class='count-badge'>47</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>source 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>11</td>
+<td class='col-table'><span class='table-name-badge'>common_code</span></td>
+<td class='col-count'><span class='count-badge'>46</span></td>
+<td class='col-cols'>app_display_name, common_code</td>
+<td class='col-role'>common 코드 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>12</td>
+<td class='col-table'><span class='table-name-badge'>collectionbag</span></td>
+<td class='col-count'><span class='count-badge'>38</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>collectionbag 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>13</td>
+<td class='col-table'><span class='table-name-badge'>laundrygo_receipt_order</span></td>
+<td class='col-count'><span class='count-badge'>37</span></td>
+<td class='col-cols'>created_datetime, delete_yn, id, normal_laundry_price, order_type, payment_status_type, wash_id</td>
+<td class='col-role'>런드리고 접수 주문 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>14</td>
+<td class='col-table'><span class='table-name-badge'>receipt</span></td>
+<td class='col-count'><span class='count-badge'>37</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>접수 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>15</td>
+<td class='col-table'><span class='table-name-badge'>base_coll_count</span></td>
+<td class='col-count'><span class='count-badge'>34</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>base coll 수량 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>16</td>
+<td class='col-table'><span class='table-name-badge'>it</span></td>
+<td class='col-count'><span class='count-badge'>32</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>it 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>17</td>
+<td class='col-table'><span class='table-name-badge'>customer</span></td>
+<td class='col-count'><span class='count-badge'>32</span></td>
+<td class='col-cols'>delete_yn, id</td>
+<td class='col-role'>customer 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>18</td>
+<td class='col-table'><span class='table-name-badge'>laundry_go_kit</span></td>
+<td class='col-count'><span class='count-badge'>28</span></td>
+<td class='col-cols'>id</td>
+<td class='col-role'>세탁 go kit 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>19</td>
+<td class='col-table'><span class='table-name-badge'>rt</span></td>
+<td class='col-count'><span class='count-badge'>25</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>rt 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>20</td>
+<td class='col-table'><span class='table-name-badge'>rc</span></td>
+<td class='col-count'><span class='count-badge'>25</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>rc 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>21</td>
+<td class='col-table'><span class='table-name-badge'>laundrygo_receipt_order_item</span></td>
+<td class='col-count'><span class='count-badge'>24</span></td>
+<td class='col-cols'>delete_yn, item_subtract_type, laundry_product_id, laundry_type, laundrygo_receipt_order_id, lsf_category_name, ordered_service_list, wash_yn</td>
+<td class='col-role'>런드리고 접수 주문 의류 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>22</td>
+<td class='col-table'><span class='table-name-badge'>account</span></td>
+<td class='col-count'><span class='count-badge'>22</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>account 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>23</td>
+<td class='col-table'><span class='table-name-badge'>laundrette_cycle_history</span></td>
+<td class='col-count'><span class='count-badge'>22</span></td>
+<td class='col-cols'>cancel_yn, detach_datetime, id, laundry_go_kit_id, registration_type, user_id, wash_id</td>
+<td class='col-role'>laundrette cycle 변경이력 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>24</td>
+<td class='col-table'><span class='table-name-badge'>franchise</span></td>
+<td class='col-count'><span class='count-badge'>21</span></td>
+<td class='col-cols'>del_yn, id, laundry24_cd, name, use_yn</td>
+<td class='col-role'>franchise 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>25</td>
+<td class='col-table'><span class='table-name-badge'>temp_hours</span></td>
+<td class='col-count'><span class='count-badge'>21</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>temp hours 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>26</td>
+<td class='col-table'><span class='table-name-badge'>cart</span></td>
+<td class='col-count'><span class='count-badge'>21</span></td>
+<td class='col-cols'>code</td>
+<td class='col-role'>cart 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>27</td>
+<td class='col-table'><span class='table-name-badge'>unsubscribe_reservation</span></td>
+<td class='col-count'><span class='count-badge'>19</span></td>
+<td class='col-cols'>created_at, id, modified_at, status</td>
+<td class='col-role'>unsubscribe reservation 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>28</td>
+<td class='col-table'><span class='table-name-badge'>laundrette_cycle</span></td>
+<td class='col-count'><span class='count-badge'>18</span></td>
+<td class='col-cols'>delete_yn, status, user_id, wash_id</td>
+<td class='col-role'>laundrette cycle 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>29</td>
+<td class='col-table'><span class='table-name-badge'>conv</span></td>
+<td class='col-count'><span class='count-badge'>16</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>conv 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>30</td>
+<td class='col-table'><span class='table-name-badge'>issue_clothing_confirmation_history</span></td>
+<td class='col-count'><span class='count-badge'>16</span></td>
+<td class='col-cols'>confirmation_unknown_release_yn, etc_yn, existing_damage_yn, modified_datetime, repair_again_yn</td>
+<td class='col-role'>issue clothing confirmation 변경이력 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>31</td>
+<td class='col-table'><span class='table-name-badge'>stroller_car_seat_request</span></td>
+<td class='col-count'><span class='count-badge'>15</span></td>
+<td class='col-cols'>created_datetime</td>
+<td class='col-role'>stroller car seat 요청 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>32</td>
+<td class='col-table'><span class='table-name-badge'>category</span></td>
+<td class='col-count'><span class='count-badge'>15</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>카테고리 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>33</td>
+<td class='col-table'><span class='table-name-badge'>secondhand_clothes_collection_request</span></td>
+<td class='col-count'><span class='count-badge'>14</span></td>
+<td class='col-cols'>id</td>
+<td class='col-role'>secondhand clothes collection 요청 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>34</td>
+<td class='col-table'><span class='table-name-badge'>customer_category</span></td>
+<td class='col-count'><span class='count-badge'>13</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>customer 카테고리 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>35</td>
+<td class='col-table'><span class='table-name-badge'>style_scanner_hanger_management_history</span></td>
+<td class='col-count'><span class='count-badge'>13</span></td>
+<td class='col-cols'>attach_datetime, lsf_wash_process_item_id</td>
+<td class='col-role'>style scanner hanger 관리 변경이력 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>36</td>
+<td class='col-table'><span class='table-name-badge'>device</span></td>
+<td class='col-count'><span class='count-badge'>13</span></td>
+<td class='col-cols'>app_update_datetime, app_version, os_type</td>
+<td class='col-role'>기기 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>37</td>
+<td class='col-table'><span class='table-name-badge'>base</span></td>
+<td class='col-count'><span class='count-badge'>13</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>분석가들이 쿼리 내에서 임시로 명명한 서브쿼리 또는 임시 별칭</td>
+</tr>
+<tr>
+<td class='col-rank'>38</td>
+<td class='col-table'><span class='table-name-badge'>ai_inquiry_chat_message</span></td>
+<td class='col-count'><span class='count-badge'>12</span></td>
+<td class='col-cols'>ai_inquiry_chat_room_id, created_datetime, direct_yn</td>
+<td class='col-role'>ai inquiry chat message 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>39</td>
+<td class='col-table'><span class='table-name-badge'>laundry_category_group</span></td>
+<td class='col-count'><span class='count-badge'>11</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>세탁 카테고리 group 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>40</td>
+<td class='col-table'><span class='table-name-badge'>laundry_delivery</span></td>
+<td class='col-count'><span class='count-badge'>11</span></td>
+<td class='col-cols'>id, unit_price</td>
+<td class='col-role'>세탁 배송 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>41</td>
+<td class='col-table'><span class='table-name-badge'>base_data</span></td>
+<td class='col-count'><span class='count-badge'>11</span></td>
+<td class='col-cols'>factory_id</td>
+<td class='col-role'>base data 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>42</td>
+<td class='col-table'><span class='table-name-badge'>laundrette_return</span></td>
+<td class='col-count'><span class='count-badge'>11</span></td>
+<td class='col-cols'>created_datetime, id, process_status_type, request_type, retrieval_visit_date, user_id</td>
+<td class='col-role'>laundrette 반납 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>43</td>
+<td class='col-table'><span class='table-name-badge'>laundrygo_service_region_delivery_method</span></td>
+<td class='col-count'><span class='count-badge'>11</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>런드리고 service region 배송 method 데이터</td>
+</tr>
+<tr>
+<td class='col-rank'>44</td>
+<td class='col-table'><span class='table-name-badge'>intensive_care_order</span></td>
+<td class='col-count'><span class='count-badge'>11</span></td>
+<td class='col-cols'><span style='color:#bdc1c6; font-style:italic;'>- (전체 조회 또는 집계 단순 참조)</span></td>
+<td class='col-role'>intensive care 주문 데이터</td>
+</tr>
+</tbody></table></div>
+</div></div></body></html>
