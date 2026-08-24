@@ -27,6 +27,7 @@ body{
   margin:0; background:var(--paper); color:var(--ink);
   font-family:"IBM Plex Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
   line-height:1.7; font-size:16px;
+  word-break:keep-all; overflow-wrap:break-word;
 }
 .wrap{max-width:1020px; margin:0 auto; padding:48px 24px 96px}
 header.hero{border-bottom:2px solid var(--teal); padding-bottom:28px; margin-bottom:40px}
@@ -91,7 +92,6 @@ footer{margin-top:72px; padding-top:20px; border-top:1px solid var(--line);
   <p class="lead">그룹웨어(gw.laundrygo.com)에서 비용 지출 결의서를 직접 작성해 결재를 올리는 방법을 처음부터 끝까지 담았습니다. 화면을 그대로 따라 하면 됩니다.</p>
   <div class="meta">
     <span>대상: 신입 구성원</span>
-    <span>소요시간: 약 10분</span>
     <span>양식: [비용 지출 결의서]_본사</span>
   </div>
   <div class="flow">
@@ -175,14 +175,14 @@ footer{margin-top:72px; padding-top:20px; border-top:1px solid var(--line);
   </figure>
 
   <ol class="fields">
-    <li><b>제목<small>형식은 <code>목적(지급일)_거래처_금액</code>. 예: 26년 8월_세탁 세제 구매 건(8/31)_한국세제상사_1,100,000원<br>목적에는 "세탁 원재료 및 소모품" 같은 뭉뚱그린 표현 대신 <b>실제로 구매한 대표 품목</b>(예: 세탁 세제, 옷걸이, 폴리백)을 적습니다.</small></b></li>
-    <li><b>지급일자<small>달력이 열리면 업체에 돈이 나가야 하는 날짜를 클릭합니다. 보통 월말 정산 지급일입니다.</small></b></li>
+    <li><b>제목<small>형식은 <code>목적(지급일)_거래처_금액</code>. 예: 26년 8월_세탁 세제 구매 건(8/31)_한국세제상사_1,100,000원. 목적에는 "세탁 원재료 및 소모품" 같은 뭉뚱그린 표현 대신 <b>실제로 구매한 대표 품목</b>(예: 세탁 세제, 옷걸이, 폴리백)을 적습니다.</small></b></li>
+    <li><b>지급일자<small>달력이 열리면 업체에 돈이 나가는 날짜를 클릭합니다. 매달 말이 가까워지면 회계팀이 "이번 달 세금계산서 대금 지급일은 O월 O일입니다"라는 공지 메일을 보내니, 그 날짜를 확인해 입력하세요. 메일이 늦으면 재경실 김현식 님께 이번 달 대금 지급일을 편하게 물어보면 됩니다.</small></b></li>
     <li><b>행추가<small>지출 내역 한 건마다 행이 하나 필요합니다. <b>행추가</b>를 눌러 입력 행을 만드세요. 여러 건이면 건수만큼 누릅니다.</small></b></li>
     <li><b>기본적요<small>칸을 클릭하면 적요코드 선택 창이 뜹니다. 지출 성격에 맞는 코드를 고릅니다. 예: 세제 구매 → 0001 공통_세탁 원재료</small></b></li>
     <li><b>증빙유형<small>받은 증빙에 맞게 선택합니다. 전자세금계산서를 받았다면 <b>세금계산서 전자</b>를 고르면 됩니다.</small></b></li>
     <li><b>증빙일자<small>달력에서 세금계산서(증빙)의 발행 날짜를 클릭합니다.</small></b></li>
     <li><b>공급가액·부가세<small>공급가액을 입력하고 Tab을 누르면 합계가 자동 계산됩니다. 부가세는 세금계산서의 부가세 금액을 그대로 입력하세요(보통 공급가액의 10%).</small></b></li>
-    <li><b>사용부서<small>칸을 클릭하면 부서 검색 창이 뜹니다. 비용을 쓰는 부서를 검색해 선택합니다.</small></b></li>
+    <li><b>사용부서<small>칸을 클릭하면 부서 검색 창이 뜹니다. 비용을 쓰는 부서를 검색해 선택합니다. 어느 부서인지는 발주 리스트의 <b>팩토리</b> 열에 적힌 값이 곧 사용부서라고 이해하면 됩니다.</small></b></li>
     <li><b>거래처<small>칸을 클릭하면 거래처 검색 창이 뜹니다. 거래처명으로 검색해 선택합니다. 목록에 없으면 재경실에 거래처 등록을 먼저 요청하세요.</small></b></li>
     <li><b>상세내역<small>무엇을 샀는지 한 줄로 적습니다. 예: 프리미엄 세탁세제 20L x 50개</small></b></li>
     <li><b>은행명·계좌·예금주<small>세금계산서 또는 통장사본에 있는 업체 입금 계좌 정보를 그대로 입력합니다. 예금주가 거래처명과 같은지 꼭 확인하세요.</small></b></li>
