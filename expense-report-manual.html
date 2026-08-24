@@ -1,3 +1,5 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>지출결의서 상신 매뉴얼</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -62,8 +64,9 @@ ol.fields li{counter-increment:f; display:flex; gap:12px; align-items:flex-start
 ol.fields li::before{content:counter(f); flex:none; width:24px; height:24px; border-radius:50%;
   background:var(--badge); color:var(--badge-ink); font-family:"IBM Plex Mono",monospace; font-size:13px;
   display:flex; align-items:center; justify-content:center; margin-top:2px}
-ol.fields b{display:block; font-weight:600}
-ol.fields small{display:block; color:var(--ink-soft); font-size:14px; line-height:1.6}
+ol.fields li > b{display:block; font-weight:600}
+ol.fields small{display:block; color:var(--ink-soft); font-size:14px; line-height:1.6; font-weight:400}
+ol.fields small b{display:inline; font-weight:600}
 .sub-shots{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px; margin-top:20px}
 .note{background:var(--teal-soft); border:1px solid var(--teal-line); border-radius:10px;
   padding:14px 18px; margin-top:20px; font-size:15px}
