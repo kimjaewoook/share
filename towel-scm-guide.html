@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>발주 SCM 정석 프로세스 — 수건 사례</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: #f4f6fa;
+    color: #1c2333;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-height: 1.45;
+    padding: 44px 20px 56px;
+  }
+  .page { max-width: 960px; margin: 0 auto; }
+
+  /* ── 헤더 ── */
+  .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #2563eb; margin-bottom: 8px; }
+  h1 { font-size: 32px; font-weight: 900; letter-spacing: -0.02em; }
+  .subtitle { margin-top: 6px; font-size: 15px; color: #5b6478; }
+
+  .intro {
+    margin-top: 20px;
+    background: #1c2b4a;
+    border-radius: 14px;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .intro .tag { font-size: 15px; font-weight: 700; color: #aebcd9; }
+  .intro .no { font-size: 17px; font-weight: 700; color: #d4ddef; text-decoration: line-through; text-decoration-color: #ef6a6a; text-decoration-thickness: 2.5px; }
+  .intro .arr { font-size: 20px; color: #ffd166; font-weight: 900; }
+  .intro .yes { font-size: 20px; font-weight: 900; color: #ffd166; }
+
+  /* ── 단계 ── */
+  .step { position: relative; margin-top: 26px; padding-left: 62px; }
+  .step::before {
+    content: "";
+    position: absolute; left: 21px; top: 50px; bottom: -26px;
+    width: 2px; background: #d4dbe8;
+  }
+  .step:last-of-type::before { display: none; }
+  .step-no {
+    position: absolute; left: 0; top: 0;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: #2563eb; color: #fff;
+    font-size: 20px; font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 3px 8px rgba(37, 99, 235, 0.28);
+  }
+  .step h2 { font-size: 21px; font-weight: 900; padding-top: 6px; letter-spacing: -0.01em; }
+  .step h2 small { font-size: 13px; font-weight: 500; color: #7a8299; margin-left: 10px; }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  @media (max-width: 720px) { .cols { grid-template-columns: 1fr; } }
+  .card {
+    background: #fff;
+    border: 1px solid #e3e8f2;
+    border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: 0 1px 3px rgba(28, 43, 74, 0.05);
+  }
+  .card.fm { border-top: 4px solid #2563eb; }
+  .card.case { border-top: 4px solid #e08a00; }
+  .card h3 { font-size: 11px; font-weight: 800; letter-spacing: 0.1em; margin-bottom: 9px; }
+  .card.fm h3 { color: #2563eb; }
+  .card.case h3 { color: #b06e00; }
+
+  /* 키워드 블록 */
+  .kw { display: flex; flex-direction: column; gap: 10px; }
+  .kw-item { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .kw-item .k { font-size: 16.5px; font-weight: 900; letter-spacing: -0.01em; }
+  .card.fm .k { color: #1d4fd7; }
+  .card.case .k { color: #b06e00; }
+  .kw-item .c { font-size: 12.5px; color: #7a8299; font-weight: 500; }
+
+  /* 칩 나열 */
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip {
+    font-size: 13.5px; font-weight: 700;
+    background: #eaf0fe; color: #1d4fd7;
+    border-radius: 999px; padding: 4px 12px;
+  }
+  .chip.warn { background: #fdeaea; color: #c02626; }
+
+  /* ── 밸류체인 도식 ── */
+  .chain {
+    margin-top: 12px;
+    background: #fff;
+    border: 1px solid #e3e8f2;
+    border-radius: 12px;
+    padding: 22px 18px 14px;
+    overflow-x: auto;
+  }
+  .chain-flow { display: flex; align-items: stretch; min-width: 620px; }
+  .node { flex: 1; text-align: center; padding: 0 3px; }
+  .node-box { border-radius: 10px; padding: 12px 6px; font-size: 14.5px; font-weight: 900; line-height: 1.3; }
+  .node-box small { display: block; font-size: 11px; font-weight: 500; margin-top: 3px; opacity: 0.85; }
+  .node.vendor .node-box { background: #eaf0fe; color: #1d4fd7; border: 1.5px solid #b9ccf8; }
+  .node.mid .node-box { background: #fdf3e3; color: #9a5f00; border: 1.5px solid #f0d9a8; }
+  .node.us .node-box { background: #1c2b4a; color: #fff; }
+  .node.end .node-box { background: #eef7ef; color: #226b32; border: 1.5px solid #bcdec2; }
+  .arrow {
+    display: flex; align-items: center; justify-content: center;
+    width: 36px; flex: none; color: #97a2b8; font-size: 18px; font-weight: 700;
+    position: relative;
+  }
+  .arrow em {
+    position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+    font-style: normal; font-size: 11px; font-weight: 800; color: #c2410c; white-space: nowrap;
+  }
+  .chain-caption { margin-top: 14px; font-size: 13px; font-weight: 700; color: #46506a; text-align: center; }
+  .chain-caption b { color: #c02626; }
+
+  /* ── 체크리스트 ── */
+  .checks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; }
+  @media (max-width: 860px) { .checks { grid-template-columns: repeat(2, 1fr); } }
+  .check {
+    background: #fff;
+    border: 1px solid #e3e8f2;
+    border-top: 4px solid #1c2b4a;
+    border-radius: 12px;
+    padding: 14px 12px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(28, 43, 74, 0.05);
+  }
+  .check .cno {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: #1c2b4a; color: #fff;
+    font-size: 13px; font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 8px;
+  }
+  .check b { display: block; font-size: 15px; font-weight: 900; line-height: 1.35; }
+  .check span { display: block; font-size: 11.5px; color: #7a8299; margin-top: 4px; }
+  .checks-note { margin-top: 10px; font-size: 12.5px; color: #7a8299; text-align: right; }
+
+  /* ── 마무리 ── */
+  .outro {
+    margin-top: 34px;
+    background: linear-gradient(135deg, #2563eb, #1c2b4a);
+    color: #fff;
+    border-radius: 14px;
+    padding: 24px 30px;
+    text-align: center;
+  }
+  .outro .big { font-size: 20px; font-weight: 900; letter-spacing: -0.01em; }
+  .outro .big em { font-style: normal; color: #ffd166; }
+  .footer { margin-top: 16px; text-align: right; font-size: 12px; color: #97a2b8; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="eyebrow">구매전략팀 FM 가이드</div>
+  <h1>발주 SCM 정석 프로세스</h1>
+  <div class="subtitle">이번 수건 발주를 사례로</div>
+
+  <div class="intro">
+    <span class="tag">기준정보 수립이란</span>
+    <span class="no">스펙 몇 줄 적기</span>
+    <span class="arr">→</span>
+    <span class="yes">공급망 전 과정을 아는 일</span>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step">
+    <div class="step-no">1</div>
+    <h2>기존 조건 검토 <small>"지금 조건이 최선인가?"</small></h2>
+    <div class="cols">
+      <div class="card fm">
+        <h3>정석</h3>
+        <div class="kw">
+          <div class="kw-item"><span class="k">일정 / MOQ / 단가 검증</span><span class="c">기존 업체 조건부터 의심</span></div>
+          <div class="kw-item"><span class="k">못 맞추면 즉시 공지</span><span class="c">운영 부서에 상황 공유</span></div>
+        </div>
+      </div>
+      <div class="card case">
+        <h3>이번 수건에서는</h3>
+        <div class="kw">
+          <div class="kw-item"><span class="k">SH글로벌 = 중국산 단순 유통 상사</span><span class="c">확인 완료</span></div>
+          <div class="kw-item"><span class="k">이번 발주 조건 검증 진행</span><span class="c">일정, MOQ, 단가</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="step-no">2</div>
+    <h2>신규 채널 투트랙 <small>공지와 동시에, 병렬로</small></h2>
+    <div class="cols">
+      <div class="card fm">
+        <h3>정석</h3>
+        <div class="kw">
+          <div class="kw-item"><span class="k">대안 2갈래 이상 병렬 검토</span></div>
+          <div class="kw-item"><span class="k">대안 = 협상력</span></div>
+        </div>
+      </div>
+      <div class="card case">
+        <h3>이번 수건에서는</h3>
+        <div class="kw">
+          <div class="kw-item"><span class="k">신규 1 — RFID 업체 턴키</span><span class="c">수건 제작까지 통째로</span></div>
+          <div class="kw-item"><span class="k">신규 2 — 중국 업체 직거래</span><span class="c">유통사 미경유</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="step-no">3</div>
+    <h2>밸류체인 이해 <small>누가 무엇을 하는가</small></h2>
+
+    <div class="chain">
+      <div class="chain-flow">
+        <div class="node vendor"><div class="node-box">에일리언<small>RFID 태그</small></div></div>
+        <div class="arrow"><em>태그 사급</em>→</div>
+        <div class="node mid"><div class="node-box">SH글로벌<small>유통 상사</small></div></div>
+        <div class="arrow"><em>제작 지시</em>→</div>
+        <div class="node mid"><div class="node-box">중국 제조 공장<small>태그 내장 박음질</small></div></div>
+        <div class="arrow">→</div>
+        <div class="node us"><div class="node-box">런드리고<small>구매자</small></div></div>
+        <div class="arrow">→</div>
+        <div class="node end"><div class="node-box">엔드유저<small>B2C, B2B</small></div></div>
+      </div>
+      <div class="chain-caption">완제품 하나 = 컨택처 <b>두 곳</b> (태그 따로, 수건 따로)</div>
+    </div>
+
+    <div class="cols">
+      <div class="card fm">
+        <h3>정석</h3>
+        <div class="kw">
+          <div class="kw-item"><span class="k">상사가 마진에 걸맞은 역량을 내는가?</span></div>
+        </div>
+        <div class="chips" style="margin-top: 9px;">
+          <span class="chip">개발단계 문서 대응력</span>
+          <span class="chip">양산단계 외주 생산 관리력</span>
+        </div>
+      </div>
+      <div class="card case">
+        <h3>이번 수건에서는</h3>
+        <div class="kw">
+          <div class="kw-item"><span class="k">군포 수선 부착 = 일회성</span><span class="c">정식 공정 아님, 임시 조치였음</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step">
+    <div class="step-no">4</div>
+    <h2>인증 서류와 사양 확인 <small>"우리 회사에 이 기준이 있는가?"부터</small></h2>
+    <div class="checks">
+      <div class="check"><div class="cno">1</div><b>지정 공급업체<br>유무</b><span>고객사, 엔드유저 지정 여부</span></div>
+      <div class="check"><div class="cno">2</div><b>유해물질<br>불검출</b><span>B2C와 B2B 요구 스펙</span></div>
+      <div class="check"><div class="cno">3</div><b>공인기관<br>성능 테스트</b><span>KOTITI 등</span></div>
+      <div class="check"><div class="cno">4</div><b>내부 확정<br>사양</b><span>존재 여부 자체가 확인 대상</span></div>
+    </div>
+    <div class="checks-note">4개는 이번에 언급된 것일 뿐, 회사와 깊이에 따라 더 늘어남</div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step">
+    <div class="step-no">5</div>
+    <h2>유통 통제와 유관부서 조율 <small>공장부터 고객까지</small></h2>
+    <div class="cols">
+      <div class="card fm">
+        <h3>정석</h3>
+        <div class="kw">
+          <div class="kw-item"><span class="k">전체 동선 관리</span><span class="c">공장 → 구매자 → 엔드유저</span></div>
+          <div class="kw-item"><span class="k">사전 공유와 동기화</span><span class="c">런칭 일정, 스펙, 입고 수량</span></div>
+        </div>
+      </div>
+      <div class="card case">
+        <h3>이번 수건에서는</h3>
+        <div class="kw">
+          <div class="kw-item"><span class="k">정영석님 = 시작점</span><span class="c">HnB사업부</span></div>
+          <div class="kw-item"><span class="k">담당자 거슬러 올라가기</span><span class="c">엔드유저 요구와 확정 사양 파악</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="outro">
+    <div class="big">이 다섯 단계를 돌면, 기준정보는 <em>자연스럽게 세워진다</em></div>
+  </div>
+
+  <div class="footer">구매전략팀 | 2026-08-26</div>
+
+</div>
+</body>
+</html>
