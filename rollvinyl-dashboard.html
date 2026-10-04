@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>군포 롤비닐 가루 문제 — 현황과 판별</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#eef0f3;--surface:#ffffff;--surface-2:#e4e9ef;
+    --ink:#171c22;--ink-2:#4a5561;--ink-3:#79848f;
+    --line:#ccd4dd;--line-2:#dfe4ea;
+    --amber:#b8730c;--amber-fill:#fbe7c4;--amber-edge:#dfae5c;
+    --crew:#0c7d70;--crew-fill:#d8f0ec;--alert:#b8442a;--alert-fill:#f8e0d9;
+    --display:"Hahmlet",serif;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","IBM Plex Sans KR",ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#13171c;--surface:#1b2128;--surface-2:#2a333d;
+      --ink:#e8edf2;--ink-2:#aab5c1;--ink-3:#7f8a96;
+      --line:#39434f;--line-2:#2a323b;
+      --amber:#f2b352;--amber-fill:#4d3a17;--amber-edge:#916f2c;
+      --crew:#4fc9bb;--crew-fill:#173a36;--alert:#ea8266;--alert-fill:#4a2a22;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+  .wrap{max-width:1080px;margin:0 auto;padding:36px 22px 64px}
+  header{border-bottom:2px solid var(--ink);padding-bottom:16px;margin-bottom:26px;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px}
+  h1{font-family:var(--display);font-size:clamp(24px,3.2vw,34px);line-height:1.2;margin:0;letter-spacing:-.02em}
+  .stamp{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--ink-3);margin-left:auto}
+  h2{font-family:var(--display);font-size:19px;margin:0 0 14px;letter-spacing:-.01em;display:flex;align-items:center;gap:12px}
+  h2::after{content:"";flex:1;height:1px;background:var(--line)}
+  section{margin-top:34px}
+
+  .summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .card{background:var(--surface);border:1px solid var(--line);padding:14px 16px}
+  .card .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--ink-3);margin:0 0 4px}
+  .card .v{font-family:var(--display);font-weight:700;font-size:20px;margin:0;font-variant-numeric:tabular-nums}
+  .card .s{font-size:13px;color:var(--ink-2);margin:4px 0 0}
+  .card--alert{border-top:4px solid var(--alert)}
+  .card--amber{border-top:4px solid var(--amber)}
+  .card--ink{border-top:4px solid var(--ink-2)}
+
+  /* 판별기 */
+  .judge{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px}
+  @media (max-width:820px){.judge{grid-template-columns:1fr}}
+  .q{background:var(--surface);border:1px solid var(--line);padding:14px 16px;margin-bottom:10px}
+  .q__t{font-weight:600;margin:0 0 4px}
+  .q__h{font-size:12.5px;color:var(--ink-3);margin:0 0 10px}
+  .seg{display:flex;flex-wrap:wrap;gap:6px}
+  .seg button{font:inherit;font-size:13px;padding:6px 12px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);cursor:pointer;border-radius:4px}
+  .seg button:hover{border-color:var(--ink-3)}
+  .seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+  .verdict{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--ink-3);padding:18px 20px;position:sticky;top:16px;align-self:start}
+  .verdict[data-v="spc"]{border-top-color:var(--amber)}
+  .verdict[data-v="mny"]{border-top-color:var(--ink-2)}
+  .verdict[data-v="both"]{border-top-color:var(--alert)}
+  .verdict__k{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--ink-3);margin:0}
+  .verdict__v{font-family:var(--display);font-weight:700;font-size:24px;margin:4px 0 4px}
+  .verdict[data-v="spc"] .verdict__v{color:var(--amber)}
+  .verdict[data-v="both"] .verdict__v{color:var(--alert)}
+  .verdict__lv{display:inline-block;font-family:var(--mono);font-size:11px;padding:2px 8px;border:1px solid currentColor;color:var(--ink-3);margin-bottom:10px}
+  .verdict ul{margin:0;padding-left:18px;font-size:13.5px;color:var(--ink-2)}
+  .verdict li{margin:3px 0}
+
+  /* 대응 */
+  .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+  .plan{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--line);padding:14px 18px;opacity:.55;transition:opacity .2s}
+  .plan.on{opacity:1}
+  .plan--common{border-top-color:var(--crew)}
+  .plan--spc{border-top-color:var(--amber)}
+  .plan--mny{border-top-color:var(--ink-2)}
+  .plan h3{font-family:var(--display);font-size:17px;margin:0 0 8px}
+  .plan ol{margin:0;padding-left:20px;font-size:14px}
+  .plan li{margin:4px 0}
+  .plan .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--ink-3);margin:0 0 4px}
+
+  /* 확인 목록 */
+  .checks{background:var(--surface);border:1px solid var(--line)}
+  .checks label{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border-bottom:1px solid var(--line-2);cursor:pointer}
+  .checks label:last-child{border-bottom:0}
+  .checks input{margin-top:5px;accent-color:var(--crew);width:16px;height:16px;flex:none}
+  .checks .who{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--crew);white-space:nowrap;margin-left:auto;padding-left:10px}
+  .checks input:checked ~ span{color:var(--ink-3);text-decoration:line-through}
+  .progress{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin:0 0 8px}
+
+  /* 스레드 */
+  details{background:var(--surface);border:1px solid var(--line)}
+  summary{cursor:pointer;padding:12px 16px;font-weight:600}
+  .tl{list-style:none;margin:0;padding:0 16px 14px}
+  .tl li{display:grid;grid-template-columns:52px 120px minmax(0,1fr);gap:10px;padding:8px 0;border-top:1px solid var(--line-2);font-size:14px}
+  .tl time{font-family:var(--mono);font-size:12px;color:var(--ink-3);padding-top:2px}
+  .tl .who{font-weight:600}
+  .tl .me .who{color:var(--crew)}
+  @media (max-width:600px){.tl li{grid-template-columns:48px minmax(0,1fr)}.tl .who{grid-column:2}.tl li>span:last-child{grid-column:2}}
+
+  .note{font-size:13px;color:var(--ink-3);margin:10px 0 0}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>군포 롤비닐 가루 문제</h1>
+    <span class="stamp">10/4 12:00 스레드 기준</span>
+  </header>
+
+  <div class="summary">
+    <div class="card card--alert"><p class="k">현상</p><p class="v">인쇄 잉크 가루</p><p class="s">GO GREEN 인쇄에서 탈락, 포장기 커팅부 축적, 포장 의류에 묻음</p></div>
+    <div class="card card--ink"><p class="k">9/30 군포 불출</p><p class="v">60롤</p><p class="s">메이네티 55, SPC팩 5 (9/29 지시 기준)</p></div>
+    <div class="card card--amber"><p class="k">SPC팩 5롤</p><p class="v">블라인드</p><p class="s">팩토리 미공유, 지관 안쪽 감열지 스티커로 구분 예정</p></div>
+    <div class="card card--alert"><p class="k">현장 요구</p><p class="v">전량 반품</p><p class="s">회수와 정상품 재입고 일정 요청</p></div>
+  </div>
+
+  <section>
+    <h2>원인 판별</h2>
+    <div class="judge">
+      <div>
+        <div class="q">
+          <p class="q__t">1. 문제 롤 지관 안쪽에 감열지 스티커가 있나요?</p>
+          <p class="q__h">9/30 실제 부착 여부는 은별님, 영진님 확인 필요</p>
+          <div class="seg" data-q="sticker">
+            <button data-a="unk" aria-pressed="true">미확인</button>
+            <button data-a="spc" aria-pressed="false">있음</button>
+            <button data-a="none" aria-pressed="false">없음 (부착은 확인됨)</button>
+          </div>
+        </div>
+        <div class="q">
+          <p class="q__t">2. 가루가 나는 롤은 몇 개인가요?</p>
+          <p class="q__h">군포에 들어간 SPC팩 롤은 최대 5개</p>
+          <div class="seg" data-q="count">
+            <button data-a="unk" aria-pressed="true">미확인</button>
+            <button data-a="le5" aria-pressed="false">5개 이하</button>
+            <button data-a="ge6" aria-pressed="false">6개 이상, 교체해도 계속</button>
+          </div>
+        </div>
+        <div class="q">
+          <p class="q__t">3. 어디서 발생하나요?</p>
+          <p class="q__h">9/29 지시의 "5롤은 3층 QC존으로" 문구 해석이 전제</p>
+          <div class="seg" data-q="loc">
+            <button data-a="unk" aria-pressed="true">미확인</button>
+            <button data-a="qc" aria-pressed="false">3층 QC존만</button>
+            <button data-a="f4" aria-pressed="false">4층 포장기도</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="verdict" id="verdict" data-v="hold" aria-live="polite">
+        <p class="verdict__k">판정</p>
+        <p class="verdict__v" id="vText">보류</p>
+        <span class="verdict__lv" id="vLevel">근거 없음</span>
+        <ul id="vWhy"></ul>
+      </aside>
+    </div>
+  </section>
+
+  <section>
+    <h2>대응</h2>
+    <div class="plans">
+      <div class="plan plan--common on" id="p-common">
+        <p class="tag">원인과 무관하게 지금</p>
+        <h3>공통 조치</h3>
+        <ol>
+          <li>9/30 입고 롤 사용 중지, 따로 보관</li>
+          <li>직전 입고분이 남아 있으면 대체 불출</li>
+          <li>출고 대기 의류에 가루가 묻었는지 점검</li>
+        </ol>
+      </div>
+      <div class="plan plan--spc" id="p-spc">
+        <p class="tag">SPC팩 롤이 원인이면</p>
+        <h3>5롤만 회수</h3>
+        <ol>
+          <li>블라인드 테스트 사실을 팩토리에 공개 (방식은 재욱님 결정)</li>
+          <li>SPC팩 5롤 회수, 전량 반품 요구 철회 요청</li>
+          <li>SPC팩에 원인과 재발 방지책 서면 요청</li>
+          <li>광고 인쇄 업체 검토에 인쇄 품질 시험 추가</li>
+        </ol>
+      </div>
+      <div class="plan plan--mny" id="p-mny">
+        <p class="tag">메이네티 롤이 원인이면</p>
+        <h3>로트 반품</h3>
+        <ol>
+          <li>해당 로트 반품과 정상품 재입고 일정 요청</li>
+          <li>자재창고와 성수 직납분에 같은 로트가 있는지 확인</li>
+          <li>대체 물량으로 동서위생 롤 소량 선투입 여부 결정 (현장 시험 기록 없음)</li>
+        </ol>
+      </div>
+    </div>
+    <p class="note">10/8 동서위생 롤비닐 8파렛트 입고 예정, 현장 시험 기록 없음. 원인과 무관하게 입고 전 시험 여부 결정 필요.</p>
+  </section>
+
+  <section>
+    <h2>확인 목록</h2>
+    <p class="progress" id="prog">0 / 6 완료</p>
+    <div class="checks" id="checks">
+      <label><input type="checkbox"><span>9/30 불출 때 지관 스티커를 실제로 붙였는지</span><em class="who">은별님, 영진님</em></label>
+      <label><input type="checkbox"><span>"60개 중 5롤만(5롤은 3층 QC존으로)" 문구가 어떻게 나뉘었는지</span><em class="who">은별님</em></label>
+      <label><input type="checkbox"><span>문제 롤 지관 안쪽 사진</span><em class="who">변지혁님</em></label>
+      <label><input type="checkbox"><span>롤마다 100% 발생하는지, 몇 롤째인지</span><em class="who">변지혁님</em></label>
+      <label><input type="checkbox"><span>4층 롤비닐 포장기에서도 발생하는지</span><em class="who">노경훈님</em></label>
+      <label><input type="checkbox"><span>메이네티 롤비닐 8/26 이후 입고 로트</span><em class="who">재고 시트</em></label>
+    </div>
+  </section>
+
+  <section>
+    <details>
+      <summary>스레드 흐름 (#팩토리-비닐-부직포-발주, 10/4)</summary>
+      <ol class="tl">
+        <li><time>11:02</time><span class="who">변지혁님</span><span>로고 인쇄에서 녹색 가루 탈락, 포장기 커팅 지장, 의류 오염 우려, 재고 점검과 제조사 개선 요청</span></li>
+        <li class="me"><time>11:12</time><span class="who">재욱님</span><span>은별님과 별도 논의</span></li>
+        <li><time>11:13</time><span class="who">최민석님</span><span>전량 반품까지 고려 요청</span></li>
+        <li><time>11:18</time><span class="who">김진영님</span><span>이번 입고분부터인지, 선별 사용 가능한지 질문. 연휴 뒤 회수와 재입고 일정 대응 요청</span></li>
+        <li class="me"><time>11:20</time><span class="who">재욱님</span><span>첫 롤인지, 몇 개 롤에서 나는지 질문</span></li>
+        <li><time>11:23</time><span class="who">최민석님</span><span>최근 입고된 롤비닐부터 발생, 10/6 방문 요청</span></li>
+        <li><time>11:24</time><span class="who">변지혁님</span><span>포장 의류 사진 3장</span></li>
+        <li class="me"><time>11:41</time><span class="who">재욱님</span><span>장착하는 롤마다 100% 발생하는지 질문</span></li>
+        <li class="me"><time>11:43</time><span class="who">재욱님</span><span>QC존인지, 모든 곳에서 나는지 질문</span></li>
+        <li><time>11:58</time><span class="who">윤보성님</span><span>노경훈님께 4층 롤비닐 포장기도 같은지 질문</span></li>
+      </ol>
+    </details>
+  </section>
+</div>
+
+<script>
+  const state = {sticker:'unk', count:'unk', loc:'unk'};
+
+  document.querySelectorAll('.seg').forEach(seg => {
+    seg.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      seg.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+      state[seg.dataset.q] = b.dataset.a;
+      render();
+    });
+  });
+
+  function judge(s){
+    const why = [];
+    if (s.sticker === 'spc' && s.count === 'ge6'){
+      why.push('스티커가 있는 SPC팩 롤에서 발생');
+      why.push('6롤 이상이면 메이네티 롤도 포함');
+      return {v:'both', text:'둘 다 의심', level:'확정', why};
+    }
+    if (s.sticker === 'spc'){ why.push('문제 롤 지관에 SPC팩 스티커'); return {v:'spc', text:'SPC팩 롤', level:'확정', why}; }
+    if (s.sticker === 'none'){ why.push('스티커 부착이 확인된 상태에서 문제 롤에 스티커 없음'); if (s.loc === 'qc') why.push('3층 QC존에서 메이네티 롤이 문제라면 "5롤은 3층 QC존으로" 해석을 다시 확인'); return {v:'mny', text:'메이네티 롤', level:'확정', why}; }
+    if (s.count === 'ge6'){
+      why.push('군포의 SPC팩 롤은 최대 5개라 SPC팩 단독으로는 설명 불가');
+      if (s.loc === 'f4') why.push('4층 포장기에서도 발생');
+      return {v:'mny', text:'메이네티 롤 포함', level:'유력', why};
+    }
+    if (s.loc === 'f4'){ why.push('SPC팩 롤이 3층 QC존으로 갔다는 해석이 맞다면 4층 발생은 메이네티 쪽'); return {v:'mny', text:'메이네티 쪽', level:'가능성', why}; }
+    if (s.loc === 'qc'){ why.push('3층 QC존에서만 발생, SPC팩 롤 행선지와 겹침'); if (s.count === 'le5') why.push('5롤 이하로 SPC팩 수량과 맞음'); return {v:'spc', text:'SPC팩 쪽', level:'가능성', why}; }
+    if (s.count === 'le5'){ why.push('5롤 이하라 양쪽 모두 가능'); }
+    why.push('지관 스티커 확인이 가장 빠른 판별');
+    return {v:'hold', text:'보류', level:'근거 부족', why};
+  }
+
+  function render(){
+    const r = judge(state);
+    const el = document.getElementById('verdict');
+    el.dataset.v = r.v;
+    document.getElementById('vText').textContent = r.text;
+    document.getElementById('vLevel').textContent = r.level;
+    document.getElementById('vWhy').innerHTML = r.why.map(w => `<li>${w}</li>`).join('');
+    document.getElementById('p-spc').classList.toggle('on', r.v === 'spc' || r.v === 'both' || r.v === 'hold');
+    document.getElementById('p-mny').classList.toggle('on', r.v === 'mny' || r.v === 'both' || r.v === 'hold');
+  }
+
+  const boxes = document.querySelectorAll('#checks input');
+  boxes.forEach(b => b.addEventListener('change', () => {
+    const n = [...boxes].filter(x => x.checked).length;
+    document.getElementById('prog').textContent = `${n} / ${boxes.length} 완료`;
+  }));
+
+  render();
+</script>
+</html>

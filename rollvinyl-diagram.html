@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>군포 롤비닐 가루 문제 — 원인 판별 도식</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#eef0f3;--surface:#ffffff;--surface-2:#e4e9ef;
+    --ink:#171c22;--ink-2:#4a5561;--ink-3:#79848f;
+    --line:#ccd4dd;--line-2:#dfe4ea;
+    --amber:#b8730c;--amber-fill:#fbe7c4;--amber-edge:#dfae5c;
+    --route:#2f6fd0;--crew:#0c7d70;--alert:#b8442a;
+    --display:"Hahmlet",serif;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","IBM Plex Sans KR",ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#13171c;--surface:#1b2128;--surface-2:#2a333d;
+      --ink:#e8edf2;--ink-2:#aab5c1;--ink-3:#7f8a96;
+      --line:#39434f;--line-2:#2a323b;
+      --amber:#f2b352;--amber-fill:#4d3a17;--amber-edge:#916f2c;
+      --route:#7cabf4;--crew:#4fc9bb;--alert:#ea8266;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+  .wrap{max-width:1240px;margin:0 auto;padding:40px 24px 56px}
+  .masthead{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 20px;padding-bottom:18px;border-bottom:2px solid var(--ink);margin-bottom:28px}
+  h1{font-family:var(--display);font-weight:700;font-size:clamp(24px,3.2vw,36px);line-height:1.15;letter-spacing:-.02em;margin:0}
+  .eyebrow{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.18em;color:var(--ink-3);margin:0 0 0 auto}
+
+  .stage{background:var(--surface);border:1px solid var(--line);padding:14px 12px 6px}
+  .stage>svg{display:block;width:100%;height:auto}
+
+  .legend{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+  .lg-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 24px}
+  .lg-row>b{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.16em;color:var(--ink-3);width:64px;flex:none}
+  .lg-row>b.lg-crew{color:var(--crew)}
+  .lg-row>b.lg-amber{color:var(--amber)}
+  .lg-row>b.lg-alert{color:var(--alert)}
+  .lg-row div{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-3)}
+  .lg-row svg{display:block;flex:none}
+
+  .band{margin-top:40px}
+  .band-title{display:flex;align-items:center;gap:14px;margin:0 0 16px}
+  .band-title h2{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-.01em;margin:0;white-space:nowrap}
+  .band-title::after{content:"";flex:1;height:1px;background:var(--line)}
+
+  .steps{display:flex;flex-wrap:wrap;border:1px solid var(--line);background:var(--surface)}
+  .step{flex:1 1 220px;padding:16px 20px;border-right:1px solid var(--line);border-top:3px solid var(--amber)}
+  .step:last-child{border-right:0}
+  .step__n{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--ink-3);margin:0 0 7px}
+  .step h4{font-family:var(--display);font-weight:700;font-size:15.5px;margin:0 0 6px;letter-spacing:-.01em}
+  .step__rule{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);margin:0 0 8px}
+  .step__s{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;margin:0;color:var(--amber)}
+
+  .cands{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+  .cand{border:1px solid var(--line);border-top:4px solid var(--ink-2);background:var(--surface);padding:16px 18px 18px;display:flex;flex-direction:column;gap:11px}
+  .cand--spc{border-color:var(--amber-edge);border-top-color:var(--amber)}
+  .cand__rank{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.16em;color:var(--ink-3);margin:0}
+  .cand--spc .cand__rank{color:var(--amber)}
+  .cand h3{font-family:var(--display);font-weight:700;font-size:19px;margin:0;letter-spacing:-.01em}
+  .cand__line{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .cand__k{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ink-3)}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;padding:3px 9px;border:1px solid var(--line);color:var(--ink-2);white-space:nowrap}
+  .chip--yes{color:var(--crew);border-color:currentColor}
+  .chip--no{color:var(--alert);border-color:currentColor}
+
+  .metrics{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .m{display:flex;align-items:baseline;gap:8px;border:1px dashed var(--alert);padding:6px 12px;font-variant-numeric:tabular-nums}
+  .m span{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ink-3)}
+  .m b{font-family:var(--sans);font-weight:600;font-size:13.5px;color:var(--alert)}
+
+  @media (max-width:640px){
+    .wrap{padding:26px 14px 40px}
+    .eyebrow{margin-left:0}
+    .lg-row>b{width:auto}
+    .step{border-right:0;border-bottom:1px solid var(--line)}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <h1>군포 롤비닐 가루 — 어느 공급사 롤인가</h1>
+    <p class="eyebrow">구매전략팀, 10/4 12:00 기준</p>
+  </header>
+
+  <div class="stage">
+    <svg viewBox="0 56 1000 400" role="img" aria-label="메이네티 55롤과 SPC팩 5롤이 자재창고를 거쳐 9/30 군포로 함께 들어갔고, 지관 스티커로 공급사를 가린다">
+      <defs>
+        <marker id="mk-ink" viewBox="0 0 13 13" refX="12" refY="6.5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L13,6.5 L0,13 z" fill="var(--ink-2)"/></marker>
+        <marker id="mk-amber" viewBox="0 0 13 13" refX="12" refY="6.5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L13,6.5 L0,13 z" fill="var(--amber)"/></marker>
+        <marker id="mk-mute" viewBox="0 0 13 13" refX="12" refY="6.5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L13,6.5 L0,13 z" fill="var(--ink-3)"/></marker>
+        <g id="plants"><path d="M-32,13 v-21 l11,7 v-7 l11,7 v14 z"/><path d="M10,13 v-21 l11,7 v-7 l11,7 v14 z"/></g>
+        <g id="pallet"><rect x="-17" y="-18" width="34" height="24" rx="2"/><rect x="-20" y="9" width="40" height="6" rx="1.5"/></g>
+        <g id="truck"><rect x="-24" y="-13" width="28" height="21" rx="2"/><path d="M6,-5 h9 l8,8 v5 h-17 z"/><circle cx="-14" cy="11" r="5"/><circle cx="13" cy="11" r="5"/></g>
+        <g id="person"><circle cx="0" cy="-4.6" r="3.4"/><path d="M-5.2,5.2 a5.2,5.8 0 0 1 10.4,0 z"/></g>
+      </defs>
+
+      <!-- ===== 공급사 ===== -->
+      <use href="#plants" transform="translate(92,128) scale(1.3)" fill="var(--ink-2)"/>
+      <text x="92" y="178" text-anchor="middle" font-family="var(--display)" font-weight="700" font-size="16" fill="var(--ink)">메이네티</text>
+      <text x="92" y="197" text-anchor="middle" font-family="var(--mono)" font-size="13" fill="var(--ink-2)">55롤</text>
+
+      <use href="#plants" transform="translate(92,318) scale(1.3)" fill="var(--amber)"/>
+      <text x="92" y="368" text-anchor="middle" font-family="var(--display)" font-weight="700" font-size="16" fill="var(--amber)">SPC팩</text>
+      <text x="92" y="387" text-anchor="middle" font-family="var(--mono)" font-size="13" fill="var(--amber)">5롤</text>
+      <rect x="52" y="397" width="80" height="22" rx="11" fill="var(--amber-fill)" stroke="var(--amber-edge)"/>
+      <text x="92" y="412" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--amber)">블라인드</text>
+
+      <!-- 공급사 → 자재창고 : 굵기 = 수량 -->
+      <path d="M140,132 C205,132 225,214 262,226" fill="none" stroke="var(--ink-2)" stroke-width="5" marker-end="url(#mk-ink)"/>
+      <path d="M140,316 C205,316 225,262 262,252" fill="none" stroke="var(--amber)" stroke-width="2.4" marker-end="url(#mk-amber)"/>
+
+      <!-- ===== 자재창고 ===== -->
+      <use href="#pallet" transform="translate(296,240) scale(1.4)" fill="var(--ink-2)"/>
+      <text x="296" y="292" text-anchor="middle" font-family="var(--display)" font-weight="700" font-size="15" fill="var(--ink)">자재창고</text>
+      <rect x="250" y="302" width="92" height="24" rx="4" fill="none" stroke="var(--ink-3)" stroke-dasharray="4 4"/>
+      <text x="296" y="318" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--ink-3)">메이네티 로트 ?</text>
+
+      <!-- 자재창고 → 군포 : 9/30 -->
+      <path d="M336,240 L496,240" fill="none" stroke="var(--ink-2)" stroke-width="5" marker-end="url(#mk-ink)"/>
+      <circle cx="398" cy="240" r="21" fill="var(--surface)"/>
+      <use href="#truck" transform="translate(398,240) scale(0.75)" fill="var(--ink-2)"/>
+      <rect x="361" y="194" width="74" height="26" rx="4" fill="var(--surface)" stroke="var(--line)"/>
+      <text x="398" y="212" text-anchor="middle" font-family="var(--mono)" font-size="13" fill="var(--ink)">9/30 60롤</text>
+
+      <!-- ===== 군포 팩토리 단면 ===== -->
+      <rect x="470" y="70" width="250" height="370" rx="6" fill="var(--surface)" stroke="var(--ink-2)" stroke-width="2"/>
+      <rect x="470" y="70" width="250" height="34" rx="6" fill="var(--ink)"/>
+      <rect x="470" y="92" width="250" height="12" fill="var(--ink)"/>
+      <text x="595" y="93" text-anchor="middle" font-family="var(--display)" font-weight="700" font-size="15" fill="var(--surface)">군포 팩토리</text>
+      <line x1="470" y1="212" x2="720" y2="212" stroke="var(--line)"/>
+      <line x1="470" y1="312" x2="720" y2="312" stroke="var(--line)"/>
+
+      <text x="484" y="128" font-family="var(--mono)" font-size="11" font-weight="600" fill="var(--ink-3)">4F</text>
+      <text x="484" y="232" font-family="var(--mono)" font-size="11" font-weight="600" fill="var(--ink-3)">3F</text>
+      <text x="484" y="332" font-family="var(--mono)" font-size="11" font-weight="600" fill="var(--ink-3)">층 ?</text>
+
+      <!-- 척추와 층별 전달 -->
+      <path d="M500,370 L500,160" fill="none" stroke="var(--ink-2)" stroke-width="3"/>
+      <path d="M500,160 L566,160" fill="none" stroke="var(--ink-2)" stroke-width="2.4" marker-end="url(#mk-ink)"/>
+      <path d="M500,262 L566,262" fill="none" stroke="var(--amber)" stroke-width="2.4" stroke-dasharray="6 5" marker-end="url(#mk-amber)"/>
+      <path d="M500,370 L566,370" fill="none" stroke="var(--ink-2)" stroke-width="2.4" marker-end="url(#mk-ink)"/>
+      <!-- SPC팩 5롤 행선지 미확인 -->
+      <circle cx="532" cy="262" r="10" fill="var(--surface)" stroke="var(--amber)" stroke-width="1.5" stroke-dasharray="3 2"/>
+      <text x="532" y="266.5" text-anchor="middle" font-family="var(--mono)" font-size="12" font-weight="600" fill="var(--amber)">?</text>
+
+      <!-- 4F 롤 포장기 -->
+      <circle cx="590" cy="160" r="17" fill="var(--surface)" stroke="var(--ink-2)" stroke-width="5"/>
+      <circle cx="590" cy="160" r="5" fill="var(--ink-2)"/>
+      <text x="590" y="198" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--ink-2)">롤 포장기</text>
+      <!-- 3F QC존 -->
+      <circle cx="590" cy="262" r="17" fill="var(--surface)" stroke="var(--amber)" stroke-width="5" stroke-dasharray="7 4"/>
+      <circle cx="590" cy="262" r="5" fill="var(--amber)"/>
+      <text x="590" y="300" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--amber)">QC존</text>
+      <!-- 제보 라인 : 가루 -->
+      <circle cx="590" cy="370" r="17" fill="var(--surface)" stroke="var(--ink-2)" stroke-width="5"/>
+      <circle cx="590" cy="370" r="5" fill="var(--ink-2)"/>
+      <g fill="var(--alert)">
+        <circle cx="572" cy="394" r="2.6"/><circle cx="582" cy="400" r="2"/><circle cx="596" cy="398" r="3"/>
+        <circle cx="608" cy="392" r="2.2"/><circle cx="614" cy="380" r="1.8"/><circle cx="566" cy="384" r="1.8"/>
+      </g>
+      <text x="590" y="422" text-anchor="middle" font-family="var(--sans)" font-size="12" font-weight="600" fill="var(--alert)">제보 라인</text>
+
+      <!-- 사람 : 확인 담당 -->
+      <circle cx="672" cy="156" r="14" fill="var(--surface)" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <use href="#person" transform="translate(672,156) scale(1.4)" fill="var(--crew)"/>
+      <text x="672" y="186" text-anchor="middle" font-family="var(--sans)" font-size="11.5" fill="var(--crew)">노경훈님</text>
+      <text x="672" y="202" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--ink-3)">?</text>
+
+      <circle cx="672" cy="258" r="14" fill="var(--surface)" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <use href="#person" transform="translate(672,258) scale(1.4)" fill="var(--crew)"/>
+      <text x="672" y="288" text-anchor="middle" font-family="var(--sans)" font-size="11.5" fill="var(--crew)">은별님</text>
+      <text x="672" y="304" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--ink-3)">?</text>
+
+      <circle cx="672" cy="366" r="14" fill="var(--surface)" stroke="var(--alert)" stroke-width="1.5"/>
+      <use href="#person" transform="translate(672,366) scale(1.4)" fill="var(--crew)"/>
+      <text x="672" y="396" text-anchor="middle" font-family="var(--sans)" font-size="11.5" fill="var(--crew)">변지혁님</text>
+      <text x="672" y="412" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--alert)">10/4 제보</text>
+
+      <!-- ===== 지관 확대 ===== -->
+      <path d="M612,362 C700,330 740,280 778,262" fill="none" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="3 5"/>
+      <text x="832" y="186" text-anchor="middle" font-family="var(--mono)" font-size="11.5" letter-spacing="1" fill="var(--ink-3)">지관 안쪽</text>
+      <circle cx="832" cy="250" r="50" fill="var(--surface)" stroke="var(--ink-2)" stroke-width="12"/>
+      <circle cx="832" cy="250" r="22" fill="var(--surface-2)" stroke="var(--ink-3)" stroke-width="2"/>
+      <rect x="822" y="241" width="20" height="18" rx="2" fill="var(--amber-fill)" stroke="var(--amber)" stroke-width="1.6" stroke-dasharray="3 2"/>
+
+      <!-- 갈래 -->
+      <path d="M872,214 C900,188 912,160 920,146" fill="none" stroke="var(--amber)" stroke-width="2.4" marker-end="url(#mk-amber)"/>
+      <path d="M872,286 C900,312 912,340 920,354" fill="none" stroke="var(--ink-2)" stroke-width="2.4" marker-end="url(#mk-ink)"/>
+      <rect x="876" y="92" width="114" height="52" rx="6" fill="var(--amber-fill)" stroke="var(--amber)" stroke-width="1.6"/>
+      <text x="933" y="115" text-anchor="middle" font-family="var(--display)" font-weight="700" font-size="15" fill="var(--amber)">SPC팩</text>
+      <text x="933" y="134" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--amber)">스티커 있음</text>
+      <rect x="876" y="356" width="114" height="52" rx="6" fill="var(--surface)" stroke="var(--ink-2)" stroke-width="1.6"/>
+      <text x="933" y="379" text-anchor="middle" font-family="var(--display)" font-weight="700" font-size="15" fill="var(--ink)">메이네티</text>
+      <text x="933" y="398" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--ink-2)">스티커 없음</text>
+    </svg>
+
+    <div class="legend">
+      <div class="lg-row"><b>자재</b>
+        <div><svg width="46" height="14" viewBox="0 0 46 14" aria-hidden="true"><line x1="1" y1="4" x2="45" y2="4" stroke="var(--ink-2)" stroke-width="5"/><line x1="1" y1="11" x2="45" y2="11" stroke="var(--ink-2)" stroke-width="2"/></svg>선 굵기 = 롤 수</div>
+        <div><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="6.5" fill="none" stroke="var(--ink-2)" stroke-width="3"/><circle cx="9" cy="9" r="2" fill="var(--ink-2)"/></svg>롤</div>
+      </div>
+      <div class="lg-row"><b class="lg-amber">시험</b>
+        <div><svg width="46" height="14" viewBox="0 0 46 14" aria-hidden="true"><line x1="1" y1="7" x2="45" y2="7" stroke="var(--amber)" stroke-width="2.4" stroke-dasharray="6 5"/></svg>SPC팩 블라인드 물량, 점선 = 지시 기준</div>
+      </div>
+      <div class="lg-row"><b class="lg-crew">사람</b>
+        <div><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="8" fill="none" stroke="var(--ink-3)" stroke-dasharray="3 3"/><g transform="translate(9,9.5) scale(1)" fill="var(--crew)"><circle cx="0" cy="-4.6" r="3.4"/><path d="M-5.2,5.2 a5.2,5.8 0 0 1 10.4,0 z"/></g></svg>점선 원 = 답변 대기</div>
+      </div>
+      <div class="lg-row"><b class="lg-alert">상태</b>
+        <div><svg width="22" height="14" viewBox="0 0 22 14" aria-hidden="true"><g fill="var(--alert)"><circle cx="4" cy="8" r="2.4"/><circle cx="11" cy="5" r="2"/><circle cx="18" cy="9" r="2.6"/></g></svg>가루 발생</div>
+        <div><svg width="40" height="16" viewBox="0 0 40 16" aria-hidden="true"><rect x="1" y="1" width="38" height="14" rx="3" fill="none" stroke="var(--ink-3)" stroke-dasharray="4 3"/></svg>미확인</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="band">
+    <div class="band-title"><h2>판별 3가지</h2></div>
+    <div class="steps">
+      <div class="step"><p class="step__n">01</p><h4>지관 스티커</h4><p class="step__rule">있음 → SPC팩</p><p class="step__s">부착 여부 답변 대기</p></div>
+      <div class="step"><p class="step__n">02</p><h4>문제 롤 수</h4><p class="step__rule">6롤 이상 → SPC팩 단독 불가</p><p class="step__s">답변 대기</p></div>
+      <div class="step"><p class="step__n">03</p><h4>발생 위치</h4><p class="step__rule">4F 포함 → 메이네티 쪽</p><p class="step__s">답변 대기</p></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="band-title"><h2>원인별 대응</h2></div>
+    <div class="cands">
+      <div class="cand cand--spc">
+        <p class="cand__rank">SPC팩이면</p>
+        <h3>5롤만 회수</h3>
+        <div class="cand__line"><span class="cand__k">첫 조치</span><span class="chip">블라인드 공개</span></div>
+        <div class="cand__line"><span class="cand__k">업체 요청</span><span class="chip">원인, 재발 방지 서면</span></div>
+        <div class="cand__line"><span class="cand__k">광고 인쇄 검토</span><span class="chip">인쇄 품질 시험 추가</span></div>
+        <div class="cand__line"><span class="cand__k">전환 논리</span><span class="chip chip--yes">시험이 사고를 막음</span></div>
+      </div>
+      <div class="cand">
+        <p class="cand__rank">메이네티면</p>
+        <h3>로트 전량 반품</h3>
+        <div class="cand__line"><span class="cand__k">첫 조치</span><span class="chip">반품, 재입고 일정 요청</span></div>
+        <div class="cand__line"><span class="cand__k">추가 확인</span><span class="chip">자재창고, 성수 같은 로트</span></div>
+        <div class="cand__line"><span class="cand__k">대체 물량</span><span class="chip chip--no">동서위생 시험 기록 없음</span></div>
+        <div class="cand__line"><span class="cand__k">전환 논리</span><span class="chip">입고 검수, 로트 추적</span></div>
+      </div>
+    </div>
+    <div class="metrics">
+      <div class="m"><span>10/8 입고</span><b>동서위생 롤비닐 8파렛트, 현장 시험 기록 없음</b></div>
+    </div>
+  </section>
+
+</div>
+</html>
